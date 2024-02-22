@@ -11,6 +11,9 @@ class HomeController extends Controller
 
     public function index()
     {
+        // User::find(1)->update([
+        //     'role_id' => 3,
+        // ]);
         if(Auth::user()->role_id == 1)
         {
             return view('home.student');

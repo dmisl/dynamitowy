@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -11,6 +12,13 @@ Route::middleware('auth')
 
     // LOGOUT
     Route::get('logout', [LoginController::class, 'logout'])->name('login.logout');
+
+});
+
+Route::middleware('teacher')
+->group(function () {
+
+    Route::get('journal', [JournalController::class, 'index'])->name('journal.index');
 
 });
 

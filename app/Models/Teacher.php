@@ -13,7 +13,7 @@ class Teacher extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'subject_id', 'classroom_id'
+        'user_id', 'classroom_id'
     ];
 
     public function user(): BelongsTo
