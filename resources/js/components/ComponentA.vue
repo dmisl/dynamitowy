@@ -1,3 +1,11 @@
+<template>
+    <div v-for="(person, index) in adults" v-key="index">
+        Name: {{ person.name }}<br>
+        Age: {{ person.age }}<br>
+        Job: {{ person.job }}<br>
+        <hr>
+    </div>
+</template>
 <script setup>
 
     import { computed } from 'vue'
@@ -27,11 +35,4 @@
     console.log(adults)
 
 </script>
-<template>
-    <div v-for="(person, index) in adults" v-key="index">
-        Name: {{ person.name }}<br>
-        Age: {{ person.age }}<br>
-        Job: {{ person.job }}<br>
-        <hr>
-    </div>
-</template>
+
