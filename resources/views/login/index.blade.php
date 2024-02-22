@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="d-flex flex-column bg-light user-select-none">
+    <div class="d-flex flex-column user-select-none">
         <header class="w-100 bg-dark">
             <div class="container">
                 <h1 class="text-light py-3 m-0">{{ env('APP_NAME') }}</h1>
@@ -41,6 +41,15 @@
                             </div>
                         </div>
 
+                        <div class="mt-3 mx-auto">
+                            Login as <br>
+                            <select name="role" id="">
+                                <option value="1" selected>student</option>
+                                <option value="2">teacher</option>
+                                <option value="3">headmaster</option>
+                            </select>
+                        </div>
+
                         <div class="form-item mt-2 text-center">
                             <button class="btn btn-success text-light p-0">
                                 <h3 class="fw-light p-2 m-0">Zaloguj sie</h3>
@@ -58,6 +67,5 @@
         </main>
 
     </div>
-
 
 @endsection

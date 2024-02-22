@@ -20,9 +20,15 @@
         },
     ]
 
+    const adults = computed(function () {
+        return people.filter(function (person) {return person.age > 15})
+    })
+
+    console.log(adults)
+
 </script>
 <template>
-    <div v-for="(person, index) in people" v-key="index">
+    <div v-for="(person, index) in adults" v-key="index">
         Name: {{ person.name }}<br>
         Age: {{ person.age }}<br>
         Job: {{ person.job }}<br>
