@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -18,6 +19,8 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
+        'teacher_id',
+        'classroom_id',
     ];
 
     protected $hidden = [
@@ -29,6 +32,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function classroom() : BelongsTo
+    {
+        return $this->belongsTo(Classroom::class);
+    }
+
+    public function teacher(): HasOne
+    {
+        return $this->hasOne(Teacher::class);
+    }
 
     public function role(): BelongsTo
     {

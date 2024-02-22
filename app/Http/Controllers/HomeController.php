@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,6 +17,7 @@ class HomeController extends Controller
         }
         else if(Auth::user()->role_id == 2)
         {
+            dd(User::find(2));
             return view('home.teacher');
         }
         else if(Auth::user()->role_id == 3)
