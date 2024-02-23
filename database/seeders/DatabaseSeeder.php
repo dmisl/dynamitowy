@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Classroom;
 use App\Models\Role;
 use App\Models\Subject;
 use App\Models\Teacher;
@@ -64,6 +65,29 @@ class DatabaseSeeder extends Seeder
         Subject::create(['name' => 'Geografia', 'teacher_id' => 11]);
         Subject::create(['name' => 'Jezyk niemiecki', 'teacher_id' => 12]);
         Subject::create(['name' => 'Zajecia z wychowawca', 'teacher_id' => 13]);
+
+        // creating students and their classroom
+        Classroom::create(['name' => '4TIP', 'teacher_id' => 12]);
+
+        User::create(['name' => 'Kamil Balda', 'email' => 'kamil_balda@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
+        User::create(['name' => 'Vadym Yakymiv', 'email' => 'vadym_yakymiv@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
+        User::create(['name' => 'Ivan Kompaniiets', 'email' => 'ivan_kompanieets@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
+        User::create(['name' => 'Vitalii Kompaniiets', 'email' => 'vitalii_kompanieets@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
+        User::create(['name' => 'Kacper Wozniak', 'email' => 'kacper_wozniak@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
+        User::create(['name' => 'Przemek Kasak', 'email' => 'przemek_kasak@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
+        User::create(['name' => 'Piotr Niechosa', 'email' => 'piotr_niechosa@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
+        User::create(['name' => 'Jakub Ramian', 'email' => 'jakub_ramian@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
+        User::create(['name' => 'Denys Shlychkov', 'email' => 'denyk_shlychkov@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
+        User::create(['name' => 'Maksym Psyshchanitsa', 'email' => 'maksym_psyshchanitsa@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
+        User::create(['name' => 'Wiktor Samolyk', 'email' => 'wiktor_samolyk@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
+        User::create(['name' => 'Szczepan Spilczynski', 'email' => 'szczepan_spilczynski@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
+        User::create(['name' => 'Kacper Bartoszek', 'email' => 'kacper_bartoszek@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
+        User::create(['name' => 'Artur Czernikowski', 'email' => 'artur_czernikowski@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
+        User::create(['name' => 'Marcel Mierzwa', 'email' => 'marcel_mierzwa@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
+        User::create(['name' => 'Oleg Buhaienko', 'email' => 'oleg_buhaienko@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
+        User::create(['name' => 'Markiian Zhylchenko', 'email' => 'markiian_zhylchenko@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
+        User::create(['name' => 'Vladyslaw Belza', 'email' => 'vladyslaw_belza@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
+        User::create(['name' => 'Dmytro Slutyi', 'email' => 'dmytro_slutyi@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
 
     }
 }
