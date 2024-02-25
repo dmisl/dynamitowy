@@ -19,13 +19,19 @@ Route::middleware('auth')
 Route::middleware('teacher')
 ->group(function () {
 
-    // views
     Route::get('journal', [JournalController::class, 'index'])->name('journal.index');
-    Route::get('journal/classroom', [ClassroomController::class, 'index'])->name('classroom.index');
-    Route::get('journal/classroom/{id}', [ClassroomController::class, 'show'])->name('classroom.show');
-    Route::get('journal/classroom/{id}/edit', [ClassroomController::class, 'edit'])->name('classroom.edit');
-    // posts
-    Route::post('journal/classroom/update', [ClassroomController::class, 'update'])->name('classroom.update');
+
+    Route::middleware('classroom_teacher')
+    ->prefix('journal/classroom')
+    ->group(function () {
+
+        Route::get('/', [ClassroomController::class, 'index'])->name('classroom.index');
+        Route::get('/show/{id}', [ClassroomController::class, 'show'])->name('classroom.show');
+        Route::get('/{id}/edit', [ClassroomController::class, 'edit'])->name('classroom.edit');
+        Route::get('/timetable', [ClassroomController::class, 'timetable'])->name('classroom.timetable');
+        Route::post('/update', [ClassroomController::class, 'update'])->name('classroom.update');
+
+    });
 
 });
 
