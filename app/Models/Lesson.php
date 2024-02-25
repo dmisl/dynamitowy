@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -12,22 +13,17 @@ class Lesson extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'lesson_day_id', 'subject_id',
+        'subject_id', 'classroom_id', 'day',
     ];
-
-    public function user(): HasOne
-    {
-        return $this->hasOne(User::class);
-    }
 
     public function subject(): HasOne
     {
         return $this->hasOne(Subject::class);
     }
 
-    public function lessonDay(): BelongsToMany
+    public function classroom() : BelongsTo
     {
-        return $this->belongsToMany(LessonDay::class);
+        return $this->belongsTo(Classroom::class);
     }
 
 }

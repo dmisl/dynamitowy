@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('teacher_id')->nullable()->constrained();
             $table->foreignId('classroom_id')->nullable()->constrained();
             $table->string('password');
+            $table->text('photo')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

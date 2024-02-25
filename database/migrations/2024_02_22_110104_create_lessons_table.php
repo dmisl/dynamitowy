@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('lesson_day_id')->constrained();
             $table->foreignId('subject_id')->constrained();
+            $table->foreignId('classroom_id')->constrained();
+            $table->integer('day');
+            $table->integer('lesson_number');
         });
     }
 

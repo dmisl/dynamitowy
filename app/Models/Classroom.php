@@ -25,9 +25,9 @@ class Classroom extends Model
         return $this->hasMany(User::class);
     }
 
-    public function lessonDays() : HasMany
+    public function lessons() : HasMany
     {
-        return $this->hasMany(LessonDay::class);
+        return $this->hasMany(Lesson::class);
     }
 
 }

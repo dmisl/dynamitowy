@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LoginController;
@@ -18,7 +19,13 @@ Route::middleware('auth')
 Route::middleware('teacher')
 ->group(function () {
 
+    // views
     Route::get('journal', [JournalController::class, 'index'])->name('journal.index');
+    Route::get('journal/classroom', [ClassroomController::class, 'index'])->name('classroom.index');
+    Route::get('journal/classroom/{id}', [ClassroomController::class, 'show'])->name('classroom.show');
+    Route::get('journal/classroom/{id}/edit', [ClassroomController::class, 'edit'])->name('classroom.edit');
+    // posts
+    Route::post('journal/classroom/update', [ClassroomController::class, 'update'])->name('classroom.update');
 
 });
 
