@@ -29,6 +29,8 @@ Route::middleware('teacher')
         Route::get('/show/{id}', [ClassroomController::class, 'show'])->name('classroom.show');
         Route::get('/{id}/edit', [ClassroomController::class, 'edit'])->name('classroom.edit');
         Route::get('/timetable', [ClassroomController::class, 'timetable'])->name('classroom.timetable');
+        Route::get('/timetableedit', [ClassroomController::class, 'timetable_edit'])->name('classroom.timetable.edit');
+        Route::post('/timetableupdate', [ClassroomController::class, 'timetable_update'])->name('classroom.timetable.update');
         Route::post('/update', [ClassroomController::class, 'update'])->name('classroom.update');
 
     });
@@ -44,6 +46,6 @@ Route::middleware('guest')
 });
 
 Route::fallback(function () {
-    return redirect()->route('home.index');
+    // return redirect()->route('home.index');
 });
 

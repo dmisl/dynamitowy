@@ -13,7 +13,7 @@ class Lesson extends Model
     use HasFactory;
 
     protected $fillable = [
-        'subject_id', 'classroom_id', 'day',
+        'subject_id', 'classroom_id', 'day', 'lesson_number',
     ];
 
     public function subject(): HasOne

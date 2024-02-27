@@ -82,26 +82,26 @@ class DatabaseSeeder extends Seeder
         Subject::create(['name' => 'Jezyk niemiecki', 'teacher_id' => 12]);
         Subject::create(['name' => 'Zajecia z wychowawca', 'teacher_id' => 13]);
 
-        Subject::create(['name' => 'Jezyk angielski', 'teacher_id' => 15]);
-        Subject::create(['name' => 'Jezyk polski', 'teacher_id' => 18]);
+        Subject::create(['name' => 'Jezyk angielski', 'teacher_id' => 14]);
+        Subject::create(['name' => 'Jezyk polski', 'teacher_id' => 17]);
         Subject::create(['name' => 'Matematyka', 'teacher_id' => 24]);
-        Subject::create(['name' => 'M4.J1.Podlaczanie urzadzen', 'teacher_id' => 20]);
-        Subject::create(['name' => 'M4.J2.Obslugiwanie urzadzen', 'teacher_id' => 20]);
-        Subject::create(['name' => 'M5.J1.Tworzenie dokumentow', 'teacher_id' => 22]);
-        Subject::create(['name' => 'M6.J2.Obsluga pobotow', 'teacher_id' => 20]);
-        Subject::create(['name' => 'Wiedza o spoleczenstwie', 'teacher_id' => 25]);
-        Subject::create(['name' => 'Wychowanie fizyczne', 'teacher_id' => 24]);
-        Subject::create(['name' => 'Praktyka zawodowa', 'teacher_id' => 20]);
-        Subject::create(['name' => 'Zajecia z wychowawca', 'teacher_id' => 24]);
+        Subject::create(['name' => 'M4.J1.Podlaczanie urzadzen', 'teacher_id' => 19]);
+        Subject::create(['name' => 'M4.J2.Obslugiwanie urzadzen', 'teacher_id' => 19]);
+        Subject::create(['name' => 'M5.J1.Tworzenie dokumentow', 'teacher_id' => 21]);
+        Subject::create(['name' => 'M6.J2.Obsluga pobotow', 'teacher_id' => 19]);
+        Subject::create(['name' => 'Wiedza o spoleczenstwie', 'teacher_id' => 24]);
+        Subject::create(['name' => 'Wychowanie fizyczne', 'teacher_id' => 23]);
+        Subject::create(['name' => 'Praktyka zawodowa', 'teacher_id' => 19]);
+        Subject::create(['name' => 'Zajecia z wychowawca', 'teacher_id' => 23]);
 
-        Subject::create(['name' => 'M3.J3 Montowanie elementow', 'teacher_id' => 14]);
-        Subject::create(['name' => 'M2.J1 Stosowanie technologii mechanicznej', 'teacher_id' => 16]);
-        Subject::create(['name' => 'M3.J1 Montowanie elementow', 'teacher_id' => 22]);
-        Subject::create(['name' => 'Podstawy przedsiebiorczosci', 'teacher_id' => 17]);
-        Subject::create(['name' => 'Wychowanie fizyczne', 'teacher_id' => 19]);
-        Subject::create(['name' => 'Zajecia z wychowawca', 'teacher_id' => 4]);
-        Subject::create(['name' => 'Praktyka zawodowa', 'teacher_id' => 21]);
-        Subject::create(['name' => 'Informatyka', 'teacher_id' => 23]);
+        Subject::create(['name' => 'M3.J3 Montowanie elementow', 'teacher_id' => 13]);
+        Subject::create(['name' => 'M2.J1 Stosowanie technologii mechanicznej', 'teacher_id' => 15]);
+        Subject::create(['name' => 'M3.J1 Montowanie elementow', 'teacher_id' => 21]);
+        Subject::create(['name' => 'Podstawy przedsiebiorczosci', 'teacher_id' => 16]);
+        Subject::create(['name' => 'Wychowanie fizyczne', 'teacher_id' => 18]);
+        Subject::create(['name' => 'Zajecia z wychowawca', 'teacher_id' => 3]);
+        Subject::create(['name' => 'Praktyka zawodowa', 'teacher_id' => 20]);
+        Subject::create(['name' => 'Informatyka', 'teacher_id' => 22]);
 
         // creating students and their classroom
 

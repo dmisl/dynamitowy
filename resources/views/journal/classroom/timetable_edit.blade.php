@@ -26,66 +26,49 @@
                         <p class="d-table-cell align-middle m-0 p-0 small">Wrocz</p>
                     </div>
                 </a>
-
-                <h1 class="fw-light">Informacja o ucznie<br><span class="fw-normal">{{ $student->name }}</span></h1>
-
-                <div class="d-flex">
-
-                    <div>
-
-                        <div class="mt-3">
-                            <h4>Imie nazwisko ucznia</h4>
-                            <h5 class="fw-light">{{ $student->name }}</h5>
-                        </div>
-
-                        <div class="mt-3">
-                            <h4>Email</h4>
-                            <h5 class="fw-light">{{ $student->email }}</h5>
-                        </div>
-
-                        <div class="mt-3">
-                            <h4>Klasa</h4>
-                            <h5 class="fw-light">{{ $student->classroom->name }}</h5>
-                        </div>
-                    </div>
-
-                    <div class="ms-5">
-                        <div class="mt-3 d-inline-block">
-                            <h4 style="display: inline-block;">Ostatnie oceny</h4>
-                            <div class="bg-warning rounded-2">
-                                <div class="p-3 pe-5">
-                                    <p class="fw-medium p-0 m-0">Matematyka</p>
-                                    <p class="small fw-medium p-0 m-0">5</p>
-                                    <p class="fw-medium p-0 m-0 pt-1">Jezyk polski</p>
-                                    <p class="small fw-medium p-0 m-0">5</p>
-                                    <p class="fw-medium p-0 m-0 pt-1">Jezyk niemiecki</p>
-                                    <p class="small fw-medium p-0 m-0">5</p>
-                                    <p class="fw-medium p-0 m-0 pt-1">Jezyk angielski</p>
-                                    <p class="small fw-medium p-0 m-0">5</p>
-                                    <p class="fw-medium p-0 m-0 pt-1">Historia</p>
-                                    <p class="small fw-medium p-0 m-0">5</p>
+                <form action="{{ route('classroom.timetable.update') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="classroom_id" value="{{ $classroom->id }}">
+                    <div class="d-flex flex-wrap">
+                        @foreach($days as $day_nr => $day)
+                            <div class="ms-5 col-md-3">
+                                <div class="mt-3">
+                                    <h4 style="display: inline-block;">{{ $day }}</h4>
+                                    <div class="bg-primary-subtle rounded-2">
+                                        <div class="p-3 pe-5">
+                                            @foreach($timetable as $key => $time)
+                                                <div class="small mt-1">
+                                                    {{ $time }}
+                                                    <select name="lessons[{{ $day_nr }}][{{ $key }}]" class="form-select form-select-sm">
+                                                        @if($lssn = App\Models\Lesson::query()->where(['classroom_id' => $classroom->id, 'day' => $day_nr, 'lesson_number' => $key])->first())
+                                                            <option value=""></option>
+                                                        @else
+                                                            <option value="" selected></option>
+                                                        @endif
+                                                        @foreach($subjects as $subject)
+                                                            @if($lssn)
+                                                                @if($subject->id == $lssn->subject_id)
+                                                                    <option value="{{ $subject->id }}" selected>{{ $subject->name }} - {{ App\Models\Teacher::find($subject->teacher_id)->user->name }}</option>
+                                                                @else
+                                                                    <option value="{{ $subject->id }}">{{ $subject->name }} - {{ App\Models\Teacher::find($subject->teacher_id)->user->name }}</option>
+                                                                @endif
+                                                            @else
+                                                                <option value="{{ $subject->id }}">{{ $subject->name }} - {{ App\Models\Teacher::find($subject->teacher_id)->user->name }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-
-                    <div class="ms-5">
-                        <div class="mt-3 d-inline-block">
-                            <h4 style="display: inline-block;">Rozklad na dzisiaj</h4>
-                            <div class="bg-primary-subtle rounded-2">
-                                <div class="p-3 pe-5">
-                                    @foreach($lessons as $index => $lesson)
-                                        <p class="fw-medium p-0 pt-{{ $index == 0 ? 0 : 1 }} m-0">{{ $subjects[$lesson->subject_id-1]['name'] }}</p>
-                                        <p class="small fw-medium p-0 m-0">{{ $timetable[$lesson->lesson_number] }}</p>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
+                    <div class="mt-5 text-center">
+                        <button type="submit" class="btn btn-primary btn-lg">Zapisac</button>
                     </div>
-
-                </div>
-
-            </div>
+                </form>
 
         </div>
     </div>

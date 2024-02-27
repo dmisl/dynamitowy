@@ -5,20 +5,7 @@
 @section('content')
 
     <div class="d-flex" style="height: 100%;">
-        <div class="col-md-3 bg-info bg-gradient">
-            <div class="user-select-none d-flex flex-column">
-                <p class="p-0 m-0 fs-4 text-center border-bottom border-dark">Funkcje</p>
-                <a href="{{ route('classroom.index') }}" class="p-0 m-0 text-decoration-none text-dark">
-                    <p class="p-0 m-0 fs-6 border-bottom d-inline border-dark">Zarzadzanie uczniami</p>
-                </a>
-                <a href="" class="p-0 m-0 text-decoration-none text-dark">
-                    <p class="p-0 m-0 fs-6 border-bottom d-inline border-dark">Obecnosci</p>
-                </a>
-                <a href="{{ route('classroom.timetable') }}" class="p-0 m-0 text-decoration-none text-dark">
-                    <p class="p-0 m-0 fs-6 border-bottom d-inline border-dark">Plan lekcji</p>
-                </a>
-            </div>
-        </div>
+        <x-classroom-menu></x-classroom-menu>
         <div class="col-md-9 user-select-none">
 
             <div class="p-3">
@@ -42,7 +29,7 @@
                 <div class="d-flex flex-wrap">
                     <div class="ms-5">
                         <div class="mt-3 d-inline-block">
-                            <h4 style="display: inline-block;">{{ $days[2] }}</h4>
+                            <h4 style="display: inline-block;">{{ $days[1] }}</h4>
                             <div class="bg-primary-subtle rounded-2">
                                 <div class="p-3 pe-5">
                                     @foreach($day1 as $lesson)
@@ -68,7 +55,7 @@
                     </div>
                     <div class="ms-5">
                         <div class="mt-3 d-inline-block">
-                            <h4 style="display: inline-block;">{{ $days[2] }}</h4>
+                            <h4 style="display: inline-block;">{{ $days[3] }}</h4>
                             <div class="bg-primary-subtle rounded-2">
                                 <div class="p-3 pe-5">
                                     @foreach($day3 as $lesson)
@@ -81,10 +68,23 @@
                     </div>
                     <div class="ms-5">
                         <div class="mt-3 d-inline-block">
-                            <h4 style="display: inline-block;">{{ $days[2] }}</h4>
+                            <h4 style="display: inline-block;">{{ $days[4] }}</h4>
                             <div class="bg-primary-subtle rounded-2">
                                 <div class="p-3 pe-5">
                                     @foreach($day4 as $lesson)
+                                        <p class="fw-medium p-0 pt-1 m-0">{{ $subjects[$lesson->subject_id-1]['name'] }}</p>
+                                        <p class="small fw-medium p-0 m-0">{{ $timetable[$lesson->lesson_number] }}</p>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ms-5">
+                        <div class="mt-3 d-inline-block">
+                            <h4 style="display: inline-block;">{{ $days[5] }}</h4>
+                            <div class="bg-primary-subtle rounded-2">
+                                <div class="p-3 pe-5">
+                                    @foreach($day5 as $lesson)
                                         <p class="fw-medium p-0 pt-1 m-0">{{ $subjects[$lesson->subject_id-1]['name'] }}</p>
                                         <p class="small fw-medium p-0 m-0">{{ $timetable[$lesson->lesson_number] }}</p>
                                     @endforeach

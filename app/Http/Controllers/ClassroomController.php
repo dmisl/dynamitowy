@@ -65,13 +65,58 @@ class ClassroomController extends Controller
         $days = [1 => 'Poniedzialek', 2 => 'Wtorek', 3 => 'Sroda', 4 => 'Czwartek', 5 => 'Piatek'];
         $subjects = Subject::all()->toArray();
         $classroom = User::find(Auth::id())->teacher->classroom;
-        $lessons = Lesson::query();
-        $day1 = $lessons->where(['day' => 1, 'classroom_id' => $classroom->id])->get();
-        $day2 = $lessons->where(['day' => 2, 'classroom_id' => $classroom->id])->get();
-        $day3 = $lessons->where(['day' => 3, 'classroom_id' => $classroom->id])->get();
-        $day4 = $lessons->where(['day' => 4, 'classroom_id' => $classroom->id])->get();
-        $day5 = $lessons->where(['day' => 5, 'classroom_id' => $classroom->id])->get();
+        $day1 = Lesson::query()->where(['day' => 1, 'classroom_id' => $classroom->id])->orderBy('lesson_number', 'asc')->get();
+        $day2 = Lesson::query()->where(['day' => 2, 'classroom_id' => $classroom->id])->orderBy('lesson_number', 'asc')->get();
+        $day3 = Lesson::query()->where(['day' => 3, 'classroom_id' => $classroom->id])->orderBy('lesson_number', 'asc')->get();
+        $day4 = Lesson::query()->where(['day' => 4, 'classroom_id' => $classroom->id])->orderBy('lesson_number', 'asc')->get();
+        $day5 = Lesson::query()->where(['day' => 5, 'classroom_id' => $classroom->id])->orderBy('lesson_number', 'asc')->get();
         return view('journal.classroom.timetable', compact('timetable', 'days', 'subjects', 'classroom', 'day1', 'day2', 'day3', 'day4', 'day5'));
+    }
+    public function timetable_edit()
+    {
+        $timetable = ['0' => '7:10', '1' => '8:00', '2' => '8:50', '3' => '9:40', '4' => '10:30', '5' => '11:35', '6' => '12:25', '7' => '13:15', '8' => '14:05', '9' => '14:55', '10' => '15:45', '11' => '16:35',];
+        $subjects = Subject::all();
+        $days = [1 => 'Poniedzialek', 2 => 'Wtorek', 3 => 'Sroda', 4 => 'Czwartek', 5 => 'Piatek'];
+        $classroom = User::find(Auth::id())->teacher->classroom;
+        return view('journal.classroom.timetable_edit', compact('timetable', 'subjects', 'classroom', 'days'));
+    }
+    public function timetable_update(Request $request)
+    {
+        // dd($request->all());
+        $validated = $request->validate([
+            'lessons' => ['required'],
+            'classroom_id' => ['required'],
+        ]);
+        foreach ($validated['lessons'] as $day => $timetable) {
+            foreach ($timetable as $lesson_number => $subject_id) {
+                if($subject_id)
+                {
+                    $lssn = Lesson::query()->where(['classroom_id' => $validated['classroom_id'], 'lesson_number' => $lesson_number, 'day' => $day])->first();
+                    if($lssn)
+                    {
+                        $lssn->update([
+                            'subject_id' => $subject_id,
+                        ]);
+                    } else
+                    {
+                        Lesson::create([
+                            'subject_id' => $subject_id,
+                            'classroom_id' => $validated['classroom_id'],
+                            'day' => $day,
+                            'lesson_number' => $lesson_number,
+                        ]);
+                    }
+                } else
+                {
+                    $lssn = Lesson::query()->where(['classroom_id' => $validated['classroom_id'], 'lesson_number' => $lesson_number, 'day' => $day])->first();
+                    if($lssn)
+                    {
+                        $lssn->delete();
+                    }
+                }
+            }
+        }
+        return redirect()->route('classroom.timetable');
     }
 
 }
