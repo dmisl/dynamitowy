@@ -18,6 +18,14 @@ class ClassroomController extends Controller
         $students = User::query()->where(['classroom_id' => 1])->orderBy('name', 'asc')->get();
         return view('journal.classroom.index', compact('students'));
     }
+    public function create()
+    {
+        return view('journal.classroom.create');
+    }
+    public function store(Request $request)
+    {
+
+    }
     public function show($id)
     {
         $timetable = ['0' => '7:10', '1' => '8:00', '2' => '8:50', '3' => '9:40', '4' => '10:30', '5' => '11:35', '6' => '12:25', '7' => '13:15', '8' => '14:05', '9' => '14:55', '10' => '15:45', '11' => '16:35',];

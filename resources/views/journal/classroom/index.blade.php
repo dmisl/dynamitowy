@@ -94,7 +94,7 @@
                     @endforeach
                 </table>
 
-                <button class="btn btn-primary btn-sm">Dodac ucznia</button>
+                <a href="{{ route('classroom.create') }}" class="btn btn-primary btn-sm">Dodac ucznia</a>
 
             </div>
 

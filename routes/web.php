@@ -26,10 +26,12 @@ Route::middleware('teacher')
     ->group(function () {
 
         Route::get('/', [ClassroomController::class, 'index'])->name('classroom.index');
+        Route::get('/create', [ClassroomController::class, 'create'])->name('classroom.create');
         Route::get('/show/{id}', [ClassroomController::class, 'show'])->name('classroom.show');
         Route::get('/{id}/edit', [ClassroomController::class, 'edit'])->name('classroom.edit');
         Route::get('/timetable', [ClassroomController::class, 'timetable'])->name('classroom.timetable');
         Route::get('/timetableedit', [ClassroomController::class, 'timetable_edit'])->name('classroom.timetable.edit');
+        Route::post('/store', [ClassroomController::class, 'store'])->name('classroom.store');
         Route::post('/timetableupdate', [ClassroomController::class, 'timetable_update'])->name('classroom.timetable.update');
         Route::post('/update', [ClassroomController::class, 'update'])->name('classroom.update');
 
