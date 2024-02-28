@@ -34,6 +34,7 @@
                                 <div class="p-3 pe-5">
                                     @foreach($day1 as $lesson)
                                         <p class="fw-medium p-0 pt-1 m-0">{{ $subjects[$lesson->subject_id-1]['name'] }}</p>
+                                        <p class="fw-light small p-0 m-0 m-0 text-secondary">{{ App\Models\User::find($subjects[$lesson->subject_id-1]['teacher_id']+1)->name }}</p>
                                         <p class="small fw-medium p-0 m-0">{{ $timetable[$lesson->lesson_number] }}</p>
                                     @endforeach
                                 </div>
@@ -47,6 +48,7 @@
                                 <div class="p-3 pe-5">
                                     @foreach($day2 as $lesson)
                                         <p class="fw-medium p-0 pt-1 m-0">{{ $subjects[$lesson->subject_id-1]['name'] }}</p>
+                                        <p class="fw-light small p-0 m-0 m-0 text-secondary">{{ App\Models\User::find($subjects[$lesson->subject_id-1]['teacher_id']+1)->name }}</p>
                                         <p class="small fw-medium p-0 m-0">{{ $timetable[$lesson->lesson_number] }}</p>
                                     @endforeach
                                 </div>
@@ -60,6 +62,7 @@
                                 <div class="p-3 pe-5">
                                     @foreach($day3 as $lesson)
                                         <p class="fw-medium p-0 pt-1 m-0">{{ $subjects[$lesson->subject_id-1]['name'] }}</p>
+                                        <p class="fw-light small p-0 m-0 m-0 text-secondary">{{ App\Models\User::find($subjects[$lesson->subject_id-1]['teacher_id']+1)->name }}</p>
                                         <p class="small fw-medium p-0 m-0">{{ $timetable[$lesson->lesson_number] }}</p>
                                     @endforeach
                                 </div>
@@ -73,6 +76,7 @@
                                 <div class="p-3 pe-5">
                                     @foreach($day4 as $lesson)
                                         <p class="fw-medium p-0 pt-1 m-0">{{ $subjects[$lesson->subject_id-1]['name'] }}</p>
+                                        <p class="fw-light small p-0 m-0 m-0 text-secondary">{{ App\Models\User::find($subjects[$lesson->subject_id-1]['teacher_id']+1)->name }}</p>
                                         <p class="small fw-medium p-0 m-0">{{ $timetable[$lesson->lesson_number] }}</p>
                                     @endforeach
                                 </div>
@@ -86,6 +90,7 @@
                                 <div class="p-3 pe-5">
                                     @foreach($day5 as $lesson)
                                         <p class="fw-medium p-0 pt-1 m-0">{{ $subjects[$lesson->subject_id-1]['name'] }}</p>
+                                        <p class="fw-light small p-0 m-0 m-0 text-secondary">{{ App\Models\User::find($subjects[$lesson->subject_id-1]['teacher_id']+1)->name }}</p>
                                         <p class="small fw-medium p-0 m-0">{{ $timetable[$lesson->lesson_number] }}</p>
                                     @endforeach
                                 </div>

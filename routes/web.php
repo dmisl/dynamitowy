@@ -48,6 +48,6 @@ Route::middleware('guest')
 });
 
 Route::fallback(function () {
-    // return redirect()->route('home.index');
+    return redirect()->route('home.index');
 });
 

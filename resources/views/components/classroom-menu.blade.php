@@ -1,4 +1,4 @@
-<div class="col-md-3 bg-info bg-gradient" style="height:500vh;">
+<div class="col-md-3 bg-info bg-gradient">
     <div class="user-select-none d-flex flex-column">
         <p class="p-0 m-0 fs-4 text-center border-bottom border-dark">Funkcje</p>
         <a href="{{ route('classroom.index') }}" class="p-0 m-0 text-decoration-none text-dark">
