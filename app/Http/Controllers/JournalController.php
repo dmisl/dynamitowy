@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lesson;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +12,11 @@ class JournalController extends Controller
 {
     public function index()
     {
-        // $todayLessons = Lesson::query()->where(['subject_id' => Auth::user()->teacher])->orderBy('lesson_nr', 'asc')->get();
-        return view('journal.index');
+        $today = date('d.m.Y');
+        $teacher = Auth::user()->teacher;
+        $todayLessons = [];
+        
+        dd(Auth::user()->teacher->id);
+        return view('journal.index', compact('today'));
     }
 }
