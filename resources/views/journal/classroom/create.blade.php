@@ -29,6 +29,35 @@
 
                 <h1 class="fw-light">Dodanie ucznia</h1>
 
+                <form action="{{ route('classroom.store') }}" method="POST" enctype="multipart/form-data">
+
+                    @csrf
+
+                    <div class="ps-3">
+
+                        <div class="mt-4 w-50">
+                            <label for="name_surname"><h3>Imie nazwisko</h3></label>
+                            <input name="name" id="name_surname" type="text" class="form-control" placeholder="Imie nazwisko">
+                        </div>
+
+                        <div class="mt-3 w-50">
+                            <label for="email"><h3>Email</h3></label>
+                            <input name="email" id="email" type="text" class="form-control" placeholder="Email">
+                        </div>
+
+                        <div class="mt-3 w-50">
+                            <label for="file" class="form-label"><h3>Photo</h3></label>
+                            <input name="photo" class="form-control" type="file" id="file">
+                        </div>
+
+                        <div class="mt-4">
+                            <button class="btn btn-primary" type="submit">Dodac ucznia</button>
+                        </div>
+
+                    </div>
+
+                </form>
+
             </div>
 
         </div>

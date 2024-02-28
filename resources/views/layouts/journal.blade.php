@@ -22,7 +22,7 @@
         <header class="w-100 bg-dark text-light m-0 p-0 user-select-none">
             <a class="text-decoration-none text-light" href="{{ route('home.index') }}"><p class="m-0 p-0">Dynamitowy</p></a>
             <div class="d-flex">
-                <div class="text-center mx-2" role="button">
+                <a href="{{ route('journal.index') }}" class="text-light text-decoration-none text-center mx-2" role="button">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="50" height="50" viewBox="0 0 256 256" xml:space="preserve">
                         <defs>
                         </defs>
@@ -36,7 +36,7 @@
                         </g>
                     </svg>
                     <p class="m-0 p-0">Lekcje</p>
-                </div>
+                </a>
                 <div class="text-center mx-2" role="button">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="50" height="50" viewBox="0 0 256 256" xml:space="preserve">
 
@@ -51,9 +51,9 @@
                     </svg>
                     <p class="m-0 p-0">Uwagi</p>
                 </div>
-                @if(App\Models\User::find(1)->teacher)
-                    @if(App\Models\User::find(1)->teacher->classroom)
-                        <a class="text-center mx-2 text-light" href="{{ route('classroom.index') }}">
+                @if(App\Models\User::find(Auth::id())->teacher)
+                    @if(App\Models\User::find(Auth::id())->teacher->classroom)
+                        <a class="text-center text-decoration-none mx-2 text-light" href="{{ route('classroom.index') }}">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="50" height="50" viewBox="0 0 256 256" xml:space="preserve">
 
                                 <defs>

@@ -15,7 +15,7 @@ class ClassroomController extends Controller
 {
     public function index()
     {
-        $students = User::query()->where(['classroom_id' => 1])->orderBy('name', 'asc')->get();
+        $students = User::query()->where(['classroom_id' => Auth::user()->teacher->classroom->id])->orderBy('name', 'asc')->get();
         return view('journal.classroom.index', compact('students'));
     }
     public function create()
@@ -24,6 +24,22 @@ class ClassroomController extends Controller
     }
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'min:3'],
+            'email' => ['required', 'email'],
+            'photo' => ['nullable', 'file', 'image'],
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'photo' => $request->hasFile('photo') ? $request->photo : 'http://127.0.0.1:8000/storage/photos/default.png',
+            'classroom_id' => User::find(Auth::id())->teacher->classroom->id,
+            'password' => 'student',
+            'role_id' => 1,
+        ]);
+
+        return redirect()->route('classroom.show', $user->id);
 
     }
     public function show($id)
@@ -38,7 +54,13 @@ class ClassroomController extends Controller
     {
         $classes = Classroom::all();
         $student = User::find($id);
-        return view('journal.classroom.edit', compact('id', 'student', 'classes'));
+        if($student->classroom->id == Auth::user()->teacher->classroom->id)
+        {
+            return view('journal.classroom.edit', compact('id', 'student', 'classes'));
+        } else
+        {
+            return redirect()->route('journal.index');
+        }
     }
     public function update(Request $request)
     {

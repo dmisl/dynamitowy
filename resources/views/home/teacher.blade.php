@@ -29,7 +29,7 @@
                         </div>
                     </a>
 
-                    <a href="" class="text-decoration-none col-md-4 col-12 text-light mt-2">
+                    <a href="{{ route('journal.index') }}" class="text-decoration-none col-md-4 col-12 text-light mt-2">
                         <div class="mx-auto bg-dark d-table text-center" style="width: 90%; height: 100%;">
                             <h1 class="fw-light m-0 d-table-cell py-2" style="vertical-align: middle;">Dziennik ></h1>
                         </div>
