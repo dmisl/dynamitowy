@@ -4,13 +4,16 @@
 
 
 ## INSTALATION
-
+```
 --npm install
 --php composer.phar install 
 --php artisan serve
 
--create .env
--paste
+
+```
+> paste in created .env
+
+```
 --APP_NAME=Laravel
 APP_ENV=local
 APP_KEY=
@@ -63,3 +66,9 @@ PUSHER_APP_CLUSTER=mt1
 
 MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
 MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+```
+## php artisan comands
+```
+php artisan key:generate
+php artisan migrate:refresh --seed
+```
