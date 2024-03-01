@@ -160,6 +160,13 @@ class DatabaseSeeder extends Seeder
             Subject::create(['name' => 'Podstawy rysunku technicznego', 'teacher_id' => 37]);
             Subject::create(['name' => 'Zajecia z wychowawca', 'teacher_id' => 1]);
 
+            Subject::create(['name' => 'Administracja bazami danych', 'teacher_id' => 5]);
+            Subject::create(['name' => 'Projektowanie i tworzenie stron internetowych', 'teacher_id' => 6]);
+            Subject::create(['name' => 'Jezyk polski', 'teacher_id' => 33]);
+            Subject::create(['name' => 'Programowanie aplikacji internetowych', 'teacher_id' => 6]);
+            Subject::create(['name' => 'Historia', 'teacher_id' => 33]);
+            Subject::create(['name' => 'Zajecia z wychowawca', 'teacher_id' => 33]);
+
         // creating students and their classroom
 
         // 4TIP
@@ -323,6 +330,21 @@ class DatabaseSeeder extends Seeder
             User::create(['name' => 'Filip Sobolew', 'email' => 'filip_sobolew@gmail.com', 'classroom_id' => 7, 'role_id' => 1, 'password' => 'student']);
             User::create(['name' => 'Karol Strak', 'email' => 'karol_strak@gmail.com', 'classroom_id' => 7, 'role_id' => 1, 'password' => 'student']);
             User::create(['name' => 'Witalij Switlicki', 'email' => 'witalij_switlicki@gmail.com', 'classroom_id' => 7, 'role_id' => 1, 'password' => 'student']);
+
+        // 2TP
+
+            Classroom::create(['name' => '2TP', 'teacher_id' => 33]);
+
+            User::create(['name' => 'Roman Vuiko', 'email' => 'roman_vuiko@gmail.com', 'classroom_id' => 8, 'role_id' => 1, 'password' => 'student']);
+            User::create(['name' => 'Mykola Vuiko', 'email' => 'mykola_vuiko@gmail.com', 'classroom_id' => 8, 'role_id' => 1, 'password' => 'student']);
+            User::create(['name' => 'Mateusz Wujcik', 'email' => 'mateusz_wujcik@gmail.com', 'classroom_id' => 8, 'role_id' => 1, 'password' => 'student']);
+            User::create(['name' => 'Karol Kazimierski', 'email' => 'karol_kazimierski@gmail.com', 'classroom_id' => 8, 'role_id' => 1, 'password' => 'student']);
+            User::create(['name' => 'Karol Grebowicz', 'email' => 'karol_grebowicz@gmail.com', 'classroom_id' => 8, 'role_id' => 1, 'password' => 'student']);
+            User::create(['name' => 'Kamil Kaldon', 'email' => 'kamil_kaldon@gmail.com', 'classroom_id' => 8, 'role_id' => 1, 'password' => 'student']);
+            User::create(['name' => 'Katerina Hubska', 'email' => 'katerina_hubska@gmail.com', 'classroom_id' => 8, 'role_id' => 1, 'password' => 'student']);
+            User::create(['name' => 'Anna Plaksina', 'email' => 'anna_plaksina@gmail.com', 'classroom_id' => 8, 'role_id' => 1, 'password' => 'student']);
+            User::create(['name' => 'Artek Vdovyczenko', 'email' => 'artek_vdovychenko@gmail.com', 'classroom_id' => 8, 'role_id' => 1, 'password' => 'student']);
+            User::create(['name' => 'Vlad Dubinin', 'email' => 'vlad_dubinin@gmail.com', 'classroom_id' => 8, 'role_id' => 1, 'password' => 'student']);
 
         // creating timetable
 
@@ -646,5 +668,48 @@ class DatabaseSeeder extends Seeder
                 Lesson::create(['classroom_id' => 7, 'subject_id' => 18, 'day' => 5, 'lesson_number' => 6]);
                 Lesson::create(['classroom_id' => 7, 'subject_id' => 60, 'day' => 5, 'lesson_number' => 7]);
                 Lesson::create(['classroom_id' => 7, 'subject_id' => 79, 'day' => 5, 'lesson_number' => 8]);
+        
+        // 2TP
+            // Monday
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 80, 'day' => 1, 'lesson_number' => 1]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 82, 'day' => 1, 'lesson_number' => 2]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 3, 'day' => 1, 'lesson_number' => 3]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 46, 'day' => 1, 'lesson_number' => 4]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 60, 'day' => 1, 'lesson_number' => 5]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 83, 'day' => 1, 'lesson_number' => 6]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 83, 'day' => 1, 'lesson_number' => 7]);
+            // Tuesday
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 38, 'day' => 2, 'lesson_number' => 1]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 18, 'day' => 2, 'lesson_number' => 2]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 84, 'day' => 2, 'lesson_number' => 3]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 3, 'day' => 2, 'lesson_number' => 4]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 71, 'day' => 2, 'lesson_number' => 5]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 71, 'day' => 2, 'lesson_number' => 6]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 85, 'day' => 2, 'lesson_number' => 7]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 1, 'day' => 2, 'lesson_number' => 8]);
+            // Wednesday
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 80, 'day' => 3, 'lesson_number' => 0]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 80, 'day' => 3, 'lesson_number' => 1]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 17, 'day' => 3, 'lesson_number' => 2]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 4, 'day' => 3, 'lesson_number' => 3]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 83, 'day' => 3, 'lesson_number' => 4]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 83, 'day' => 3, 'lesson_number' => 5]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 63, 'day' => 3, 'lesson_number' => 6]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 17, 'day' => 3, 'lesson_number' => 7]);
+            // Thursday
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 3, 'day' => 4, 'lesson_number' => 2]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 4, 'day' => 4, 'lesson_number' => 3]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 82, 'day' => 4, 'lesson_number' => 4]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 82, 'day' => 4, 'lesson_number' => 5]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 81, 'day' => 4, 'lesson_number' => 6]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 81, 'day' => 4, 'lesson_number' => 7]);
+            // Friday
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 15, 'day' => 5, 'lesson_number' => 0]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 84, 'day' => 5, 'lesson_number' => 1]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 18, 'day' => 5, 'lesson_number' => 2]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 34, 'day' => 5, 'lesson_number' => 3]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 4, 'day' => 5, 'lesson_number' => 4]);
+                Lesson::create(['classroom_id' => 8, 'subject_id' => 1, 'day' => 5, 'lesson_number' => 5]);
+        
     }
 }
