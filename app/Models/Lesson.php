@@ -16,9 +16,9 @@ class Lesson extends Model
         'subject_id', 'classroom_id', 'day', 'lesson_number',
     ];
 
-    public function subject(): HasOne
+    public function subject(): BelongsTo
     {
-        return $this->hasOne(Subject::class);
+        return $this->belongsTo(Subject::class);
     }
 
     public function classroom() : BelongsTo

@@ -14,6 +14,13 @@ return new class extends Migration
         Schema::create('presences', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+
+            $table->date('date');
+            $table->foreignId('classroom_id')->constrained();
+            $table->foreignId('lesson_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->integer('type');
+            $table->integer('lesson_number');
         });
     }
 

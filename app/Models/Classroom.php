@@ -30,4 +30,9 @@ class Classroom extends Model
         return $this->hasMany(Lesson::class);
     }
 
+    public function presences() : HasMany
+    {
+        return $this->hasMany(Presence::class);
+    }
+
 }
