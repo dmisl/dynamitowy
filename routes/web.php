@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JournalController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,8 @@ Route::middleware('teacher')
 ->group(function () {
 
     Route::get('journal', [JournalController::class, 'index'])->name('journal.index');
+    Route::get('lesson/{id}/{date}/show', [LessonController::class, 'show'])->name('lesson.show');
+    Route::get('lesson/{lesson_id}/{classroom_id}/{date}/edit', [LessonController::class, 'edit'])->name('lesson.edit');
 
     Route::middleware('classroom_teacher')
     ->prefix('journal/classroom')
