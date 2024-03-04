@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\GradeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LessonController;
@@ -23,6 +24,8 @@ Route::middleware('teacher')
     Route::get('journal', [JournalController::class, 'index'])->name('journal.index');
     Route::get('lesson/{id}/{date}/show', [LessonController::class, 'show'])->name('lesson.show');
     Route::get('lesson/{lesson_id}/{classroom_id}/{date}/edit', [LessonController::class, 'edit'])->name('lesson.edit');
+
+    Route::get('grade', [GradeController::class, 'show'])->name('grade.show');
 
     Route::middleware('classroom_teacher')
     ->prefix('journal/classroom')
