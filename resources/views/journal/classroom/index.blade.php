@@ -4,8 +4,10 @@
 
 @section('content')
 
-    <div class="d-flex">
-        <x-classroom-menu></x-classroom-menu>
+    <div class="d-flex" id="app">
+        <app-menu-classroom></app-menu-classroom>
+
+        </>
         <div class="col-md-9">
             <div class="p-3">
                 <h1>Lista uczniow</h1>
