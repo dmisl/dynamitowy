@@ -16,7 +16,7 @@
                             <p class="p-0 m-0 ps-1 pt-1 fw-medium">{{ $lesson->classroom->name }} - {{ $timetable[$lesson->lesson_number] }}</p>
                             <p class="p-0 m-0 ps-1 small text-wrap">{{ $lesson->subject->name }}</p>
                         </div> --}}
-                        <lessons-navigate></lessons-navigate>
+                        <lessons-navigate id="{{ Auth::id() }}" ></lessons-navigate>
                     {{-- </a> --}}
                 {{-- @endforeach --}}
             </div>

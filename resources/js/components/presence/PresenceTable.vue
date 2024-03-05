@@ -2363,7 +2363,6 @@ export default {
     mounted() {
     this.emitter.on("ChangeTableData", (data) => {
         this.TestApiData = data.data
-        console.log(this.TestApiData);
     })
     },
 
