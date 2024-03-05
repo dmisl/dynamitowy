@@ -9,6 +9,7 @@ use App\Models\Lesson;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,4 +44,8 @@ Route::get('/subject/{id}', function (string $id) {
 Route::get('/subjects', function () {
     return SubjectResource::collection(Subject::all());
 });
-
+Route::get('/todayLessons/{id}', function (string $id) {
+    $subjects = Subject::query()->where(['teacher_id' => $id-1])->get('id');
+    $lessons = Lesson::query()->where(['day' => date('N')])->whereIn('subject_id', $subjects)->get()->toJson();
+    return $lessons;
+});
