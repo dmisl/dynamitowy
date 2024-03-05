@@ -31,3 +31,62 @@
 
 
                 stroka 28
+
+                gamno bomza jake ja probuwaw:
+export default {
+    name: "Lessonnavigate",
+    props: {
+        id:String
+    },
+    data() {
+        return {
+            lessonsApiData: [],
+            lessons: []
+        }
+    },
+    methods: {  
+        sendDataToChangeTable(x){
+            this.emitter.emit("ChangeTableData", {data: x});
+        }
+    },
+    mounted() {
+        // requests to get today lessons data by /todayLessons/{id}
+        axios
+            .get(`/api/todayLessons/${this.id}`)
+            .then(response => {
+                this.lessonsApiData = response.data;
+                console.log(this.lessonsApiData);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            .then(() => {
+                this.lessonsApiData.forEach(element => {
+                    const lessonPusher = {
+                        ClassName: null,
+                        LessonName: null,
+                        LessonTime: null 
+                    }
+                    axios.get(`/api/subject/${element.classroom_id}`).then(response => {
+                        console.log(response.data);
+                        lessonPusher.LessonName = response.data.name;
+                    }).catch(error => {
+                        console.log(error);
+                    }).then(() => {
+                        axios.get(`/api/classroom/${element.classroom_id}`).then(response => {
+                            console.log(response.data);
+                            lessonPusher.ClassName = response.data.name;
+                        }).catch(error => {
+                            console.log(error);
+                        }).then(() => {
+                            axios.get(`/api/lesson/${element.lesson_id}`).then(response => {
+                                console.log(response.data);
+                                lessonPusher.LessonTime = response.data.time;
+                            })
+                            this.lessons.push(lessonPusher);
+                        })
+                    })
+                });
+            })
+    },
+}

@@ -6,23 +6,59 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     name: "Lessonnavigate",
+    props: {
+        id: String,
+    },
     data() {
         return {
-            lessons: [
-                { ClassName: "4TIP", LessonTime: "9-40", LessonName: "programowanie Obiektowe" },
-                { ClassName: "4TIP", LessonTime: "9-40", LessonName: "programowanie Obiektowe" },
-                { ClassName: "4TIP", LessonTime: "9-40", LessonName: "programowanie Obiektowe" },
-                { ClassName: "4TIP", LessonTime: "9-40", LessonName: "programowanie Obiektowe" },
-                { ClassName: "4TIP", LessonTime: "9-40", LessonName: "programowanie Obiektowe" },
-            ]
-        }
+            lessons: [],
+            error: null, // Added to handle potential errors
+        };
     },
-    methods: {  
-        sendDataToChangeTable(x){
-            this.emitter.emit("ChangeTableData", {data: x});
-        }
+    methods: {
+        sendDataToChangeTable(x) {
+            this.emitter.emit("ChangeTableData", { data: x });
+        },
     },
-}
+   /**
+    * Function to fetch data from the API and update the lessons data in the component.
+     *
+     * @return {void} 
+     */
+
+    mounted() {
+        async function fetchData() {
+            try {
+                const response = await axios.get(`/api/todayLessons/${this.id}`);
+                const lessonsApiData = response.data;
+
+                const lessons = await Promise.all(
+                    lessonsApiData.map(async (element) => {
+                        const { data: classroomData } = await axios.get(`/api/classroom/${element.classroom_id}`);
+                        const { data: subjectData } = await axios.get(`/api/subject/${element.subject_id}`);
+                        const { data: lessonData } = await axios.get(`/api/lesson/${element.id}`);
+
+                        return {
+                            ClassName: classroomData.name,
+                            LessonName: subjectData.name,
+                            LessonTime: lessonData.time,
+                        };
+                    })
+                );
+
+                this.lessons = lessons;
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                this.error = error; 
+            }
+        }
+
+        fetchData(); // Call the function to start fetching data
+    },
+};
+
 </script>
