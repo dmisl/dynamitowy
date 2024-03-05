@@ -8,10 +8,10 @@
         <div class="col-md-3 bg-info bg-gradient">
             <div class="user-select-none">
                 <select class="form-select rounded-0">
-                    <option value="">{{ $date }}</option>
+                    <option value="">{{ date('Y-m-d') }}</option>
                 </select>
                 @foreach($lessons as $lesson)
-                    <a class="text-decoration-none text-dark" href="{{ route('lesson.show', [$lesson->id, $date]) }}">
+                    <a class="text-decoration-none text-dark" href="{{ route('lesson.show', [$lesson->id, date('Y-m-d')]) }}">
                         <div class="m-0 p-0 border-bottom border-dark">
                             <p class="p-0 m-0 ps-1 pt-1 fw-medium">{{ $lesson->classroom->name }} - {{ $timetable[$lesson->lesson_number] }}</p>
                             <p class="p-0 m-0 ps-1 small text-wrap">{{ $lesson->subject->name }}</p>
@@ -24,7 +24,7 @@
 
             <div class="p-3">
 
-                {{-- <a href="{{ route('lesson.show', [$currentLesson->id, $date]) }}" class="d-flex mb-2">
+                <a href="{{ route('journal.index') }}" class="d-flex mb-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="21" height="21" viewBox="0 0 256 256" xml:space="preserve">
                         <defs>
                         </defs>
@@ -39,9 +39,28 @@
                     <div class="d-table ms-1">
                         <p class="d-table-cell align-middle m-0 p-0 small">Wrocz</p>
                     </div>
-                </a> --}}
+                </a>
 
-                
+                <table class="table table-primary table-bordered">
+                    @if($gradeReasons->count() == 0)
+                        <tr>
+                            <th>Imie Nazwisko</th>
+                            <th>Niema zadnych ocen</th>
+                        </tr>
+                        @foreach($classroom->users as $student)
+                            <tr>
+                                <td>{{ $student->name }}</td>
+                                <td>
+                                    brak
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+
+                    @endif
+                </table>
+
+                <a href="{{ route('grade.edit', [$classroom->id, $subject->id]) }}" class="btn btn-primary btn-lg">Edytowac</a>
 
             </div>
 

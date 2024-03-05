@@ -26,9 +26,8 @@
             <div class="p-3">
 
                 <presence-table></presence-table>
-
                 <a href="{{ route('lesson.edit', [$currentLesson->id, $classroom->id, $date]) }}" class="btn brn-lg btn-primary">Edytowac</a>
-                <a href="{{ route('grade.show') }}" class="btn brn-lg btn-primary ms-5">Oceny</a>
+                <a href="{{ route('grade.show', [$classroom->id, $currentLesson->subject->id]) }}" class="btn brn-lg btn-primary ms-5">Oceny</a>
 
             </div>
 

@@ -55,4 +55,9 @@ class User extends Authenticatable
         return $this->hasMany(Presence::class);
     }
 
+    public function grades() : HasMany
+    {
+        return $this->hasMany(Grade::class);
+    }
+
 }

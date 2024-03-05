@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Classroom;
+use App\Models\GradeType;
 use App\Models\Lesson;
 use App\Models\PresenceType;
 use App\Models\Role;

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\GradeController;
+use App\Http\Controllers\GradeReasonController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LessonController;
@@ -25,7 +26,10 @@ Route::middleware('teacher')
     Route::get('lesson/{id}/{date}/show', [LessonController::class, 'show'])->name('lesson.show');
     Route::get('lesson/{lesson_id}/{classroom_id}/{date}/edit', [LessonController::class, 'edit'])->name('lesson.edit');
 
-    Route::get('grade', [GradeController::class, 'show'])->name('grade.show');
+    Route::get('grade/{classroom_id}/{subject_id}/show', [GradeController::class, 'show'])->name('grade.show');
+    Route::get('grade/{classroom_id}/{subject_id}/edit', [GradeController::class, 'edit'])->name('grade.edit');
+
+    Route::post('gradereason', [GradeReasonController::class, 'store'])->name('gradereason.store');
 
     Route::middleware('classroom_teacher')
     ->prefix('journal/classroom')

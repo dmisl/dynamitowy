@@ -35,4 +35,9 @@ class Classroom extends Model
         return $this->hasMany(Presence::class);
     }
 
+    public function gradeReasons() : HasMany
+    {
+        return $this->hasMany(GradeReason::class);
+    }
+
 }
