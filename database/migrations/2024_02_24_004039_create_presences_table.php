@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('classroom_id')->constrained();
             $table->foreignId('lesson_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->integer('type');
+            $table->foreignId('presence_type_id')->constrained();
             $table->integer('lesson_number');
         });
     }
