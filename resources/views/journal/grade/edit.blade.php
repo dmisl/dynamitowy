@@ -100,8 +100,10 @@
                         @foreach($gradeReasons->first()->classroom->users as $user)
                             <tr>
                                 <td>{{ $user->name }}</td>
-                                @foreach($user->grades as $grade)
-                                    <td>{{ $grade->type }}</td>
+                                @foreach($gradeReasons as $gradeReason)
+                                    @foreach($gradeReason->classroom->users()->where('id', $user->id)->first()->grades()->where('grade_reason_id', $gradeReason->id)->get() as $grade)
+                                        <td>{{ $grade->type }}</td>
+                                    @endforeach
                                 @endforeach
                                 <td class="text-center" role="button" data-bs-toggle="modal" data-bs-target="#addModal">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20" viewBox="0 0 256 256" xml:space="preserve">
@@ -142,27 +144,83 @@
                                 </div>
                             </div>
                         </div>
-                    <div class="d-inline-block bg-warning rounded-3" style="position: fixed; bottom: 20px; right: 20px;">
-                        <div class="p-2">
-                            <h4 class="fw-medium">Wybierz ucznia</h4>
-                            <table class="table table-primary bordered border-dark">
-                                <tr>
-                                    <td colspan="3" class="p-1 text-center border-end border-dark fs-5">Oceny</td>
-                                </tr>
-                                <tr>
-                                    <td class="p-1 border-end border-dark">
-                                        <p class="p-0 m-0">Obecny</p>
-                                    </td>
-                                    <td class="p-1 border-end border-dark">
-                                        <p class="p-0 m-0">Obecny</p>
-                                    </td>
-                                    <td class="p-1 border-end border-dark">
-                                        <p class="p-0 m-0">Obecny</p>
-                                    </td>
-                                </tr>
-                            </table>
+                    {{-- FIXED GRADES --}}
+                        <div class="d-inline-block bg-warning rounded-3" style="position: fixed; bottom: 20px; right: 20px;">
+                            <div class="p-2">
+                                <h4 class="fw-medium">Wybierz ucznia</h4>
+                                <table class="table table-primary bordered border-dark">
+                                    <tr>
+                                        <td colspan="3" class="p-1 text-center border-end border-dark fs-5">Oceny</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">6</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">6-</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">5</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">5+</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">5-</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">4</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">4+</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">4-</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">3</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">3+</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">3-</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">2</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">2+</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">2-</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">1</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">1+</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">np</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">brak</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                    </div>
                 @endif
 
                 <button class="btn btn-primary btn-lg" type="submit">Zapisac</button>
