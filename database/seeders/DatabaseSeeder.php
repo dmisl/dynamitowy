@@ -181,7 +181,7 @@ class DatabaseSeeder extends Seeder
         // creating students and their classroom
 
         // 4TIP
-            Classroom::create(['name' => '4TIP', 'teacher_id' => 13]);
+            Classroom::create(['name' => '4TIP', 'teacher_id' => 12]);
 
             User::create(['name' => 'Kamil Balda', 'email' => 'kamil_balda@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
             User::create(['name' => 'Vadym Yakymiv', 'email' => 'vadym_yakymiv@gmail.com', 'classroom_id' => 1, 'role_id' => 1, 'password' => 'student']);
