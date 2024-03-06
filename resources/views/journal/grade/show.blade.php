@@ -5,21 +5,9 @@
 @section('content')
 
     <div class="d-flex" style="height: 100%;">
-        <div class="col-md-3 bg-info bg-gradient">
-            <div class="user-select-none">
-                <select class="form-select rounded-0">
-                    <option value="">{{ date('Y-m-d') }}</option>
-                </select>
-                @foreach($lessons as $lesson)
-                    <a class="text-decoration-none text-dark" href="{{ route('lesson.show', [$lesson->id, date('Y-m-d')]) }}">
-                        <div class="m-0 p-0 border-bottom border-dark">
-                            <p class="p-0 m-0 ps-1 pt-1 fw-medium">{{ $lesson->classroom->name }} - {{ $timetable[$lesson->lesson_number] }}</p>
-                            <p class="p-0 m-0 ps-1 small text-wrap">{{ $lesson->subject->name }}</p>
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-        </div>
+        
+        <x-classroom-menu :lessons="$lessons" :timetable="$timetable"></x-classroom-menu>
+        
         <div class="col-md-9">
 
             <div class="p-3">
@@ -40,9 +28,8 @@
                         <p class="d-table-cell align-middle m-0 p-0 small">Wrocz</p>
                     </div>
                 </a>
-
-                <table class="table table-primary table-bordered">
-                    @if($gradeReasons->count() == 0)
+                @if($gradeReasons->count() == 0)
+                    <table class="table table-primary table-bordered">
                         <tr>
                             <th>Imie Nazwisko</th>
                             <th>Niema zadnych ocen</th>
@@ -55,10 +42,27 @@
                                 </td>
                             </tr>
                         @endforeach
-                    @else
-
-                    @endif
-                </table>
+                    </table>
+                @else
+                    <table class="table table-primary table-bordered">
+                        <tr>
+                            <th>Imie Nazwisko</th>
+                            @foreach($gradeReasons as $gradeReason)
+                                <th>{{ $gradeReason->text }}</th>
+                            @endforeach
+                        </tr>
+                        @foreach($gradeReasons->first()->classroom->users as $user)
+                            <tr>
+                                <td>{{ $user->name }}</td>
+                                @foreach($gradeReasons as $gradeReason)
+                                    @foreach($gradeReason->classroom->users()->where('id', $user->id)->first()->grades()->where('grade_reason_id', $gradeReason->id)->get() as $grade)
+                                        <td>{{ $grade->type }}</td>
+                                    @endforeach
+                                @endforeach
+                            </tr>
+                        @endforeach
+                    </table>
+                @endif
 
                 <a href="{{ route('grade.edit', [$classroom->id, $subject->id]) }}" class="btn btn-primary btn-lg">Edytowac</a>
 

@@ -633,24 +633,24 @@ class DatabaseSeeder extends Seeder
                 Lesson::create(['classroom_id' => 6, 'subject_id' => 67, 'day' => 3, 'lesson_number' => 6]);
                 Lesson::create(['classroom_id' => 6, 'subject_id' => 70, 'day' => 3, 'lesson_number' => 7]);
             // Thursday
-                Lesson::create(['classroom_id' => 6, 'subject_id' => 15, 'day' => 3, 'lesson_number' => 0]);
-                Lesson::create(['classroom_id' => 6, 'subject_id' => 17, 'day' => 3, 'lesson_number' => 1]);
-                Lesson::create(['classroom_id' => 6, 'subject_id' => 1, 'day' => 3, 'lesson_number' => 2]);
-                Lesson::create(['classroom_id' => 6, 'subject_id' => 18, 'day' => 3, 'lesson_number' => 3]);
-                Lesson::create(['classroom_id' => 6, 'subject_id' => 67, 'day' => 3, 'lesson_number' => 4]);
-                Lesson::create(['classroom_id' => 6, 'subject_id' => 68, 'day' => 3, 'lesson_number' => 5]);
-                Lesson::create(['classroom_id' => 6, 'subject_id' => 65, 'day' => 3, 'lesson_number' => 6]);
-                Lesson::create(['classroom_id' => 6, 'subject_id' => 34, 'day' => 3, 'lesson_number' => 7]);
+                Lesson::create(['classroom_id' => 6, 'subject_id' => 15, 'day' => 4, 'lesson_number' => 0]);
+                Lesson::create(['classroom_id' => 6, 'subject_id' => 17, 'day' => 4, 'lesson_number' => 1]);
+                Lesson::create(['classroom_id' => 6, 'subject_id' => 1, 'day' => 4, 'lesson_number' => 2]);
+                Lesson::create(['classroom_id' => 6, 'subject_id' => 18, 'day' => 4, 'lesson_number' => 3]);
+                Lesson::create(['classroom_id' => 6, 'subject_id' => 67, 'day' => 4, 'lesson_number' => 4]);
+                Lesson::create(['classroom_id' => 6, 'subject_id' => 68, 'day' => 4, 'lesson_number' => 5]);
+                Lesson::create(['classroom_id' => 6, 'subject_id' => 65, 'day' => 4, 'lesson_number' => 6]);
+                Lesson::create(['classroom_id' => 6, 'subject_id' => 34, 'day' => 4, 'lesson_number' => 7]);
             // Friday
-                Lesson::create(['classroom_id' => 6, 'subject_id' => 65, 'day' => 3, 'lesson_number' => 0]);
-                Lesson::create(['classroom_id' => 6, 'subject_id' => 70, 'day' => 3, 'lesson_number' => 0]);
-                Lesson::create(['classroom_id' => 6, 'subject_id' => 13, 'day' => 3, 'lesson_number' => 0]);
-                Lesson::create(['classroom_id' => 6, 'subject_id' => 60, 'day' => 3, 'lesson_number' => 0]);
-                Lesson::create(['classroom_id' => 6, 'subject_id' => 66, 'day' => 3, 'lesson_number' => 0]);
-                Lesson::create(['classroom_id' => 6, 'subject_id' => 67, 'day' => 3, 'lesson_number' => 0]);
-                Lesson::create(['classroom_id' => 6, 'subject_id' => 67, 'day' => 3, 'lesson_number' => 0]);
-                Lesson::create(['classroom_id' => 6, 'subject_id' => 18, 'day' => 3, 'lesson_number' => 0]);
-                Lesson::create(['classroom_id' => 6, 'subject_id' => 7, 'day' => 3, 'lesson_number' => 0]);
+                Lesson::create(['classroom_id' => 6, 'subject_id' => 65, 'day' => 4, 'lesson_number' => 0]);
+                Lesson::create(['classroom_id' => 6, 'subject_id' => 70, 'day' => 4, 'lesson_number' => 0]);
+                Lesson::create(['classroom_id' => 6, 'subject_id' => 13, 'day' => 4, 'lesson_number' => 0]);
+                Lesson::create(['classroom_id' => 6, 'subject_id' => 60, 'day' => 4, 'lesson_number' => 0]);
+                Lesson::create(['classroom_id' => 6, 'subject_id' => 66, 'day' => 4, 'lesson_number' => 0]);
+                Lesson::create(['classroom_id' => 6, 'subject_id' => 67, 'day' => 4, 'lesson_number' => 0]);
+                Lesson::create(['classroom_id' => 6, 'subject_id' => 67, 'day' => 4, 'lesson_number' => 0]);
+                Lesson::create(['classroom_id' => 6, 'subject_id' => 18, 'day' => 4, 'lesson_number' => 0]);
+                Lesson::create(['classroom_id' => 6, 'subject_id' => 7, 'day' => 4, 'lesson_number' => 0]);
         // 1TME
             // Monday
                 Lesson::create(['classroom_id' => 7, 'subject_id' => 60, 'day' => 1, 'lesson_number' => 2]);
