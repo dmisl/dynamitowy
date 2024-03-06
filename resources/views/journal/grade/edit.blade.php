@@ -103,7 +103,7 @@
                                 @foreach($user->grades as $grade)
                                     <td>{{ $grade->type }}</td>
                                 @endforeach
-                                <td class="text-center">
+                                <td class="text-center" role="button" data-bs-toggle="modal" data-bs-target="#addModal">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20" viewBox="0 0 256 256" xml:space="preserve">
                                         <defs>
                                         </defs>
@@ -117,6 +117,52 @@
                             </tr>
                         @endforeach
                     </table>
+                    {{-- MODAL --}}
+                        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form action="{{ route('gradereason.store') }}" method="POST">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <label for="text">Podaj opis</label>
+                                            <input id="text" class="form-control" type="text" name="text">
+                                            <input type="hidden" name="subject_id" value="{{ $subject->id }}">
+                                            <input type="hidden" name="classroom_id" value="{{ $classroom->id }}">
+                                            <input type="hidden" name="date" value="{{ date('Y-m-d') }}">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknac</button>
+                                            <button type="submit" class="btn btn-primary">Dodac temat</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="d-inline-block bg-warning rounded-3" style="position: fixed; bottom: 20px; right: 20px;">
+                        <div class="p-2">
+                            <h4 class="fw-medium">Wybierz ucznia</h4>
+                            <table class="table table-primary bordered border-dark">
+                                <tr>
+                                    <td colspan="3" class="p-1 text-center border-end border-dark fs-5">Oceny</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1 border-end border-dark">
+                                        <p class="p-0 m-0">Obecny</p>
+                                    </td>
+                                    <td class="p-1 border-end border-dark">
+                                        <p class="p-0 m-0">Obecny</p>
+                                    </td>
+                                    <td class="p-1 border-end border-dark">
+                                        <p class="p-0 m-0">Obecny</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 @endif
 
                 <button class="btn btn-primary btn-lg" type="submit">Zapisac</button>

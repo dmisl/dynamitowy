@@ -73,7 +73,7 @@
 
                 <div class="d-inline-block bg-warning rounded-3" style="position: fixed; bottom: 20px; right: 20px;">
                     <div class="p-2">
-                        <h4 class="fw-medium">Wybierz ucznia</h4 class="fw-light">
+                        <h4 class="fw-medium">Wybierz ucznia</h4>
                         <table class="table table-primary bordered border-dark">
                             <tr>
                                 <td class="p-1 text-center border-end border-dark fs-5">Nazwa</td>
