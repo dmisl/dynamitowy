@@ -9,56 +9,46 @@
 import axios from 'axios';
 
 export default {
-    name: "Lessonnavigate",
-    props: {
-        id: String,
-    },
-    data() {
+  name: "Lessonnavigate",
+  props: {
+    id: String,
+  },
+  data() {
+    return {
+      lessons: [], // Initialize the lessons array directly
+    };
+  },
+  async mounted() {
+    console.log(this.id);
+
+    try {
+      const todayLessonsResponse = await axios.get(`/api/todayLessons/${this.id}`);
+      const todayLessonsData = todayLessonsResponse.data;
+
+      const subjectClassroomLessonPromises = todayLessonsData.map(async (lesson) => {
+        const [subjectResponse, classroomResponse, lessonTimeResponse] = await Promise.all([
+          axios.get(`/api/subject/${lesson.subject_id}`),
+          axios.get(`/api/classroom/${lesson.classroom_id}`),
+          axios.get(`/api/lesson/${lesson.id}`),
+        ]);
+
         return {
-            lessons: [],
-            error: null, // Added to handle potential errors
+          LessonName: subjectResponse.data.data.name,
+          ClassName: classroomResponse.data.data.name,
+          LessonTime: this.lessontimetable[lessonTimeResponse.data.data.lesson_number], // Assuming lessontimetable is no longer needed
         };
-    },
-    methods: {
-        sendDataToChangeTable(x) {
-            this.emitter.emit("ChangeTableData", { data: x });
-        },
-    },
-   /**
-    * Function to fetch data from the API and update the lessons data in the component.
-     *
-     * @return {void} 
-     */
+      });
 
-    mounted() {
-        async function fetchData() {
-            try {
-                const response = await axios.get(`/api/todayLessons/${this.id}`);
-                const lessonsApiData = response.data;
+      const processedLessons = await Promise.all(subjectClassroomLessonPromises);
+      this.lessons = processedLessons;
 
-                const lessons = await Promise.all(
-                    lessonsApiData.map(async (element) => {
-                        const { data: classroomData } = await axios.get(`/api/classroom/${element.classroom_id}`);
-                        const { data: subjectData } = await axios.get(`/api/subject/${element.subject_id}`);
-                        const { data: lessonData } = await axios.get(`/api/lesson/${element.id}`);
-
-                        return {
-                            ClassName: classroomData.name,
-                            LessonName: subjectData.name,
-                            LessonTime: lessonData.time,
-                        };
-                    })
-                );
-
-                this.lessons = lessons;
-            } catch (error) {
-                console.error("Error fetching data:", error);
-                this.error = error; 
-            }
-        }
-
-        fetchData(); // Call the function to start fetching data
-    },
+      this.emitter.emit("ChangeTableData", { data: processedLessons }); // Emit data only once after processing
+    } catch (error) {
+      console.error("Error fetching lesson data:", error);
+      // Handle errors appropriately, e.g., display an error message to the user
+    }
+  },
 };
+
 
 </script>
