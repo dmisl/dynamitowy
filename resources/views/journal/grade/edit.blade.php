@@ -5,21 +5,9 @@
 @section('content')
 
     <div class="d-flex" style="height: 100%;">
-        <div class="col-md-3 bg-info bg-gradient">
-            <div class="user-select-none">
-                <select class="form-select rounded-0">
-                    <option value="">{{ date('Y-m-d') }}</option>
-                </select>
-                @foreach($lessons as $lesson)
-                    <a class="text-decoration-none text-dark" href="{{ route('lesson.show', [$lesson->id, date('Y-m-d')]) }}">
-                        <div class="m-0 p-0 border-bottom border-dark">
-                            <p class="p-0 m-0 ps-1 pt-1 fw-medium">{{ $lesson->classroom->name }} - {{ $timetable[$lesson->lesson_number] }}</p>
-                            <p class="p-0 m-0 ps-1 small text-wrap">{{ $lesson->subject->name }}</p>
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-        </div>
+        
+        <x-classroom-menu :lessons="$lessons" :timetable="$timetable"></x-classroom-menu>
+
         <div class="col-md-9">
 
             <div class="p-3">
@@ -40,7 +28,7 @@
                         <p class="d-table-cell align-middle m-0 p-0 small">Wrocz</p>
                     </div>
                 </a>
-
+                
                 @if($gradeReasons->count() == 0)
                     <table class="table table-primary table-bordered">
                         <tr>
@@ -100,10 +88,12 @@
                         @foreach($gradeReasons->first()->classroom->users as $user)
                             <tr>
                                 <td>{{ $user->name }}</td>
-                                @foreach($user->grades as $grade)
-                                    <td>{{ $grade->type }}</td>
+                                @foreach($gradeReasons as $gradeReason)
+                                    @foreach($gradeReason->classroom->users()->where('id', $user->id)->first()->grades()->where('grade_reason_id', $gradeReason->id)->get() as $grade)
+                                        <td>{{ $grade->type }}</td>
+                                    @endforeach
                                 @endforeach
-                                <td class="text-center">
+                                <td class="text-center" role="button" data-bs-toggle="modal" data-bs-target="#addModal">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20" viewBox="0 0 256 256" xml:space="preserve">
                                         <defs>
                                         </defs>
@@ -117,6 +107,108 @@
                             </tr>
                         @endforeach
                     </table>
+                    {{-- MODAL --}}
+                        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form action="{{ route('gradereason.store') }}" method="POST">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <label for="text">Podaj opis</label>
+                                            <input id="text" class="form-control" type="text" name="text">
+                                            <input type="hidden" name="subject_id" value="{{ $subject->id }}">
+                                            <input type="hidden" name="classroom_id" value="{{ $classroom->id }}">
+                                            <input type="hidden" name="date" value="{{ date('Y-m-d') }}">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknac</button>
+                                            <button type="submit" class="btn btn-primary">Dodac temat</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {{-- FIXED GRADES --}}
+                        <div class="d-inline-block bg-warning rounded-3" style="position: fixed; bottom: 20px; right: 20px;">
+                            <div class="p-2">
+                                <h4 class="fw-medium">Wybierz ucznia</h4>
+                                <table class="table table-primary bordered border-dark">
+                                    <tr>
+                                        <td colspan="3" class="p-1 text-center border-end border-dark fs-5">Oceny</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">6</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">6-</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">5</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">5+</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">5-</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">4</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">4+</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">4-</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">3</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">3+</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">3-</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">2</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">2+</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">2-</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">1</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">1+</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">np</p>
+                                        </td>
+                                        <td class="p-1 border-end border-dark">
+                                            <p class="p-0 m-0">brak</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                 @endif
 
                 <button class="btn btn-primary btn-lg" type="submit">Zapisac</button>

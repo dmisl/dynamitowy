@@ -5,21 +5,9 @@
 @section('content')
 
     <div class="d-flex" style="height: 100%;">
-        <div class="col-md-3 bg-info bg-gradient">
-            <div class="user-select-none">
-                <select class="form-select rounded-0">
-                    <option value="">{{ $date }}</option>
-                </select>
-                @foreach($lessons as $lesson)
-                    <a class="text-decoration-none text-dark" href="{{ route('lesson.show', [$lesson->id, $date]) }}">
-                        <div class="m-0 p-0 border-bottom border-dark">
-                            <p class="p-0 m-0 ps-1 pt-1 fw-medium">{{ $lesson->classroom->name }} - {{ $timetable[$lesson->lesson_number] }}</p>
-                            <p class="p-0 m-0 ps-1 small text-wrap">{{ $lesson->subject->name }}</p>
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-        </div>
+
+        <x-classroom-menu :lessons="$lessons" :timetable="$timetable"></x-classroom-menu>
+ 
         <div class="col-md-9">
 
             <div class="p-3">
@@ -62,7 +50,7 @@
                                 @php($currentLesson->id == $lesson->id ? $bordered = 'table-success' : $bordered = 'table-secondary')
                                 <td class="text-center {{ $bordered }}">
                                     @php($presence = $lesson->presences()->where('user_id', $student->id)->where('date', $date)->first())
-                                    {!! $presenceTypes[$presence->type-1]['text'] !!}
+                                    {!! $presence->presenceType->text !!}
                                 </td>
                             @endforeach
                         </tr>
@@ -73,68 +61,23 @@
 
                 <div class="d-inline-block bg-warning rounded-3" style="position: fixed; bottom: 20px; right: 20px;">
                     <div class="p-2">
-                        <h4 class="fw-medium">Wybierz ucznia</h4 class="fw-light">
+                        <h4 class="fw-medium">Wybierz ucznia</h4>
                         <table class="table table-primary bordered border-dark">
                             <tr>
                                 <td class="p-1 text-center border-end border-dark fs-5">Nazwa</td>
                                 <td class="p-1 text-center fs-5">Symbol</td>
                             </tr>
-                            <tr>
-                                <td class="p-1 border-end border-dark">
-                                    <p class="p-0 m-0">Obecny</p>
-                                </td>
-                                <td class="p-1 text-center">
-                                    {!! $presenceTypes[0]['text'] !!}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-1 border-end border-dark">
-                                    <p class="p-0 m-0">Nieobecnosc</p>
-                                </td>
-                                <td class="p-1 text-center">
-                                    {!! $presenceTypes[1]['text'] !!}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-1 border-end border-dark">
-                                    <p class="p-0 m-0">Nieobecnosc uspraw.</p>
-                                </td>
-                                <td class="p-1 text-center">
-                                    {!! $presenceTypes[2]['text'] !!}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-1 border-end border-dark">
-                                    <p class="p-0 m-0">Zwolnienie</p>
-                                </td>
-                                <td class="p-1 text-center">
-                                    {!! $presenceTypes[3]['text'] !!}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-1 border-end border-dark">
-                                    <p class="p-0 m-0">Spoz. z pow. przy.</p>
-                                </td>
-                                <td class="p-1 text-center">
-                                    {!! $presenceTypes[4]['text'] !!}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-1 border-end border-dark">
-                                    <p class="p-0 m-0">Spoz. z niepow. przy.</p>
-                                </td>
-                                <td class="p-1 text-center">
-                                    {!! $presenceTypes[5]['text'] !!}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-1 border-end border-dark">
-                                    <p class="p-0 m-0">Niewiadomo</p>
-                                </td>
-                                <td class="p-1 text-center">
-                                    {!! $presenceTypes[6]['text'] !!}
-                                </td>
-                            </tr>
+                            @foreach($presenceTypes as $presenceType)
+                                <tr>
+                                    <td class="p-1 border-end border-dark">
+                                        <p class="p-0 m-0">{{ $presenceType->desc }}</p>
+                                    </td>
+                                    <td class="p-1 text-center">
+                                        {!! $presenceType->text !!}
+                                    </td>
+                                </tr>
+                            @endforeach
+                            
                         </table>
                     </div>
                 </div>

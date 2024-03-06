@@ -40,7 +40,7 @@ class LessonController extends Controller
         // dates
         $day = $currentLesson->day;
         // presence types
-        $presenceTypes = PresenceType::all()->toArray();
+        $presenceTypes = PresenceType::all();
         return view('journal.lesson.edit', compact('day', 'lessons', 'timetable', 'currentLesson', 'subjects', 'classroom', 'date', 'presenceTypes'));
     }
 }

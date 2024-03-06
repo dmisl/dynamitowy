@@ -5,7 +5,9 @@
 @section('content')
 
     <div class="d-flex" style="height: 100%;">
+
         <x-classroom-menu></x-classroom-menu>
+
         <div class="col-md-9 user-select-none">
 
             <div class="p-3">
