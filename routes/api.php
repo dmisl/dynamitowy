@@ -38,6 +38,10 @@ Route::get('/classroom/{id}', function (string $id) {
 Route::get('/classrooms', function () {
     return ClassroomResource::collection(Classroom::all());
 });
+Route::get('/classroom_users/{classroom_id}', function (string $classroom_id) {
+    $classroom = Classroom::find($classroom_id);
+    return $classroom->users;
+});
 Route::get('/subject/{id}', function (string $id) {
     return new SubjectResource(Subject::findOrFail($id));
 });
