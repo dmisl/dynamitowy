@@ -43,4 +43,10 @@ class LessonController extends Controller
         $presenceTypes = PresenceType::all();
         return view('journal.lesson.edit', compact('day', 'lessons', 'timetable', 'currentLesson', 'subjects', 'classroom', 'date', 'presenceTypes'));
     }
+    public function update(Request $request)
+    {
+        return response()->json([
+            'message' => 'Ти підарас, надіслав мені'.$request->all()
+        ]);
+    }
 }

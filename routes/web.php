@@ -26,6 +26,8 @@ Route::middleware('teacher')
     Route::get('lesson/{id}/{date}/show', [LessonController::class, 'show'])->name('lesson.show');
     Route::get('lesson/{lesson_id}/{classroom_id}/{date}/edit', [LessonController::class, 'edit'])->name('lesson.edit');
 
+    Route::post('lesson/store', [LessonController::class, 'store'])->name('lesson.store');
+
     Route::get('grade/{classroom_id}/{subject_id}/show', [GradeController::class, 'show'])->name('grade.show');
     Route::get('grade/{classroom_id}/{subject_id}/edit', [GradeController::class, 'edit'])->name('grade.edit');
 
