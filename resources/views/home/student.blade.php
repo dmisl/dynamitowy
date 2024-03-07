@@ -38,7 +38,51 @@
                                     </svg>
                                 </div>
                                 <div class="d-table">
-                                    <h2 class="d-table-cell align-middle m-0 p-0">Wiadomosci ></h2>
+                                    <h2 class="d-table-cell align-middle m-0 p-0 fw-light">Wiadomosci ></h2>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="" class="text-decoration-none text-dark">
+                            <div class="bg-warning mx-auto mt-4" style="width: 90%;">
+                                <div class="d-flex justify-content-center">
+                                    <div class="p-2 ps-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="50" height="50" viewBox="0 0 256 256" xml:space="preserve">
+    
+                                            <defs>
+                                            </defs>
+                                            <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
+                                                <path d="M 22.105 22.105 L 0.559 43.651 c -0.745 0.745 -0.745 1.953 0 2.699 l 6.094 6.094 c 0.487 -0.749 1.155 -1.413 2.045 -1.908 c 1.95 -1.084 4.418 -0.952 6.215 0.37 c 2.934 2.159 3.164 6.311 0.692 8.783 c -0.293 0.293 -0.61 0.546 -0.944 0.763 l 7.444 7.444 L 45 45 L 22.105 22.105 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(50,171,219); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                                <path d="M 43.651 0.559 l -6.094 6.094 c 0.748 0.486 1.412 1.154 1.906 2.042 c 1.085 1.949 0.954 4.418 -0.367 6.215 c -2.158 2.936 -6.312 3.168 -8.785 0.695 c -0.293 -0.293 -0.546 -0.61 -0.763 -0.944 l -7.444 7.444 L 45 45 l 22.895 -22.895 L 46.349 0.559 C 45.604 -0.186 44.396 -0.186 43.651 0.559 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,209,91); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                                <circle cx="32.12" cy="34.99" r="5.79" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,209,91); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+                                                <circle cx="57.88" cy="9.22" r="5.79" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,209,91); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+                                                <path d="M 51.5 82.584 c -2.472 -2.472 -2.242 -6.624 0.692 -8.783 c 1.797 -1.322 4.265 -1.454 6.215 -0.37 c 0.89 0.494 1.558 1.159 2.045 1.908 l 7.444 -7.444 L 45 45 L 22.105 67.895 l 21.546 21.546 c 0.745 0.745 1.953 0.745 2.699 0 l 6.094 -6.094 C 52.11 83.13 51.793 82.877 51.5 82.584 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(242,112,112); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                                <path d="M 85.206 54.152 c -0.578 -0.688 -1.278 -1.191 -2.033 -1.534 l 6.268 -6.268 c 0.745 -0.745 0.745 -1.953 0 -2.699 l -6.094 -6.094 c -0.486 0.748 -1.154 1.412 -2.042 1.906 c -1.949 1.085 -4.418 0.954 -6.215 -0.367 c -2.936 -2.158 -3.168 -6.312 -0.695 -8.785 c 0.293 -0.293 0.61 -0.546 0.944 -0.763 l -7.444 -7.444 l -7.618 7.618 c -0.343 -0.755 -0.847 -1.456 -1.535 -2.034 c -2.282 -1.918 -5.797 -1.75 -7.878 0.385 c -2.209 2.265 -2.192 5.892 0.052 8.136 c 0.507 0.507 1.086 0.893 1.702 1.173 L 45 45 l 3.241 3.241 l 4.202 4.202 l 8.008 8.008 l 5.626 5.626 l 1.817 1.817 l 7.618 -7.618 c 0.28 0.616 0.666 1.195 1.173 1.702 c 2.244 2.244 5.872 2.261 8.137 0.051 C 86.957 59.948 87.124 56.434 85.206 54.152 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(9,214,180); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                                <circle cx="9.22" cy="32.12" r="5.79" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(50,171,219); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+                                                <circle cx="34.99" cy="57.88" r="5.79" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(50,171,219); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+                                                <circle cx="32.12" cy="80.78" r="5.79" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(242,112,112); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+                                                <circle cx="57.88" cy="55.01" r="5.79" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(242,112,112); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="d-table">
+                                        <h4 class="d-table-cell align-middle m-0 p-0 fw-light">Ostatnie oceny ></h4>
+                                    </div>
+                                </div>
+                                <div class="mt-1 pb-2">
+                                    <div class="px-3">
+                                        <div class="d-table text-start" style="width: 30px; overflow:hidden;">
+                                            <p class="m-0 p-0 fs-4 d-table-cell align-middle">Matematyka</p>
+                                        </div>
+                                        <div class="py-1 text-start">
+                                            <p class="ps-0 p-0 m-0 fw-medium">5, 5+</p>
+                                        </div>
+                                        <div class="d-table text-start" style="width: 30px; overflow:hidden;">
+                                            <p class="m-0 p-0 fs-4 d-table-cell align-middle">WOZ</p>
+                                        </div>
+                                        <div class="py-1 text-start">
+                                            <p class="ps-0 p-0 m-0 fw-medium">5, 5+</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </a>
@@ -85,7 +129,47 @@
                                     </svg>
                                 </div>
                                 <div class="d-table">
-                                    <h1 class="d-table-cell align-middle m-0 p-0">Uczen ></h1>
+                                    <h1 class="d-table-cell align-middle m-0 p-0 fw-light">Uczen ></h1>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="" class="text-decoration-none text-light">
+                            <div class="bg-primary mx-auto mt-4" style="width: 90%;">
+                                <div class="d-flex justify-content-center">
+                                    <div class="p-2 ps-0 pe-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="50" height="50" viewBox="0 0 256 256" xml:space="preserve">
+    
+                                            <defs>
+                                            </defs>
+                                            <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
+                                                <path d="M 69.541 90 H 20.459 c -3.175 0 -5.758 -2.583 -5.758 -5.759 v -64.93 c 0 -3.175 2.583 -5.758 5.758 -5.758 h 8.855 c 1.104 0 2 0.896 2 2 s -0.896 2 -2 2 h -8.855 c -0.97 0 -1.758 0.789 -1.758 1.758 v 64.93 c 0 0.97 0.789 1.759 1.758 1.759 h 49.082 c 0.97 0 1.759 -0.789 1.759 -1.759 v -64.93 c 0 -0.97 -0.789 -1.758 -1.759 -1.758 h -8.855 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 8.855 c 3.176 0 5.759 2.583 5.759 5.758 v 64.93 C 75.3 87.417 72.717 90 69.541 90 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                                <path d="M 60.686 20.988 H 29.314 c -1.104 0 -2 -0.896 -2 -2 v -3.32 c 0 -5.522 4.255 -10.069 9.659 -10.534 C 38.4 2.049 41.514 0 45 0 c 3.485 0 6.6 2.049 8.026 5.134 c 5.404 0.465 9.659 5.012 9.659 10.534 v 3.32 C 62.686 20.093 61.79 20.988 60.686 20.988 z M 31.314 16.988 h 27.372 v -1.32 c 0 -3.625 -2.949 -6.573 -6.573 -6.573 h -0.497 c -0.907 0 -1.701 -0.611 -1.934 -1.488 C 49.119 5.483 47.194 4 45 4 c -2.194 0 -4.12 1.483 -4.683 3.607 c -0.232 0.877 -1.026 1.488 -1.933 1.488 h -0.497 c -3.625 0 -6.573 2.949 -6.573 6.573 V 16.988 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                                <path d="M 47.346 13.27 h -4.692 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 4.692 c 1.104 0 2 0.896 2 2 S 48.45 13.27 47.346 13.27 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                                <path d="M 31.336 59.59 h -4.835 c -1.806 0 -3.275 -1.47 -3.275 -3.275 v -4.835 c 0 -1.806 1.469 -3.275 3.275 -3.275 h 4.835 c 1.806 0 3.275 1.47 3.275 3.275 v 4.835 C 34.611 58.12 33.142 59.59 31.336 59.59 z M 27.226 55.59 h 3.385 v -3.386 h -3.385 V 55.59 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                                <path d="M 63.834 52.204 H 39.989 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 23.845 c 1.104 0 2 0.896 2 2 S 64.938 52.204 63.834 52.204 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                                <path d="M 52.479 59.59 H 39.989 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 12.491 c 1.104 0 2 0.896 2 2 S 53.584 59.59 52.479 59.59 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                                <path d="M 28.18 41.578 c -0.638 0 -1.239 -0.304 -1.616 -0.822 l -2.954 -4.054 c -0.651 -0.893 -0.455 -2.144 0.438 -2.794 c 0.893 -0.651 2.144 -0.455 2.794 0.438 l 1.176 1.614 l 2.878 -4.796 c 0.568 -0.947 1.797 -1.255 2.744 -0.686 c 0.947 0.568 1.254 1.797 0.686 2.744 l -4.431 7.385 c -0.345 0.575 -0.956 0.939 -1.625 0.969 C 28.24 41.577 28.21 41.578 28.18 41.578 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                                <path d="M 63.834 34.192 H 39.989 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 23.845 c 1.104 0 2 0.896 2 2 S 64.938 34.192 63.834 34.192 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                                <path d="M 52.479 41.578 H 39.989 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 12.491 c 1.104 0 2 0.896 2 2 S 53.584 41.578 52.479 41.578 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                                <path d="M 31.336 78.372 h -4.835 c -1.806 0 -3.275 -1.47 -3.275 -3.275 v -4.835 c 0 -1.806 1.469 -3.275 3.275 -3.275 h 4.835 c 1.806 0 3.275 1.47 3.275 3.275 v 4.835 C 34.611 76.902 33.142 78.372 31.336 78.372 z M 27.226 74.372 h 3.385 v -3.386 h -3.385 V 74.372 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                                <path d="M 63.834 70.986 H 39.989 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 23.845 c 1.104 0 2 0.896 2 2 S 64.938 70.986 63.834 70.986 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                                <path d="M 52.479 78.372 H 39.989 c -1.104 0 -2 -0.896 -2 -2 s 0.896 -2 2 -2 h 12.491 c 1.104 0 2 0.896 2 2 S 53.584 78.372 52.479 78.372 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="d-table">
+                                        <h4 class="d-table-cell align-middle m-0 p-0 fw-light">Zadania domowe</h4>
+                                    </div>
+                                </div>
+                                <div class="mt-1 pb-2">
+                                    <div class="px-3">
+                                        <div class="d-table text-start" style="width: 30px; overflow:hidden;">
+                                            <p class="m-0 p-0 fs-5 d-table-cell align-middle">Matematyka</p>
+                                        </div>
+                                        <div class="py-1 text-start">
+                                            <p class="ps-0 p-0 m-0 fw-light">Zrob jakies pierdoly</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </a>
@@ -93,7 +177,7 @@
                     <div class="col-md-4">
                         <a href="" class="text-decoration-none text-light mt-2">
                             <div class="bg-danger mx-auto" style="width: 90%;">
-                                <div class="d-flex pt-2 ps-3">
+                                <div class="d-flex pt-3 ps-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="40" height="40" viewBox="0 0 256 256" xml:space="preserve">
 
                                         <defs>
@@ -113,52 +197,33 @@
                                         </g>
                                     </svg>
                                     <div class="d-table">
-                                        <h2 class="d-table-cell align-middle m-0 p-0 ps-1">Plan zajec ></h2>
+                                        <h3 class="d-table-cell align-middle m-0 p-0 ps-2 fw-light">Plan lekcji ></h3>
                                     </div>
+                                </div>
+                                <div class="mt-3">
+                                    @foreach($lessons as $lesson)
+                                        <div class="d-flex px-3">
+                                            <div class="d-table text-start" style="width: 30px; overflow:hidden;">
+                                                <p class="m-0 p-0 fs-1 d-table-cell align-middle">{{ $lesson->lesson_number }}</p>
+                                            </div>
+                                            <div class="d-table ps-2">
+                                                <div class="d-table-cell align-middle">
+                                                    <p class="p-0 m-0 small">{{ $timetable[$lesson->lesson_number] }}</p>
+                                                    <p class="p-0 m-0 small">{{ $timetableEnd[$lesson->lesson_number] }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="d-table ps-3 text-start">
+                                                <div class="d-table-cell align-middle">
+                                                    <p class="p-0 m-0 fs-6">{{ substr($lesson->subject->name, 0, 15) }}</p>
+                                                    <p class="p-0 m-0 small">{{ $lesson->subject->teacher->user->name }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </a>
                     </div>
-
-                </div>
-
-                <div class="d-flex user-select-none" style="flex-wrap: wrap;">
-
-                    <a href="" class="text-decoration-none col-md-4 col-12 text-light mt-2">
-                        <div class="mx-auto bg-dark d-table text-center" style="width: 90%; height: 100%;">
-                            <h1 class="fw-light m-0 d-table-cell py-2" style="vertical-align: middle;">Wiadomosci ></h1>
-                        </div>
-                    </a>
-
-                    <a href="" class="text-decoration-none col-md-4 col-12 text-light mt-2">
-                        <div class="mx-auto bg-dark d-table text-center" style="width: 90%; height: 100%;">
-                            <h1 class="fw-light m-0 d-table-cell py-2" style="vertical-align: middle;">Uczen ></h1>
-                        </div>
-                    </a>
-
-                    <a href="" class="text-decoration-none col-md-4 col-12 text-light mt-2">
-                        <div class="mx-auto bg-danger d-table text-center" style="width: 90%; height: 100%;">
-                            <h3 class="fw-light m-0 d-table-cell py-2" style="vertical-align: middle;">Plan zajec ucznia</h3>
-                        </div>
-                    </a>
-
-                    <a href="" class="text-decoration-none col-md-4 col-12 text-light mt-2">
-                        <div class="mx-auto bg-danger d-table text-center" style="width: 90%; height: 100%;">
-                            <h1 class="fw-light m-0 d-table-cell py-2" style="vertical-align: middle;">Ostatnie oceny</h1>
-                        </div>
-                    </a>
-
-                    <a href="" class="text-decoration-none col-md-4 col-12 text-light mt-2">
-                        <div class="mx-auto bg-primary d-table text-center" style="width: 90%; height: 100%;">
-                            <h2 class="fw-light m-0 d-table-cell py-2" style="vertical-align: middle;">Zadania domowe</h2>
-                        </div>
-                    </a>
-
-                    <a href="" class="text-decoration-none col-md-4 col-12 text-light mt-2">
-                        <div class="mx-auto bg-primary d-table text-center" style="width: 90%; height: 100%;">
-                            <h3 class="fw-light m-0 d-table-cell py-2" style="vertical-align: middle;">Terminy sprawdzianow</h3>
-                        </div>
-                    </a>
 
                 </div>
 

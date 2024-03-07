@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')
@@ -63,3 +64,5 @@ Route::fallback(function () {
     return redirect()->route('home.index');
 });
 
+Route::get('test', [TestController::class, 'index'])->name('test.index');
+Route::post('test_message', [TestController::class, 'message'])->name('test.message');
