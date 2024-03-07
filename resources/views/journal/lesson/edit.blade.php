@@ -29,58 +29,7 @@
                     </div>
                 </a>
 
-                <table class="table table-primary table-bordered">
-
-                    {{-- TABLE HEADERS + TIMETABLE WITH PRESENCES OF CURRENT CLASSROOM FROM TODAY --}}
-                    <tr>
-                        <th scope="col">Imie nazwisko ucznia</th>
-                        @foreach($classroom->lessons()->where('day', $day)->get() as $lesson)
-                            <th>{{ $timetable[$lesson->lesson_number] }}</th>
-                        @endforeach
-                    </tr>
-
-                    {{-- SHOWING EACH USER AND HIS PRESENCES ON LESSONS --}}
-                    @foreach($classroom->users as $student)
-                        <tr>
-                            {{-- STUDENTS NAME --}}
-                            <td>
-                                {{ $student->name }}
-                            </td>
-                            @foreach($student->classroom->lessons()->where('day', $day)->orderBy('lesson_number', 'asc')->get() as $lesson)
-                                @php($currentLesson->id == $lesson->id ? $bordered = 'table-success' : $bordered = 'table-secondary')
-                                <td class="text-center {{ $bordered }}">
-                                    @php($presence = $lesson->presences()->where('user_id', $student->id)->where('date', $date)->first())
-                                    {!! $presence->presenceType->text !!}
-                                </td>
-                            @endforeach
-                        </tr>
-                    @endforeach
-                </table>
-
-                <button type="submit" class="btn btn-primary btn-lg">Zapisz</button>
-
-                <div class="d-inline-block bg-warning rounded-3" style="position: fixed; bottom: 20px; right: 20px;">
-                    <div class="p-2">
-                        <h4 class="fw-medium">Wybierz ucznia</h4>
-                        <table class="table table-primary bordered border-dark">
-                            <tr>
-                                <td class="p-1 text-center border-end border-dark fs-5">Nazwa</td>
-                                <td class="p-1 text-center fs-5">Symbol</td>
-                            </tr>
-                            @foreach($presenceTypes as $presenceType)
-                                <tr>
-                                    <td class="p-1 border-end border-dark">
-                                        <p class="p-0 m-0">{{ $presenceType->desc }}</p>
-                                    </td>
-                                    <td class="p-1 text-center">
-                                        {!! $presenceType->text !!}
-                                    </td>
-                                </tr>
-                            @endforeach
-                            
-                        </table>
-                    </div>
-                </div>
+                <presence-table ></presence-table>
 
             </div>
 

@@ -41,8 +41,7 @@ export default {
 
       const processedLessons = await Promise.all(subjectClassroomLessonPromises);
       this.lessons = processedLessons;
-
-      this.emitter.emit("ChangeTableData", { data: processedLessons }); // Emit data only once after processing
+      this.emitter.emit("ChangeTableData", { data: item }); // Emit data only once after processing
     } catch (error) {
       console.error("Error fetching lesson data:", error);
       // Handle errors appropriately, e.g., display an error message to the user
