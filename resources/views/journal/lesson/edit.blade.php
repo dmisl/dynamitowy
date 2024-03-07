@@ -29,7 +29,7 @@
                     </div>
                 </a>
 
-                <presence-table ></presence-table>
+                <presence-table></presence-table>
 
             </div>
 

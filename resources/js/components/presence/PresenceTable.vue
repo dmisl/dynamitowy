@@ -33,7 +33,7 @@
 
             </tr>
         </tbody>
-    </table><button type="submit" class="btn btn-primary btn-lg">Zapisz</button>
+    </table><button @click="savePresence()" type="submit" class="btn btn-primary btn-lg">Zapisz</button>
     <PresenceTableChange></PresenceTableChange>
 </template>
 
@@ -43,20 +43,24 @@ import PresenceTableChange from "./PresenceTableChange.vue";
 
 export default {
     name: "PresenceTable",
+    // props:{
+    //     id: Number,
+    // }
+    // ,
     data() {
         return {
             // TestApiData: null;
             StudentsList: [],
             studentNames: [],
-            classroom_id: 2,
             studentSelected: 0, //x
             column_selected: 0,  //y
-            PresenceStatus: null
+            classroom_id:6,
+            PresenceStatus: null,
+            StudentPresenceChangeList: [
+            ],
+            timetableCurrent: []
         }
     },
-    // props: {
-    // classroom_id: String,
-    // },
     components: {
         PresenceTableChange
     },
@@ -69,12 +73,15 @@ export default {
                 this.StudentsList.map(student => student.name)
                 this.studentNames = [];
                 this.StudentsList.forEach(student => this.studentNames.push(student.name));
-                console.log(this.studentNames);
             })
         this.emitter.on("ChangeTableData", (data) => {
             this.PresenceStatus = data.data
             this.changePresence();
         })
+        const thList=document.querySelectorAll("th")
+        for (let id = 1; id < thList.length; id++) {
+            this.timetableCurrent.push(thList[id].innerHTML)
+        }
     },
     methods: {
         selectStudent(student_id) {
@@ -170,8 +177,18 @@ export default {
                 default:
                     break;
             }
+            const P ={
+                studentId:this.studentSelected,
+                studentName:this.studentNames[this.studentSelected],
+                lessontime:this.timetableCurrent[this.column_selected],
+                status:this.PresenceStatus,
+            }
+            this.StudentPresenceChangeList.push(P);
             this.studentSelected++;
 
+        },
+        savePresence(){
+            console.log(this.StudentPresenceChangeList);
         }
     },
 
