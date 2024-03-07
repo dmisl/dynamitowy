@@ -24,6 +24,7 @@
                     @foreach($classroom->users as $user)
                         <tr>
                             <td>{{ $user->name }}</td>
+                            {{ dd($user->classroom->lessons()->where('day', $currentLesson->day)->get()) }}
                             @foreach($user->classroom->lessons()->where('day', $currentLesson->day)->orderBy('lesson_number', 'asc')->get() as $lesson)
                                 @php($currentLesson->id == $lesson->id ? $bordered = 'table-success' : $bordered = 'table-primary')
                                 @if($user->presences()->where('lesson_id', $lesson->id)->where('date', $date)->get()->count() == 0)
