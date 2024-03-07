@@ -6,7 +6,9 @@
 
     <div class="d-flex" style="height: 100%;">
 
-        <x-lessons-menu :lessons="$lessons" :timetable="$timetable"></x-lessons-menu>
+        {{-- <x-lessons-menu :lessons="$lessons" :timetable="$timetable"></x-lessons-menu> --}}
+        <lessons-navigate :id={{Auth::id()}}></lessons-navigate>
+        
  
         <div class="col-md-9">
 
