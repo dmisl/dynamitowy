@@ -8,7 +8,7 @@
 
     <div class="d-flex" style="height: 100%;">
         
-        <x-classroom-menu :lessons="$lessons" :timetable="$timetable"></x-classroom-menu>
+        <x-lessons-menu :lessons="$lessons" :timetable="$timetable"></x-lessons-menu>
  
         <div class="col-md-9">
 
@@ -24,7 +24,6 @@
                     @foreach($classroom->users as $user)
                         <tr>
                             <td>{{ $user->name }}</td>
-                            {{ dd($user->classroom->lessons()->where('day', $currentLesson->day)->get()) }}
                             @foreach($user->classroom->lessons()->where('day', $currentLesson->day)->orderBy('lesson_number', 'asc')->get() as $lesson)
                                 @php($currentLesson->id == $lesson->id ? $bordered = 'table-success' : $bordered = 'table-primary')
                                 @if($user->presences()->where('lesson_id', $lesson->id)->where('date', $date)->get()->count() == 0)
