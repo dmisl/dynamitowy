@@ -66,27 +66,12 @@ export default {
         PresenceTableChange
     },
     mounted() {
-        axios
-            .get(`/api/classroom_users/${this.classroom_id}`)
-            .then(response => {
-                // Create a new array using spread syntax to avoid mutating the original data
-                this.studentsWithIDKey = response.data.map(student => ({
-                    // Use dynamic property name creation for clarity and flexibility
-                    user_id:student.id,
-                    user_name:student.name
-                }));
-                console.log(this.studentsWithIDKey);
+        this.GetClassroomData();
+            this.emitter.on("ChangeTableData", (data) => {
+                console.log(data.data.ClassroomId);
+                this.classroom_id=data.data.ClassroomId
+                this.GetClassroomData();
             })
-            .catch(error => {
-                console.error("Error fetching students:", error);
-                // Handle error gracefully, e.g., display an error message to the user
-            });
-        // .then(response => {
-        //     this.StudentsList = response.data
-        // }).then(() => {
-        //     this.StudentsList.map(student => student.name)
-        //     this.StudentsList.forEach(student => this.studentNames.push({student."id":student.name}));
-        // })
         this.emitter.on("ChangeTablePresence", (data) => {
             this.PresenceStatus = data.data
             this.changePresence();
@@ -207,6 +192,24 @@ export default {
             }).then((res)=>{
                 console.log(res);
             })
+        },
+        GetClassroomData(){
+            this.studentsWithIDKey=[]
+            axios
+            .get(`/api/classroom_users/${this.classroom_id}`)
+            .then(response => {
+                // Create a new array using spread syntax to avoid mutating the original data
+                this.studentsWithIDKey = response.data.map(student => ({
+                    // Use dynamic property name creation for clarity and flexibility
+                    user_id:student.id,
+                    user_name:student.name
+                }));
+                console.log(this.studentsWithIDKey);
+            })
+            .catch(error => {
+                console.error("Error fetching students:", error);
+                // Handle error gracefully, e.g., display an error message to the user
+            });
         }
     },
 

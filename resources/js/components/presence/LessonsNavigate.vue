@@ -65,6 +65,7 @@ export default {
   },
   methods: {
     sendDataToChangeTable(x) {
+    console.log(x);
       this.emitter.emit("ChangeTableData", { data: x });
     },
   },
