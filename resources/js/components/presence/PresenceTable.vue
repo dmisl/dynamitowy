@@ -6,12 +6,11 @@
                 <th v-for="(lessontime, index) in this.lessontimetable" :key="index">{{ lessontime }}</th>
 
             </tr>
-            <tr @click="this.selectStudent(index)" v-for="(name, index) in studentNames" :key="index"
-                >
-                <td> {{ name }}-{{ index }} </td>
-                <td v-for="(lessontime, columnid) in this.lessontimetable" :key="columnid" class="text-center table-secondary"
-                    @click="this.selectColumn(columnid)"
-                    :class="{ 'table-success': columnid == this.column_selected ,'table-active':index== this.studentSelected }">
+            <tr @click="this.selectStudent(index)" v-for="(student, index) in studentsWithIDKey" :key="student.index">
+                <td> {{ student.user_name }} </td>
+                <td v-for="(lessontime, columnid) in this.lessontimetable" :key="columnid"
+                    class="text-center table-secondary" @click="this.selectColumn(columnid)"
+                    :class="{ 'table-success': columnid == this.column_selected, 'table-active': index == this.studentSelected }">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
                         width="10" height="10" viewBox="0 0 256 256" xml:space="preserve">
                         <defs></defs>
@@ -33,7 +32,7 @@
 
             </tr>
         </tbody>
-    </table><button type="submit" class="btn btn-primary btn-lg">Zapisz</button>
+    </table><button @click="savePresence()" type="submit" class="btn btn-primary btn-lg">Zapisz</button>
     <PresenceTableChange></PresenceTableChange>
 </template>
 
@@ -43,20 +42,26 @@ import PresenceTableChange from "./PresenceTableChange.vue";
 
 export default {
     name: "PresenceTable",
+    // props:{
+    //     id: Number,
+    // }
+    // ,
     data() {
         return {
             // TestApiData: null;
-            StudentsList: [],
-            studentNames: [],
-            classroom_id: 2,
+            studentsWithIDKey:[
+                {user_id:null,
+                user_name:null},
+            ],
             studentSelected: 0, //x
             column_selected: 0,  //y
-            PresenceStatus: null
+            classroom_id: 6,
+            PresenceStatus: null,
+            StudentPresenceChangeList: [
+            ],
+            timetableCurrent: []
         }
     },
-    // props: {
-    // classroom_id: String,
-    // },
     components: {
         PresenceTableChange
     },
@@ -64,17 +69,32 @@ export default {
         axios
             .get(`/api/classroom_users/${this.classroom_id}`)
             .then(response => {
-                this.StudentsList = response.data
-            }).then(() => {
-                this.StudentsList.map(student => student.name)
-                this.studentNames = [];
-                this.StudentsList.forEach(student => this.studentNames.push(student.name));
-                console.log(this.studentNames);
+                // Create a new array using spread syntax to avoid mutating the original data
+                this.studentsWithIDKey = response.data.map(student => ({
+                    // Use dynamic property name creation for clarity and flexibility
+                    user_id:student.id,
+                    user_name:student.name
+                }));
+                console.log(this.studentsWithIDKey);
             })
+            .catch(error => {
+                console.error("Error fetching students:", error);
+                // Handle error gracefully, e.g., display an error message to the user
+            });
+        // .then(response => {
+        //     this.StudentsList = response.data
+        // }).then(() => {
+        //     this.StudentsList.map(student => student.name)
+        //     this.StudentsList.forEach(student => this.studentNames.push({student."id":student.name}));
+        // })
         this.emitter.on("ChangeTableData", (data) => {
             this.PresenceStatus = data.data
             this.changePresence();
         })
+        const thList = document.querySelectorAll("th")
+        for (let id = 1; id < thList.length; id++) {
+            this.timetableCurrent.push(thList[id].innerHTML)
+        }
     },
     methods: {
         selectStudent(student_id) {
@@ -101,7 +121,7 @@ export default {
             }
             switch (this.PresenceStatus) {
                 case 0:
-                filteredCell.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg"
+                    filteredCell.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="10" height="10"
                                     viewBox="0 0 256 256" xml:space="preserve">
                                     <defs></defs>
@@ -116,7 +136,7 @@ export default {
                                 </svg>`
                     break;
                 case 1:
-                    filteredCell.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg"
+                    filteredCell.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="10" height="10"
                                     viewBox="0 0 256 256" xml:space="preserve">
                                     <defs></defs>
@@ -136,19 +156,19 @@ export default {
                                 </svg>`
                     break;
                 case 2:
-                    filteredCell.innerHTML="u"
+                    filteredCell.innerHTML = "u"
                     break;
                 case 3:
-                    filteredCell.innerHTML="z"
+                    filteredCell.innerHTML = "z"
                     break;
                 case 4:
-                    filteredCell.innerHTML="s"
+                    filteredCell.innerHTML = "s"
                     break;
                 case 5:
-                    filteredCell.innerHTML="ns"
+                    filteredCell.innerHTML = "ns"
                     break;
                 case 6:
-                    filteredCell.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg"
+                    filteredCell.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="10" height="10"
                                     viewBox="0 0 256 256" xml:space="preserve">
                                     <defs></defs>
@@ -170,8 +190,18 @@ export default {
                 default:
                     break;
             }
+            const P = {
+                user_id: this.studentsWithIDKey[this.studentSelected].user_id,
+                studentName: this.studentsWithIDKey[this.studentSelected].user_name,
+                lessontime: this.timetableCurrent[this.column_selected],
+                status: this.PresenceStatus,
+            }
+            this.StudentPresenceChangeList.push(P);
             this.studentSelected++;
 
+        },
+        savePresence() {
+            console.log(this.StudentPresenceChangeList);
         }
     },
 
