@@ -49,11 +49,9 @@ export default {
     data() {
         return {
             // TestApiData: null;
-            studentsWithIDKey: [
-                {
-                    user_id: null,
-                    user_name: null
-                },
+            studentsWithIDKey:[
+                {user_id:null,
+                user_name:null},
             ],
             studentSelected: 0, //x
             column_selected: 0,  //y
@@ -74,8 +72,8 @@ export default {
                 // Create a new array using spread syntax to avoid mutating the original data
                 this.studentsWithIDKey = response.data.map(student => ({
                     // Use dynamic property name creation for clarity and flexibility
-                    user_id: student.id,
-                    user_name: student.name
+                    user_id:student.id,
+                    user_name:student.name
                 }));
                 console.log(this.studentsWithIDKey);
             })
@@ -83,8 +81,15 @@ export default {
                 console.error("Error fetching students:", error);
                 // Handle error gracefully, e.g., display an error message to the user
             });
-        this.emitter.on("ChangeTableData", (data) => {
-            this.classroom_id=data.data.ClassroomId
+        // .then(response => {
+        //     this.StudentsList = response.data
+        // }).then(() => {
+        //     this.StudentsList.map(student => student.name)
+        //     this.StudentsList.forEach(student => this.studentNames.push({student."id":student.name}));
+        // })
+        this.emitter.on("ChangeTablePresence", (data) => {
+            this.PresenceStatus = data.data
+            this.changePresence();
         })
         const thList = document.querySelectorAll("th")
         for (let id = 1; id < thList.length; id++) {
@@ -93,10 +98,14 @@ export default {
     },
     methods: {
         selectStudent(student_id) {
+            // console.log(student_id);
+            // console.log("Selected student:", this.studentNames[student_id]);
             this.studentSelected = student_id
 
         },
         selectColumn(column_id) {
+            // console.log(column_id);
+            // console.log("Selected column:", column_id);
             this.column_selected = column_id
         },
         changePresence() {
@@ -193,9 +202,9 @@ export default {
         },
         savePresence() {
             console.log(this.StudentPresenceChangeList);
-            axios.post('/lesson/update', {
-                data: this.StudentPresenceChangeList
-            }).then((res) => {
+            axios.post('/lesson/store', {
+                data:this.StudentPresenceChangeList
+            }).then((res)=>{
                 console.log(res);
             })
         }

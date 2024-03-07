@@ -117,7 +117,7 @@ export default {
     methods: {
         changePresenceStatus(id) {
             // console.log(e);
-            this.emitter.emit("ChangeTableData", { data: id });
+            this.emitter.emit("ChangeTablePresence", { data: id });
         }
     },
 }
