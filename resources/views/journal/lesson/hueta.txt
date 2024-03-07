@@ -1,0 +1,187 @@
+                <table class="table table-primary table-bordered">
+
+                    {{-- TABLE HEADERS + TIMETABLE WITH PRESENCES OF CURRENT CLASSROOM FROM TODAY --}}
+                    <tr>
+                        <th scope="col">Imie nazwisko ucznia</th>
+                        @foreach($classroom->lessons()->where('day', $day)->get() as $lesson)
+                            <th>{{ $timetable[$lesson->lesson_number] }}</th>
+                        @endforeach
+                    </tr>
+
+                    {{-- SHOWING EACH USER AND HIS PRESENCES ON LESSONS --}}
+                    @foreach($classroom->users as $student)
+                        <tr>
+                            {{-- STUDENTS NAME --}}
+                            <td>
+                                {{ $student->name }}
+                            </td>
+                            @foreach($student->classroom->lessons()->where('day', $day)->orderBy('lesson_number', 'asc')->get() as $lesson)
+                                @php($currentLesson->id == $lesson->id ? $bordered = 'table-success' : $bordered = '')
+                                <td class="text-center {{ $bordered }}">
+                                    @if($lesson->presences()->where('user_id', $student->id)->where('date', $date)->get()->count() == 0)
+                                        @php(App\Models\Presence::create(['date' => $date, 'lesson_id' => $lesson->id, 'classroom_id' => $classroom->id, 'lesson_number' => $lesson->lesson_number, 'user_id' => $student->id, 'type' => 7]))
+                                    @endif
+                                    @php($presence = $lesson->presences()->where('user_id', $student->id)->where('date', $date)->first())
+                                    {!! $presenceTypes[$presence->type-1]['text'] !!}
+                                </td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                </table> 
+
+
+                stroka 28
+
+                gamno bomza jake ja probuwaw:
+
+
+export default {
+    name: "Lessonnavigate",
+    props: {
+        id:String
+    },
+    data() {
+        return {
+            lessonsApiData: [],
+            lessons: []
+        }
+    },
+    methods: {  
+        sendDataToChangeTable(x){
+            this.emitter.emit("ChangeTableData", {data: x});
+        }
+    },
+
+    mounted() {
+        console.log(this.id);
+        // requests to get today lessons data by /todayLessons/{id}
+        axios
+            .get(`/api/todayLessons/${this.id}`)
+            .then(response => {
+                this.lessonsApiData = response.data;
+            })
+            .then(() => {
+                this.lessonsApiData.forEach(element => {
+                    const lessonPusher = {
+                        ClassName: "",
+                        LessonName: "",
+                        LessonTime: "", 
+                    }
+                    axios.get(`/api/subject/${element.subject_id}`).then(response => {
+                        lessonPusher.LessonName = response.data.data.name;
+                    }).then(() => {
+                        axios.get(`/api/classroom/${element.classroom_id}`).then(response => {
+                            lessonPusher.ClassName = response.data.data.name;
+                        }).then(() => {
+                            axios.get(`/api/lesson/${element.id}`).then(response => {
+                                lessonPusher.LessonTime = this.lessontimetable[response.data.data.lesson_number];
+                                console.log(response.data.data.lesson_number);
+                                console.log(this.lessontimetable[response.data.data.lesson_number]);
+                            })
+                            this.lessons.push(lessonPusher);
+                        })
+                    })
+                });
+            })
+    },
+}
+
+
+
+
+----------------------------------
+
+
+
+export default {
+    name: "Lessonnavigate",
+    props: {
+        id: String,
+    },
+    data() {
+        return {
+            lessons: [],
+            error: null, // Added to handle potential errors
+        };
+    },
+    methods: {
+        sendDataToChangeTable(x) {
+            this.emitter.emit("ChangeTableData", { data: x });
+        },
+    },
+   /**
+    * Function to fetch data from the API and update the lessons data in the component.
+     *
+     * @return {void} 
+     */
+
+    mounted() {
+        async function fetchData() {
+            try {
+                console.log("1");
+                const response = await axios.get(`/api/todayLessons/${this.id}`);
+                const lessonsApiData = response.data;
+
+                const lessons = await Promise.all(
+                    lessonsApiData.map(async (element) => {
+                        console.log(element);
+                        const { data: classroomData } = await axios.get(`/api/classroom/${element.classroom_id}`);
+                        const { data: subjectData } = await axios.get(`/api/subject/${element.subject_id}`);
+                        const { data: lessonData } = await axios.get(`/api/lesson/${element.id}`);
+
+                        return {
+                            ClassName: classroomData.name,
+                            LessonName: subjectData.name,
+                            LessonTime: lessonData.lesson_number,
+                        };
+                    })
+                );
+
+                this.lessons = lessons;
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                this.error = error; 
+            }
+        }
+
+        fetchData(); // Call the function to start fetching data
+    },
+};
+
+
+
+
+                <table class="table table-primary table-bordered">
+
+                    {{-- TABLE HEADERS + TIMETABLE WITH PRESENCES OF CURRENT CLASSROOM FROM TODAY --}}
+                    <tr>
+                        <th scope="col">Imie nazwisko ucznia</th>
+                        @foreach($classroom->lessons()->where('day', $day)->get() as $lesson)
+                            <th>{{ $timetable[$lesson->lesson_number] }}</th>
+                        @endforeach
+                    </tr>
+
+                    {{-- SHOWING EACH USER AND HIS PRESENCES ON LESSONS --}}
+                    @foreach($classroom->users as $student)
+                        <tr>
+                            {{-- STUDENTS NAME --}}
+                            <td>
+                                {{ $student->name }}
+                            </td>
+                            @foreach($student->classroom->lessons()->where('day', $day)->orderBy('lesson_number', 'asc')->get() as $lesson)
+                                @php($currentLesson->id == $lesson->id ? $bordered = 'table-success' : $bordered = 'table-secondary')
+                                <td class="text-center {{ $bordered }}">
+                                    @php($presence = $lesson->presences()->where('user_id', $student->id)->where('date', $date)->first())
+                                    {!! $presence->presenceType->text !!}
+                                </td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                </table>
+
+
+
+
+
+
+                ------------edit.blade 32

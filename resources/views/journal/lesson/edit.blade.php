@@ -29,6 +29,7 @@
                     </div>
                 </a>
 
+<<<<<<< HEAD
                 <table class="table table-primary table-bordered">
 
                     {{-- TABLE HEADERS + TIMETABLE WITH PRESENCES OF CURRENT CLASSROOM FROM TODAY --}}
@@ -81,6 +82,9 @@
                         </table>
                     </div>
                 </div>
+=======
+                <presence-table ></presence-table>
+>>>>>>> e26dfb333393f3edc7673f2c921e4d3d76dee30b
 
             </div>
 
