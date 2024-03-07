@@ -6,8 +6,15 @@
 
     <div class="d-flex" style="height: 100%;">
 
+<<<<<<< HEAD
         <x-lessons-menu :lessons="$lessons" :timetable="$timetable"></x-classroom-menu>
 
+=======
+        {{-- <x-lessons-menu :lessons="$lessons" :timetable="$timetable"></x-lessons-menu> --}}
+        <lessons-navigate :id={{Auth::id()}}></lessons-navigate>
+        
+ 
+>>>>>>> b26605925915dcd3e7671edf9101978d22c0c070
         <div class="col-md-9">
 
             <div class="p-3">

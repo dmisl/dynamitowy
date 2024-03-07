@@ -1,8 +1,22 @@
 <template>
-    <div class="m-0 p-0 border-bottom border-dark" v-for="(item, index) in lessons" :key="index" @click="sendDataToChangeTable(item)">
-        <p class="p-0 m-0 ps-1 pt-1 fw-medium">{{ item.ClassName }}-{{ item.LessonTime }}</p>
-        <p class="p-0 m-0 ps-1 small text-wrap">{{ item.LessonName }}</p>
+
+  <div style="height: 100%;">
+    <div class="col-md-3 bg-info bg-gradient" style="position: fixed; height: 100vh;">
+        <div class="user-select-none">
+            <select class="form-select rounded-0">
+                <option value=""></option>
+            </select>
+                <a class="text-decoration-none text-dark">
+                  <div class="m-0 p-0 border-bottom border-dark" v-for="(item, index) in lessons" :key="index" @click="sendDataToChangeTable(item)">
+                    <p class="p-0 m-0 ps-1 pt-1 fw-medium">{{ item.ClassName }}-{{ item.LessonTime }}</p>
+                    <p class="p-0 m-0 ps-1 small text-wrap">{{ item.LessonName }}</p>
+                </div>
+                </a>
+        </div>
     </div>
+</div>
+<div class="col-md-3"></div>
+
 </template>
 
 <script>
@@ -11,7 +25,7 @@ import axios from 'axios';
 export default {
   name: "Lessonnavigate",
   props: {
-    id: String,
+    id: Number,
   },
   data() {
     return {
@@ -33,19 +47,27 @@ export default {
         ]);
 
         return {
+          ClassroomId: lesson.classroom_id,
           LessonName: subjectResponse.data.data.name,
           ClassName: classroomResponse.data.data.name,
           LessonTime: this.lessontimetable[lessonTimeResponse.data.data.lesson_number], // Assuming lessontimetable is no longer needed
+          LessonNumber: lessonTimeResponse.data.data.lesson_number,
         };
       });
 
       const processedLessons = await Promise.all(subjectClassroomLessonPromises);
       this.lessons = processedLessons;
-      this.emitter.emit("ChangeTableData", { data: item }); // Emit data only once after processing
+      // this.emitter.emit("ChangeTableData", { data: item }); // Emit data only once after processing
     } catch (error) {
       console.error("Error fetching lesson data:", error);
       // Handle errors appropriately, e.g., display an error message to the user
     }
+  },
+  methods: {
+    sendDataToChangeTable(x) {
+    console.log(x);
+      this.emitter.emit("ChangeTableData", { data: x });
+    },
   },
 };
 

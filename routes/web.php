@@ -7,7 +7,11 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
+<<<<<<< HEAD
 use App\Http\Controllers\WarningController;
+=======
+use App\Http\Controllers\TestController;
+>>>>>>> b26605925915dcd3e7671edf9101978d22c0c070
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')
@@ -26,6 +30,8 @@ Route::middleware('teacher')
     Route::get('journal', [JournalController::class, 'index'])->name('journal.index');
     Route::get('lesson/{id}/{date}/show', [LessonController::class, 'show'])->name('lesson.show');
     Route::get('lesson/{lesson_id}/{classroom_id}/{date}/edit', [LessonController::class, 'edit'])->name('lesson.edit');
+
+    Route::post('lesson/update', [LessonController::class, 'update'])->name('lesson.update');
 
     Route::get('grade/{classroom_id}/{subject_id}/show', [GradeController::class, 'show'])->name('grade.show');
     Route::get('grade/{classroom_id}/{subject_id}/edit', [GradeController::class, 'edit'])->name('grade.edit');
@@ -69,3 +75,5 @@ Route::fallback(function () {
     return redirect()->route('home.index');
 });
 
+Route::get('test', [TestController::class, 'index'])->name('test.index');
+Route::post('test_message', [TestController::class, 'message'])->name('test.message');
