@@ -7,11 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
-<<<<<<< HEAD
-use App\Http\Controllers\WarningController;
-=======
 use App\Http\Controllers\TestController;
->>>>>>> b26605925915dcd3e7671edf9101978d22c0c070
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')
