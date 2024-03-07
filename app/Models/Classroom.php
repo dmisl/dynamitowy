@@ -40,4 +40,9 @@ class Classroom extends Model
         return $this->hasMany(GradeReason::class);
     }
 
+    public function warnings() : HasMany
+    {
+        return $this->hasMany(Warning::class);
+    }
+
 }

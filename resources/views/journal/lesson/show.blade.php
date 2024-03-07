@@ -7,9 +7,9 @@
 @section('content')
 
     <div class="d-flex" style="height: 100%;">
-        
-        <x-classroom-menu :lessons="$lessons" :timetable="$timetable"></x-classroom-menu>
- 
+
+        <x-lessons-menu :lessons="$lessons" :timetable="$timetable"></x-classroom-menu>
+
         <div class="col-md-9">
 
             <div class="p-3">

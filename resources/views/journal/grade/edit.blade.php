@@ -5,8 +5,8 @@
 @section('content')
 
     <div class="d-flex" style="height: 100%;">
-        
-        <x-classroom-menu :lessons="$lessons" :timetable="$timetable"></x-classroom-menu>
+
+        <x-lessons-menu :lessons="$lessons" :timetable="$timetable"></x-classroom-menu>
 
         <div class="col-md-9">
 
@@ -28,7 +28,7 @@
                         <p class="d-table-cell align-middle m-0 p-0 small">Wrocz</p>
                     </div>
                 </a>
-                
+
                 @if($gradeReasons->count() == 0)
                     <table class="table table-primary table-bordered">
                         <tr>

@@ -60,4 +60,9 @@ class User extends Authenticatable
         return $this->hasMany(Grade::class);
     }
 
+    public function warnings() : HasMany
+    {
+        return $this->hasMany(Warning::class);
+    }
+
 }

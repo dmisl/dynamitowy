@@ -31,4 +31,9 @@ class Teacher extends Model
         return $this->hasOne(Classroom::class);
     }
 
+    public function warnings() : HasMany
+    {
+        return $this->hasMany(Teacher::class);
+    }
+
 }

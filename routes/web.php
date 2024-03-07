@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\WarningController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')
@@ -30,6 +31,13 @@ Route::middleware('teacher')
     Route::get('grade/{classroom_id}/{subject_id}/edit', [GradeController::class, 'edit'])->name('grade.edit');
 
     Route::post('gradereason', [GradeReasonController::class, 'store'])->name('gradereason.store');
+
+    Route::get('warning', [WarningController::class, 'index'])->name('warning.index');
+    Route::get('warning/classroom', [WarningController::class, 'classroom'])->name('warning.classroom');
+    Route::get('warning/{user_id}/show', [WarningController::class, 'show'])->name('warning.show');
+    Route::get('warning/{user_id}/create', [WarningController::class, 'create'])->name('warning.create');
+
+    Route::post('warning/store', [WarningController::class, 'store'])->name('warning.store');
 
     Route::middleware('classroom_teacher')
     ->prefix('journal/classroom')

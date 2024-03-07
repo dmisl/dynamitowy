@@ -1,3 +1,5 @@
+@use('App\Models\Presence')
+
 @extends('layouts.journal')
 
 @section('title', 'Dziennik')
@@ -6,13 +8,13 @@
 
     <div class="d-flex" style="height: 100%;">
 
-        <x-lessons-menu :lessons="$lessons" :timetable="$timetable"></x-classroom-menu>
+        <x-warning-menu></x-warning-menu>
 
         <div class="col-md-9">
 
             <div class="p-3">
 
-                <a href="{{ route('lesson.show', [$currentLesson->id, $date]) }}" class="d-flex mb-2">
+                <a href="{{ route('warning.index') }}" class="d-flex mb-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="21" height="21" viewBox="0 0 256 256" xml:space="preserve">
                         <defs>
                         </defs>
@@ -29,56 +31,24 @@
                     </div>
                 </a>
 
-                <table class="table table-primary table-bordered">
+                <h1 class="fw-medium">Informacja o uwadze</h1>
 
-                    {{-- TABLE HEADERS + TIMETABLE WITH PRESENCES OF CURRENT CLASSROOM FROM TODAY --}}
-                    <tr>
-                        <th scope="col">Imie nazwisko ucznia</th>
-                        @foreach($classroom->lessons()->where('day', $day)->get() as $lesson)
-                            <th>{{ $timetable[$lesson->lesson_number] }}</th>
-                        @endforeach
-                    </tr>
-
-                    {{-- SHOWING EACH USER AND HIS PRESENCES ON LESSONS --}}
-                    @foreach($classroom->users as $student)
-                        <tr>
-                            {{-- STUDENTS NAME --}}
-                            <td>
-                                {{ $student->name }}
-                            </td>
-                            @foreach($student->classroom->lessons()->where('day', $day)->orderBy('lesson_number', 'asc')->get() as $lesson)
-                                @php($currentLesson->id == $lesson->id ? $bordered = 'table-success' : $bordered = 'table-secondary')
-                                <td class="text-center {{ $bordered }}">
-                                    @php($presence = $lesson->presences()->where('user_id', $student->id)->where('date', $date)->first())
-                                    {!! $presence->presenceType->text !!}
-                                </td>
-                            @endforeach
-                        </tr>
-                    @endforeach
-                </table>
-
-                <button type="submit" class="btn btn-primary btn-lg">Zapisz</button>
-
-                <div class="d-inline-block bg-warning rounded-3" style="position: fixed; bottom: 20px; right: 20px;">
-                    <div class="p-2">
-                        <h4 class="fw-medium">Wybierz ucznia</h4>
-                        <table class="table table-primary bordered border-dark">
-                            <tr>
-                                <td class="p-1 text-center border-end border-dark fs-5">Nazwa</td>
-                                <td class="p-1 text-center fs-5">Symbol</td>
-                            </tr>
-                            @foreach($presenceTypes as $presenceType)
-                                <tr>
-                                    <td class="p-1 border-end border-dark">
-                                        <p class="p-0 m-0">{{ $presenceType->desc }}</p>
-                                    </td>
-                                    <td class="p-1 text-center">
-                                        {!! $presenceType->text !!}
-                                    </td>
-                                </tr>
-                            @endforeach
-
-                        </table>
+                <div class="ps-2 mt-2 w-50">
+                    <div class="mt-2">
+                        <label for="user" class="fs-5">Imie Nazwisko :</label>
+                        <h3>{{ $warning->user->name }}</h3>
+                    </div>
+                    <div class="mt-2">
+                        <label for="desc" class="fs-5">Opis uwagi :</label>
+                        <p class="m-0 p-0 fs-5 fw-medium">{{ $warning->desc }}</p>
+                    </div>
+                    <div class="mt-2">
+                        <label for="desc" class="fs-5">Data :</label>
+                        <p class="m-0 p-0 fs-5 fw-medium">{{ $warning->date }}</p>
+                    </div>
+                    <div class="mt-2">
+                        <label for="desc" class="fs-5">Nadano nauczycielem :</label>
+                        <p class="m-0 p-0 fs-5 fw-medium">{{ $warning->teacher->user->name }}</p>
                     </div>
                 </div>
 
