@@ -7,13 +7,23 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\WarningController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')
 ->group(function () {
 
     Route::get('home', [HomeController::class, 'index'])->name('home.index');
+
+    Route::middleware('student')
+    ->group(function () {
+        Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+        Route::get('profile/grades', [ProfileController::class, 'grades'])->name('profile.grades');
+        Route::get('profile/timetable', [ProfileController::class, 'timetable'])->name('profile.timetable');
+        Route::get('profile/warnings', [ProfileController::class, 'warnings'])->name('profile.warnings');
+    });
 
     // LOGOUT
     Route::get('logout', [LoginController::class, 'logout'])->name('login.logout');
@@ -64,6 +74,7 @@ Route::middleware('guest')
 
     Route::get('login', [LoginController::class, 'index'])->name('login.index');
     Route::post('login', [LoginController::class, 'store'])->name('login.store');
+    Route::post('hints', [LoginController::class, 'hints'])->name('hints.store');
 
 });
 

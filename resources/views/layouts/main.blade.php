@@ -15,9 +15,33 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
-<body style="font-family: 'Poppins', sans-serif; height: 100vh; overflow: hidden;">
-    <div id="app" class="m-0 p-0">
-        @yield('content')
+<body class="d-flex flex-column" style="font-family: 'Poppins', sans-serif; height: 100vh; overflow: hidden;">
+    <div style="position:fixed; z-index: -20; width: 100%; height: 100vh; background-image: url('https://images.pexels.com/photos/158826/structure-light-led-movement-158826.jpeg'); background-size: cover; background-repeat: no-repeat;"></div>
+
+    <header class="bg-dark w-100 p-2 user-select-none" style="position: fixed; z-index: 99;">
+        <div class="container text-light d-flex">
+            <a href="{{ route('home.index') }}" class="text-decoration-none text-light fs-3 fw-light m-0">{{ env('APP_NAME') }}</a>
+            @if(Auth::check())
+                <div class="ms-auto" style="display: table;">
+                    <div class="small" style="display: table-cell; vertical-align: middle;">{{ Auth::user()->name }} - {{ Auth::user()->email }} <a class="text-light" href="{{ route('login.logout') }}">(wyloguj)</a></div>
+                </div>
+            @endif
+        </div>
+    </header>
+    <div id="app" class="m-0 p-0 flex-grow-1 overflow-auto">
+
+        <div class="container bg-light h-100">
+
+            <div style="width: 80%; padding-top: 20vh; margin: 0 auto; height: 100%;">
+
+                <div class="container text-center h-100">
+                    @yield('content')
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 </body>
 </html>

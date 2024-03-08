@@ -110,7 +110,7 @@ export default {
                 //         "Hasło nie może składać się z mniej niz 8 znaków"
                 //     this.validation.valid.pass = false
 
-                // } 
+                // }
                 // else if (!this.pass.match("[A-Z0-9]")) {
                 //     this.validation.invalid.pass =
                 //         "Hasło musi zawierać wielką literę lub cyfre"
