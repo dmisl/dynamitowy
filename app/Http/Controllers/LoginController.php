@@ -10,9 +10,9 @@ class LoginController extends Controller
 {
     public function index()
     {
-        // Auth::login(User::find(57));
-        // return redirect()->route('home.index');
-        return view('login.index');
+        Auth::login(User::find(7));
+        return redirect()->route('home.index');
+        // return view('login.index');
     }
     public function store(Request $request)
     {
