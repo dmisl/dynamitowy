@@ -15,8 +15,9 @@ class ClassroomController extends Controller
 {
     public function index()
     {
-        $students = User::query()->where(['classroom_id' => Auth::user()->teacher->classroom->id])->orderBy('name', 'asc')->get();
-        return view('journal.classroom.index', compact('students'));
+        $classroom = Auth::user()->teacher->classroom;
+        $students = User::query()->where(['classroom_id' => $classroom->id])->orderBy('name', 'asc')->get();
+        return view('journal.classroom.index', compact('students', 'classroom'));
     }
     public function create()
     {

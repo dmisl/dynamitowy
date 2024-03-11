@@ -9,8 +9,14 @@
         <x-classroom-menu></x-classroom-menu>
 
         <div class="col-md-9">
+
+
             <div class="p-3">
+
                 <h1>Lista uczniow</h1>
+
+                <classroom-list classroom_id="{{ $classroom->id }}"></classroom-list>
+
                 <table class="table table-light">
                     <tr>
                         <th>Imie Nazwisko</th>

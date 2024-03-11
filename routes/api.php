@@ -38,9 +38,8 @@ Route::get('/classroom/{id}', function (string $id) {
 Route::get('/classrooms', function () {
     return ClassroomResource::collection(Classroom::all());
 });
-Route::get('/classroom_users/{classroom_id}', function (string $classroom_id) {
-    $classroom = Classroom::find($classroom_id);
-    return $classroom->users;
+Route::get('/classroomUsers/{classroom_id}', function (string $classroom_id) {
+    return ClassroomResource::collection(Classroom::find($classroom_id)->users);
 });
 Route::get('classroomLessons/{classroom_id}/{day}', function (string $classroom_id, string $day) {
     $classroom = Classroom::find($classroom_id);
