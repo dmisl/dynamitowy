@@ -3,12 +3,12 @@
         <tbody>
             <tr>
                 <th scope="col">Imie nazwisko ucznia</th>
-                <th v-for="(lessontime, index) in this.lessontimetable" :key="index">{{ lessontime }}</th>
+                <th v-for="(lessontime, index) in timetable" :key="index">{{ this.lessontimetable[lessontime.lesson_number]}}</th>
 
             </tr>
             <tr @click="this.selectStudent(index)" v-for="(student, index) in studentsWithIDKey" :key="student.index">
                 <td> {{ student.user_name }} </td>
-                <td v-for="(lessontime, columnid) in this.lessontimetable" :key="columnid"
+                <td v-for="(lessontime, columnid) in timetable" :key="columnid"
                     class="text-center table-secondary" @click="this.selectColumn(columnid)"
                     :class="{ 'table-success': columnid == this.column_selected, 'table-active': index == this.studentSelected }">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
@@ -49,9 +49,11 @@ export default {
     data() {
         return {
             // TestApiData: null;
-            studentsWithIDKey:[
-                {user_id:null,
-                user_name:null},
+            studentsWithIDKey: [
+                {
+                    user_id: null,
+                    user_name: null
+                },
             ],
             studentSelected: 0, //x
             column_selected: 0,  //y
@@ -59,7 +61,7 @@ export default {
             PresenceStatus: null,
             StudentPresenceChangeList: [
             ],
-            timetableCurrent: []
+            timetable: []
         }
     },
     components: {
@@ -67,11 +69,12 @@ export default {
     },
     mounted() {
         this.GetClassroomData();
-            this.emitter.on("ChangeTableData", (data) => {
-                console.log(data.data.ClassroomId);
-                this.classroom_id=data.data.ClassroomId
-                this.GetClassroomData();
-            })
+        this.emitter.on("ChangeTableData", (data) => {
+            console.log(data.data);
+            this.classroom_id = data.data.ClassroomId
+            this.timetable = data.data.ClassroomLessons
+            this.GetClassroomData();
+        })
         this.emitter.on("ChangeTablePresence", (data) => {
             this.PresenceStatus = data.data
             this.changePresence();
@@ -188,28 +191,28 @@ export default {
         savePresence() {
             console.log(this.StudentPresenceChangeList);
             axios.post('/lesson/store', {
-                data:this.StudentPresenceChangeList
-            }).then((res)=>{
+                data: this.StudentPresenceChangeList
+            }).then((res) => {
                 console.log(res);
             })
         },
-        GetClassroomData(){
-            this.studentsWithIDKey=[]
+        GetClassroomData() {
+            this.studentsWithIDKey = []
             axios
-            .get(`/api/classroom_users/${this.classroom_id}`)
-            .then(response => {
-                // Create a new array using spread syntax to avoid mutating the original data
-                this.studentsWithIDKey = response.data.map(student => ({
-                    // Use dynamic property name creation for clarity and flexibility
-                    user_id:student.id,
-                    user_name:student.name
-                }));
-                console.log(this.studentsWithIDKey);
-            })
-            .catch(error => {
-                console.error("Error fetching students:", error);
-                // Handle error gracefully, e.g., display an error message to the user
-            });
+                .get(`/api/classroomUsers/${this.classroom_id}`)
+                .then(response => {
+                    // Create a new array using spread syntax to avoid mutating the original data
+                    this.studentsWithIDKey = response.data.data.map(student => ({
+                        // Use dynamic property name creation for clarity and flexibility
+                        user_id: student.id,
+                        user_name: student.name
+                    }));
+                    console.log(this.studentsWithIDKey);
+                })
+                .catch(error => {
+                    console.error("Error fetching students:", error);
+                    // Handle error gracefully, e.g., display an error message to the user
+                });
         }
     },
 

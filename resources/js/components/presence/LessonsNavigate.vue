@@ -40,10 +40,11 @@ export default {
       const todayLessonsData = todayLessonsResponse.data;
 
       const subjectClassroomLessonPromises = todayLessonsData.map(async (lesson) => {
-        const [subjectResponse, classroomResponse, lessonTimeResponse] = await Promise.all([
+        const [subjectResponse, classroomResponse, lessonTimeResponse,classroomLessons] = await Promise.all([
           axios.get(`/api/subject/${lesson.subject_id}`),
           axios.get(`/api/classroom/${lesson.classroom_id}`),
           axios.get(`/api/lesson/${lesson.id}`),
+          axios.get(`/api/classroomLessons/${lesson.classroom_id}/${new Date().getDay()}/`),
         ]);
 
         return {
@@ -52,12 +53,13 @@ export default {
           ClassName: classroomResponse.data.data.name,
           LessonTime: this.lessontimetable[lessonTimeResponse.data.data.lesson_number], // Assuming lessontimetable is no longer needed
           LessonNumber: lessonTimeResponse.data.data.lesson_number,
+          ClassroomLessons : classroomLessons.data
         };
       });
 
       const processedLessons = await Promise.all(subjectClassroomLessonPromises);
       this.lessons = processedLessons;
-      // this.emitter.emit("ChangeTableData", { data: item }); // Emit data only once after processing
+      this.emitter.emit("ChangeTableData", { data: this.lessons[0] }); // Emit data only once after processing
     } catch (error) {
       console.error("Error fetching lesson data:", error);
       // Handle errors appropriately, e.g., display an error message to the user
@@ -65,7 +67,6 @@ export default {
   },
   methods: {
     sendDataToChangeTable(x) {
-    console.log(x);
       this.emitter.emit("ChangeTableData", { data: x });
     },
   },
