@@ -42,8 +42,7 @@ Route::get('/classroomUsers/{classroom_id}', function (string $classroom_id) {
     return ClassroomResource::collection(Classroom::find($classroom_id)->users);
 });
 Route::get('classroomLessons/{classroom_id}/{day}', function (string $classroom_id, string $day) {
-    $classroom = Classroom::find($classroom_id);
-    return $classroom->lessons()->where('day', $day)->get();
+    return ClassroomResource::collection(Classroom::find($classroom_id)->lessons()->where('day', $day)->get());
 });
 Route::get('/subject/{id}', function (string $id) {
     return new SubjectResource(Subject::findOrFail($id));
