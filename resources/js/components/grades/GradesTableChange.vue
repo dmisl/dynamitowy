@@ -1,0 +1,83 @@
+<template>
+    <div class="p-2">
+        <h4 class="fw-medium">Wybierz ucznia</h4>
+        <table class="table table-primary bordered border-dark">
+            <tbody>
+                <tr>
+                    <td colspan="3" class="p-1 text-center border-end border-dark fs-5">Oceny</td>
+                </tr>
+                <tr>
+                    <td class="p-1 border-end border-dark">
+                        <p class="p-0 m-0">6</p>
+                    </td>
+                    <td class="p-1 border-end border-dark">
+                        <p class="p-0 m-0">6-</p>
+                    </td>
+                    <td class="p-1 border-end border-dark">
+                        <p class="p-0 m-0">5</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="p-1 border-end border-dark">
+                        <p class="p-0 m-0">5+</p>
+                    </td>
+                    <td class="p-1 border-end border-dark">
+                        <p class="p-0 m-0">5-</p>
+                    </td>
+                    <td class="p-1 border-end border-dark">
+                        <p class="p-0 m-0">4</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="p-1 border-end border-dark">
+                        <p class="p-0 m-0">4+</p>
+                    </td>
+                    <td class="p-1 border-end border-dark">
+                        <p class="p-0 m-0">4-</p>
+                    </td>
+                    <td class="p-1 border-end border-dark">
+                        <p class="p-0 m-0">3</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="p-1 border-end border-dark">
+                        <p class="p-0 m-0">3+</p>
+                    </td>
+                    <td class="p-1 border-end border-dark">
+                        <p class="p-0 m-0">3-</p>
+                    </td>
+                    <td class="p-1 border-end border-dark">
+                        <p class="p-0 m-0">2</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="p-1 border-end border-dark">
+                        <p class="p-0 m-0">2+</p>
+                    </td>
+                    <td class="p-1 border-end border-dark">
+                        <p class="p-0 m-0">2-</p>
+                    </td>
+                    <td class="p-1 border-end border-dark">
+                        <p class="p-0 m-0">1</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="p-1 border-end border-dark">
+                        <p class="p-0 m-0">1+</p>
+                    </td>
+                    <td class="p-1 border-end border-dark">
+                        <p class="p-0 m-0">np</p>
+                    </td>
+                    <td class="p-1 border-end border-dark">
+                        <p class="p-0 m-0">brak</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+<script>
+export default {
+    name: "GradesTableChange",
+}
+</script>
