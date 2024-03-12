@@ -16,8 +16,8 @@
                             <input type="hidden" name="date" :value="date">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknac</button>
-                            <button type="submit" @click.prevent="addGradeReason()" class="btn btn-primary">Dodac temat</button>
+                            <button type="button"  data-bs-dismiss="modal" class="btn btn-secondary">Zamknac</button>
+                            <button type="submit"  data-bs-dismiss="modal" @click.prevent="addGradeReason()" class="btn btn-primary">Dodac temat</button>
                         </div>
                     </form>
                 </div>

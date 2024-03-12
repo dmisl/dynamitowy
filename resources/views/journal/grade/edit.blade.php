@@ -30,8 +30,6 @@
                         <p class="d-table-cell align-middle m-0 p-0 small">Wrocz</p>
                     </div>
                 </a>
-
-
                 <grades-table></grades-table>
 
                 

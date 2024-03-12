@@ -1,40 +1,46 @@
 <template>
     <div>
         <table class="table table-primary table-bordered">
-            <tr>
-                <th>Imie Nazwisko</th>
-                <th v-for="(GradeReason, index) in this.GradeReasons" :key="index" class="text-center">{{ GradeReason }}</th>
-                <th class="text-center">Dodac temat oceny</th>
-            </tr>
-            <tr v-for="(student, index) in this.studentsWithIDKey" :key="index">
-                <td>{{ student.user_name }}</td>
-                <td v-for="(GradeReason, index) in this.GradeReasons" :key="index"></td>
-                <td class="text-center" role="button" data-bs-toggle="modal" data-bs-target="#addModal">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                        width="20" height="20" viewBox="0 0 256 256" xml:space="preserve">
-                        <defs>
-                        </defs>
-                        <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"
-                            transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
-                            <path
-                                d="M 45 90 C 20.187 90 0 69.813 0 45 C 0 20.187 20.187 0 45 0 c 24.813 0 45 20.187 45 45 C 90 69.813 69.813 90 45 90 z"
-                                style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(78,188,59); fill-rule: nonzero; opacity: 1;"
-                                transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                            <path
-                                d="M 45 70.454 c -2.761 0 -5 -2.238 -5 -5 V 24.545 c 0 -2.761 2.239 -5 5 -5 c 2.762 0 5 2.239 5 5 v 40.909 C 50 68.216 47.762 70.454 45 70.454 z"
-                                style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"
-                                transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                            <path
-                                d="M 65.454 50 H 24.545 c -2.761 0 -5 -2.238 -5 -5 c 0 -2.761 2.239 -5 5 -5 h 40.909 c 2.762 0 5 2.239 5 5 C 70.454 47.762 68.216 50 65.454 50 z"
-                                style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"
-                                transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                        </g>
-                    </svg>
-                </td>
-            </tr>
+            <tbody>
+                <tr>
+                    <th>Imie Nazwisko</th>
+                    <th v-for="(GradeReason, index) in this.GradeReasons" :key="index" class="text-center">{{
+                        GradeReason }}</th>
+                    <th class="text-center">Dodac temat oceny</th>
+                </tr>
+                <tr v-for="(student, index) in this.studentsWithIDKey" :key="student.user_id">
+                    <td @click="this.selectStudent(student.user_id)">{{ student.user_name }}</td>
+                    <td class="text-center" v-for="(gradeReason, reasonIndex) in this.GradeReasons" :key="reasonIndex">
+                        {{ getGradeValue(student.user_id, gradeReason) }}
+                    </td>
+                    <td class="text-center" role="button" data-bs-toggle="modal" data-bs-target="#addModal">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                            width="20" height="20" viewBox="0 0 256 256" xml:space="preserve">
+                            <defs>
+                            </defs>
+                            <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"
+                                transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+                                <path
+                                    d="M 45 90 C 20.187 90 0 69.813 0 45 C 0 20.187 20.187 0 45 0 c 24.813 0 45 20.187 45 45 C 90 69.813 69.813 90 45 90 z"
+                                    style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(78,188,59); fill-rule: nonzero; opacity: 1;"
+                                    transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <path
+                                    d="M 45 70.454 c -2.761 0 -5 -2.238 -5 -5 V 24.545 c 0 -2.761 2.239 -5 5 -5 c 2.762 0 5 2.239 5 5 v 40.909 C 50 68.216 47.762 70.454 45 70.454 z"
+                                    style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"
+                                    transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <path
+                                    d="M 65.454 50 H 24.545 c -2.761 0 -5 -2.238 -5 -5 c 0 -2.761 2.239 -5 5 -5 h 40.909 c 2.762 0 5 2.239 5 5 C 70.454 47.762 68.216 50 65.454 50 z"
+                                    style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;"
+                                    transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                            </g>
+                        </svg>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
-    <GradesModalWindow :subject_id="this.subject_id" :classroom_id="this.classroom_id" ></GradesModalWindow>
+    <GradesModalWindow :subject_id="this.subject_id" :classroom_id="this.classroom_id"></GradesModalWindow>
+    <GradesTableChange></GradesTableChange>
 </template>
 
 <script>
@@ -106,6 +112,7 @@ export default {
             GradeReasons: [],
             subject_id: 0,
             classroom_id: 6,
+            selectedStudentId: 0,
         }
     },
     components: {
@@ -141,8 +148,16 @@ export default {
                 });
         },
         GetGradesDetails() {
-            const expData =this.fakeGrades;
-            console.log(expData);
+            const expData = this.fakeGrades;
+            this.GradeReasons = [...new Set(expData.map(item => item.GradeReason))]
+            console.log(this.GradeReasons);
+        },
+        getGradeValue(studentId, gradeReason) {
+            const matchingGrade = this.fakeGrades.find(grade => grade.studentId === studentId && grade.GradeReason === gradeReason);
+            return matchingGrade ? matchingGrade.GradeValue : 'brak'; // Return empty string if no match found
+        },
+        selectStudent(x){
+
         }
 
 
