@@ -8,6 +8,9 @@ import GradesTable from './components/grades/GradesTable.vue';
 import Index from './components/classroom/Index.vue';
 import Show from './components/classroom/Show.vue';
 import Edit from './components/classroom/Edit.vue';
+import Create from './components/classroom/Create.vue';
+import Timetable from './components/classroom/Timetable.vue';
+import TimetableEdit from './components/classroom/TimetableEdit.vue';
 
 const emitter = mitt()
 const app = createApp({});
@@ -28,7 +31,9 @@ app.component('GradesTable', GradesTable);
 app.component('ClassroomList', Index);
 app.component('ClassroomShow', Show);
 app.component('ClassroomEdit', Edit);
-
+app.component('ClassroomCreate', Create);
+app.component('ClassroomTimetable', Timetable);
+app.component('ClassroomTimetableEdit', TimetableEdit);
 
 app.mount("#app");
 

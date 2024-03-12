@@ -12,7 +12,9 @@
 
             <div class="p-3">
 
-                <a href="{{ route('classroom.index') }}" class="d-flex mb-2">
+                <classroom-timetable-edit></classroom-timetable-edit>
+
+                {{-- <a href="{{ route('classroom.index') }}" class="d-flex mb-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="21" height="21" viewBox="0 0 256 256" xml:space="preserve">
                         <defs>
                         </defs>
@@ -70,7 +72,7 @@
                     <div class="mt-5 text-center">
                         <button type="submit" class="btn btn-primary btn-lg">Zapisac</button>
                     </div>
-                </form>
+                </form> --}}
 
         </div>
     </div>

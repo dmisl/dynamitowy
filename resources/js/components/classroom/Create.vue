@@ -2,50 +2,28 @@
     import axios from 'axios';
     import { ref, onMounted } from 'vue';
 
-    const props = defineProps(['user_id'])
-
-    const user = ref([])
-    const classrooms = ref([])
-    const loading = ref(true)
+    const props = defineProps(['classroom_id'])
 
     // models
     const userName = ref('')
     const userEmail = ref('')
-    const userClassroomId = ref('')
     const userImage = ref(null)
-
-    onMounted(async () => {
-        try {
-            const userResponse = await axios.get(`http://127.0.0.1:8000/api/user/${props.user_id}`);
-            user.value = userResponse.data.data;
-            userName.value = user.value.name
-            userEmail.value = user.value.email
-            userClassroomId.value = user.value.classroom_id
-            const classroomsResponse = await axios.get(`http://127.0.0.1:8000/api/classrooms`);
-            classrooms.value = classroomsResponse.data.data;
-        } catch (error) {
-            console.error('Error fetching users data:', error);
-        } finally {
-            loading.value = false;
-        }
-    });
 
     function handleFile(event)
     {
         userImage.value = event.target.files[0];
     }
 
-    async function updateUser()
+    async function createUser()
     {
         try {
             const formData = new FormData();
-            formData.append('id', user.value.id);
             formData.append('name', userName.value);
             formData.append('email', userEmail.value);
-            formData.append('classroom_id', userClassroomId.value);
+            formData.append('classroom_id', props.classroom_id);
             formData.append('photo', userImage.value);
 
-            const response = await axios.post('http://127.0.0.1:8000/journal/classroom/update', formData, {
+            const response = await axios.post('http://127.0.0.1:8000/journal/classroom/store', formData, {
                 headers: {
                 'Content-Type': 'multipart/form-data'
                 }
@@ -61,11 +39,7 @@
 <template>
     <div>
 
-        <div v-if="loading">
-            Loading..
-        </div>
-
-        <div v-else class="p-3">
+        <div class="p-3">
 
             <a href="{{ route('classroom.index') }}" class="d-flex mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="21" height="21" viewBox="0 0 256 256" xml:space="preserve">
@@ -83,8 +57,7 @@
                     <p class="d-table-cell align-middle m-0 p-0 small">Wrocz</p>
                 </div>
             </a>
-
-            <h1 class="fw-light">Informacja o ucznie<br><span class="fw-normal">{{ user.name }}</span></h1>
+            <h1 class="fw-light">Dodanie ucznia</h1>
 
             <div class="ps-3">
 
@@ -99,19 +72,12 @@
                 </div>
 
                 <div class="mt-3 w-50">
-                    <label for="classes"><h3>Klasa</h3></label>
-                    <select v-model="userClassroomId" id="classes" class="form-select">
-                        <option v-for="classroom in classrooms" value="{{ classroom.id }}">{{ classroom.name }}</option>
-                    </select>
-                </div>
-
-                <div class="mt-3 w-50">
                     <label for="file" class="form-label"><h3>Photo</h3></label>
                     <input @change="handleFile" class="form-control" type="file" id="file">
                 </div>
 
                 <div class="mt-4">
-                    <button class="btn btn-primary" type="button" @click="updateUser">Save changes</button>
+                    <button class="btn btn-primary" type="button" @click="createUser">Dodac ucznia</button>
                 </div>
 
             </div>

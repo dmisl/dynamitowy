@@ -26,22 +26,39 @@ class ClassroomController extends Controller
     }
     public function store(Request $request)
     {
-        $validated = $request->validate([
+
+        $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'min:3'],
             'email' => ['required', 'email'],
-            'photo' => ['nullable', 'file', 'image'],
+            'classroom_id' => ['required'],
+            'photo' => $request->hasFile('photo') ? ['file', 'image'] : ['nullable'],
         ]);
 
-        $user = User::create([
+        if($validator->fails())
+        {
+            return response()->json(
+                ['message' => $validator->errors()]
+            );
+        }
+
+        $path = asset('storage/photos/default.png');
+        if($request->hasFile('photo'))
+        {
+            $storaged = Storage::disk('public')->put("photos", $request->photo);
+            $path = 'storage/'.$storaged;
+        }
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'photo' => $request->hasFile('photo') ? $request->photo : 'http://127.0.0.1:8000/storage/photos/default.png',
-            'classroom_id' => User::find(Auth::id())->teacher->classroom->id,
+            'classroom_id' => $request->classroom_id,
+            'photo' => $path,
             'password' => 'student',
-            'role_id' => 1,
+            'role_id' => 1
         ]);
 
-        return redirect()->route('classroom.show', $user->id);
+        return response()->json([
+            'message' => 'success',
+        ], 200);
 
     }
     public function show($id)
@@ -72,7 +89,7 @@ class ClassroomController extends Controller
             'name' => ['required', 'string', 'min:3'],
             'email' => ['required', 'email'],
             'classroom_id' => ['required'],
-            'photo' => $request->hasFile('photo') ? ['file', 'photo'] : ['nullable'],
+            'photo' => $request->hasFile('photo') ? ['file', 'image'] : ['nullable'],
         ]);
 
         if($validator->fails())
