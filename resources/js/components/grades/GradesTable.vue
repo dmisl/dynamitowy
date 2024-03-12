@@ -8,8 +8,8 @@
                         GradeReason }}</th>
                     <th class="text-center">Dodac temat oceny</th>
                 </tr>
-                <tr v-for="(student, index) in this.studentsWithIDKey" :key="student.user_id">
-                    <td @click="this.selectStudent(student.user_id)">{{ student.user_name }}</td>
+                <tr :class="{ 'table-success' : student.user_id == this.selectedStudentId}" v-for="(student, index) in this.studentsWithIDKey" :key="student.user_id">
+                    <td :class="{ 'table-success' : student.user_id == this.selectedStudentId}"  @click="this.selectStudent(student.user_id)">{{ student.user_name }}</td>
                     <td class="text-center" v-for="(gradeReason, reasonIndex) in this.GradeReasons" :key="reasonIndex">
                         {{ getGradeValue(student.user_id, gradeReason) }}
                     </td>
@@ -157,7 +157,8 @@ export default {
             return matchingGrade ? matchingGrade.GradeValue : 'brak'; // Return empty string if no match found
         },
         selectStudent(x){
-
+            this.selectedStudentId = x
+            console.log(this.selectedStudentId);
         }
 
 
