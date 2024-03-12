@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ClassroomController extends Controller
 {
@@ -66,28 +67,39 @@ class ClassroomController extends Controller
     public function update(Request $request)
     {
 
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
+            'id' => ['required'],
             'name' => ['required', 'string', 'min:3'],
             'email' => ['required', 'email'],
-            'class' => ['required'],
-            'photo' => ['file', 'image'],
+            'classroom_id' => ['required'],
+            'photo' => $request->hasFile('photo') ? ['file', 'photo'] : ['nullable'],
         ]);
 
-        $student = User::query()->where(['email' => $validated['email']])->first();
+        if($validator->fails())
+        {
+            return response()->json(
+                ['message' => $validator->errors()]
+            );
+        }
+
+        $user = User::find($request->id);
+
         $path = asset('storage/photos/default.png');
         if($request->hasFile('photo'))
         {
             $storaged = Storage::disk('public')->put("photos", $request->photo);
             $path = 'storage/'.$storaged;
         }
-        $student->update([
-            'name' => $validated['name'],
-            'name' => $validated['name'],
-            'name' => $validated['name'],
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'classroom_id' => $request->classroom_id,
             'photo' => $path
         ]);
 
-        return back();
+        return response()->json([
+            'message' => 'success',
+        ], 200);
 
     }
     public function timetable()
