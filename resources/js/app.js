@@ -7,6 +7,7 @@ import GradesNavMenu from './components/grades/GradesNavMenu.vue';
 import GradesTable from './components/grades/GradesTable.vue';
 import Index from './components/classroom/Index.vue';
 import Show from './components/classroom/Show.vue';
+import Edit from './components/classroom/Edit.vue';
 
 const emitter = mitt()
 const app = createApp({});
@@ -26,6 +27,7 @@ app.component('GradesTable', GradesTable);
 
 app.component('ClassroomList', Index);
 app.component('ClassroomShow', Show);
+app.component('ClassroomEdit', Edit);
 
 
 app.mount("#app");
