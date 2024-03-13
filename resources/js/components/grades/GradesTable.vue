@@ -4,13 +4,17 @@
             <tbody>
                 <tr>
                     <th>Imie Nazwisko</th>
-                    <th v-for="(GradeReason, index) in this.GradeReasons" :key="index" class="text-center">{{
+                    <th @click="selectGradeReason(index)" v-for="(GradeReason, index) in this.GradeReasons" :key="index"
+                        class="text-center">{{
                         GradeReason }}</th>
                     <th class="text-center">Dodac temat oceny</th>
                 </tr>
-                <tr :class="{ 'table-success' : student.user_id == this.selectedStudentId}" v-for="(student, index) in this.studentsWithIDKey" :key="student.user_id">
-                    <td :class="{ 'table-success' : student.user_id == this.selectedStudentId}"  @click="this.selectStudent(student.user_id)">{{ student.user_name }}</td>
-                    <td class="text-center" v-for="(gradeReason, reasonIndex) in this.GradeReasons" :key="reasonIndex">
+                <tr :class="{ 'table-success': student.user_id == this.selectedStudentId }"
+                    v-for="(student, index) in this.studentsWithIDKey" :key="student.user_id">
+                    <td :class="{ 'table-success': student.user_id == this.selectedStudentId }"
+                        @click="this.selectStudent(student.user_id)">{{ student.user_name }}</td>
+                    <td :class="{ 'table-info': reasonIndex == this.selectedGradeReason }" class="text-center"
+                        v-for="(gradeReason, reasonIndex) in this.GradeReasons" :key="reasonIndex">
                         {{ getGradeValue(student.user_id, gradeReason) }}
                     </td>
                     <td class="text-center" role="button" data-bs-toggle="modal" data-bs-target="#addModal">
@@ -40,7 +44,9 @@
         </table>
     </div>
     <GradesModalWindow :subject_id="this.subject_id" :classroom_id="this.classroom_id"></GradesModalWindow>
-    <GradesTableChange></GradesTableChange>
+    <GradesTableChange v-if="this.selectedStudentId"
+        :name="this.studentsWithIDKey.filter(student => student.user_id == this.selectedStudentId)[0].user_name">
+    </GradesTableChange>
 </template>
 
 <script>
@@ -53,9 +59,9 @@ export default {
         return {
 
             fakeGrades: [{
-                "studentId": 45,
+                "studentId": 139,
                 "GradeReason": "BHP",
-                "GradeValue": "3"
+                "GradeValue": "-1"
             },
             {
                 "studentId": 55,
@@ -110,9 +116,10 @@ export default {
             ],
             Grade: [],
             GradeReasons: [],
-            subject_id: 0,
-            classroom_id: 6,
-            selectedStudentId: 0,
+            subject_id: null,
+            classroom_id: null,
+            selectedStudentId: null,
+            selectedGradeReason: null,
         }
     },
     components: {
@@ -126,6 +133,9 @@ export default {
             this.subject_id = data.data.SubjectId
             this.GetStudents();
             this.GetGradesDetails();
+        })
+        this.emitter.on("ChangeGrades", (data) => {
+            this.changeGrade(data);
         })
     },
     methods: {
@@ -141,11 +151,14 @@ export default {
                         user_name: student.name
                     }));
                     console.log(this.studentsWithIDKey);
+                    this.selectStudent(this.studentsWithIDKey[0].user_id);
+
                 })
                 .catch(error => {
                     console.error("Error fetching students:", error);
                     // Handle error gracefully, e.g., display an error message to the user
                 });
+
         },
         GetGradesDetails() {
             const expData = this.fakeGrades;
@@ -156,11 +169,34 @@ export default {
             const matchingGrade = this.fakeGrades.find(grade => grade.studentId === studentId && grade.GradeReason === gradeReason);
             return matchingGrade ? matchingGrade.GradeValue : 'brak'; // Return empty string if no match found
         },
-        selectStudent(x){
+        selectStudent(x) {
+            console.log(x);
             this.selectedStudentId = x
-            console.log(this.selectedStudentId);
-        }
+        },
+        selectGradeReason(x) {
+            console.log(x);
+            this.selectedGradeReason = x
+        },
+        changeGrade(x) {
+            const G = {
+                studentId: this.selectedStudentId,
+                GradeReason: this.GradeReasons[this.selectedGradeReason],
+                GradeValue: x.data,
+            }
+            const existingGradeIndex = this.fakeGrades.findIndex(
+                (grade) =>
+                    grade.studentId === G.studentId && grade.GradeReason === G.GradeReason
+            );
 
+            if (existingGradeIndex !== -1) {
+                // If the grade already exists, update its value
+                this.fakeGrades[existingGradeIndex].GradeValue = G.GradeValue;
+            } else {
+                // If the grade doesn't exist, push a new object
+                this.fakeGrades.push(G);
+            }
+            this.selectedStudentId++
+        }
 
     },
 

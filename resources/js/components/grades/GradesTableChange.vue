@@ -1,77 +1,56 @@
 <template>
     <div class="d-inline-block bg-warning rounded-3" style="position: fixed; bottom: 20px; right: 20px;">
         <div class="p-2">
-            <h4 class="fw-medium">{{ "Wybierz ucznia" }}</h4>
+            <h4 style="width: 150px;text-align: center;" class="fw-medium">{{ this.name }}</h4>
             <table class="table table-primary bordered border-dark">
-                <tr>
-                    <td colspan="3" class="p-1 text-center border-end border-dark fs-5">Oceny</td>
-                </tr>
-                <tr>
-                    <td    class="p-1 border-end border-dark">
-                        <p class="p-0 m-0">6</p>
-                    </td>
-                    <td    class="p-1 border-end border-dark">
-                        <p class="p-0 m-0">-6</p>
-                    </td>
-                    <td    class="p-1 border-end border-dark">
-                        <p class="p-0 m-0">5</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td    class="p-1 border-end border-dark">
-                        <p class="p-0 m-0">5+</p>
-                    </td>
-                    <td    class="p-1 border-end border-dark">
-                        <p class="p-0 m-0">5-</p>
-                    </td>
-                    <td    class="p-1 border-end border-dark">
-                        <p class="p-0 m-0">4</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td    class="p-1 border-end border-dark">
-                        <p class="p-0 m-0">4+</p>
-                    </td>
-                    <td    class="p-1 border-end border-dark">
-                        <p class="p-0 m-0">4-</p>
-                    </td>
-                    <td    class="p-1 border-end border-dark">
-                        <p class="p-0 m-0">3</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td    class="p-1 border-end border-dark">
-                        <p class="p-0 m-0">3+</p>
-                    </td>
-                    <td    class="p-1 border-end border-dark">
-                        <p class="p-0 m-0">3-</p>
-                    </td>
-                    <td    class="p-1 border-end border-dark">
-                        <p class="p-0 m-0">2</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td    class="p-1 border-end border-dark">
-                        <p class="p-0 m-0">2+</p>
-                    </td>
-                    <td    class="p-1 border-end border-dark">
-                        <p class="p-0 m-0">2-</p>
-                    </td>
-                    <td    class="p-1 border-end border-dark">
-                        <p class="p-0 m-0">1</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td    class="p-1 border-end border-dark">
-                        <p class="p-0 m-0">1+</p>
-                    </td>
-                    <td    class="p-1 border-end border-dark">
-                        <p class="p-0 m-0">np</p>
-                    </td>
-                    <td    class="p-1 border-end border-dark">
-                        <p class="p-0 m-0">brak</p>
-                    </td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td colspan="3" class="p-1 text-center border-end border-dark fs-5">Oceny</td>
+                    </tr>
+                    <tr>
+                        <td v-for="(grade, index) in gradesList.slice(0,3)" :key="index" class="p-1 border-end border-dark"
+                        @click="this.changegrades(grade)"
+                        >
+                            <p class="p-0 m-0">{{ grade }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td v-for="(grade, index) in gradesList.slice(3,6)" :key="index" class="p-1 border-end border-dark"
+                        @click="this.changegrades(grade)"
+                        >
+                            <p class="p-0 m-0">{{grade}}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td v-for="(grade, index) in gradesList.slice(6,9)" :key="index" class="p-1 border-end border-dark"
+                        @click="this.changegrades(grade)"
+                        >
+                            <p class="p-0 m-0">{{grade}}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td v-for="(grade, index) in gradesList.slice(9,12)" :key="index" class="p-1 border-end border-dark"
+                        @click="this.changegrades(grade)"
+                        >
+                            <p class="p-0 m-0">{{grade}}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td v-for="(grade, index) in gradesList.slice(12,15)" :key="index" class="p-1 border-end border-dark"
+                        @click="this.changegrades(grade)"
+                        >
+                            <p class="p-0 m-0">{{grade}}</p>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td v-for="(grade, index) in gradesList.slice(15,18)" :key="index" class="p-1 border-end border-dark"
+                        @click="this.changegrades(grade)"
+                        >
+                            <p class="p-0 m-0">{{ grade }}</p>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -105,10 +84,13 @@ export default {
             ],
         }
     },
+    props: {
+        name: String,
+    },
     methods: {
-        changegrades() {
-            console.log();
-            this.emitter.emit("ChangeGrades", { data: this.grade });
+        changegrades(x) {
+
+            this.emitter.emit("ChangeGrades", { data: x });
         }
     },
 }

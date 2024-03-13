@@ -9,8 +9,8 @@
             <tr @click="this.selectStudent(index)" v-for="(student, index) in studentsWithIDKey" :key="student.index">
                 <td> {{ student.user_name }} </td>
                 <td v-for="(lessontime, columnid) in timetable" :key="columnid"
-                    class="text-center table-secondary" @click="this.selectColumn(columnid)"
-                    :class="{ 'table-success': columnid == this.column_selected, 'table-active': index == this.studentSelected }">
+                    class="text-center table-secondary" @click="this.selectColumn(lessontime.lesson_number)"
+                    :class="{ 'table-success': columnid == this.column_selected, 'table-info': index == this.studentSelected }">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
                         width="10" height="10" viewBox="0 0 256 256" xml:space="preserve">
                         <defs></defs>
@@ -72,7 +72,8 @@ export default {
         this.emitter.on("ChangeTableData", (data) => {
             console.log(data.data);
             this.classroom_id = data.data.ClassroomId
-            this.timetable = data.data.ClassroomLessons
+            this.timetable = data.data.ClassroomLessons.data
+            this.column_selected=data.data.LessonNumber
             this.GetClassroomData();
         })
         this.emitter.on("ChangeTablePresence", (data) => {
@@ -101,7 +102,7 @@ export default {
 
             let filteredCell = null;
             for (const cell of tableCellsToChange) {
-                if (cell.classList.contains('table-success') && cell.classList.contains('table-active')) {
+                if (cell.classList.contains('table-success') && cell.classList.contains('table-info')) {
                     filteredCell = cell;
                     // console.log(filteredCell);
                     break;
@@ -181,7 +182,7 @@ export default {
             const P = {
                 user_id: this.studentsWithIDKey[this.studentSelected].user_id,
                 studentName: this.studentsWithIDKey[this.studentSelected].user_name,
-                lessontime: this.timetableCurrent[this.column_selected],
+                lessontime: this.column_selected,
                 status: this.PresenceStatus,
             }
             this.StudentPresenceChangeList.push(P);
@@ -207,7 +208,7 @@ export default {
                         user_id: student.id,
                         user_name: student.name
                     }));
-                    console.log(this.studentsWithIDKey);
+                    // console.log(this.studentsWithIDKey);
                 })
                 .catch(error => {
                     console.error("Error fetching students:", error);

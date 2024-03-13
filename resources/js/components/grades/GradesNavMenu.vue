@@ -4,7 +4,7 @@
         <div class="col-md-3 bg-info bg-gradient" style="position: fixed; height: 100vh;">
             <div class="user-select-none">
                 <select class="form-select rounded-0">
-                    <option value=""></option>
+                    <option value="">{{ todaysDate() }}</option>
                 </select>
                 <a class="text-decoration-none text-dark">
                     <div class="m-0 p-0 border-bottom border-dark" v-for="(item, index) in lessons" :key="index"
@@ -69,6 +69,15 @@ export default {
             console.log(x);
             this.emitter.emit("SelectLesson", { data: x });
         },
+        todaysDate() {
+            const today = new Date();
+
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+            const dd = String(today.getDate()).padStart(2, '0');
+
+            return `${yyyy}-${mm}-${dd}`;
+        }
     },
 };
 
