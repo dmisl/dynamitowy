@@ -30,8 +30,6 @@
             teachers.value = teachersResponse.data.data;
             const subjectsResponse = await axios.get(`http://127.0.0.1:8000/api/subjects`);
             subjects.value = subjectsResponse.data.data;
-            // console.log(classroomLessons.value[0])
-            // console.log(containsValuesForKeys(classroomLessons.value[0], 'lesson_number', 8, 'subject_id', 5))
         } catch (error) {
             console.error('Error fetching users data:', error);
         } finally {
@@ -53,6 +51,24 @@
         }
         return false;
     }
+
+    async function saveChanges(event)
+    {
+
+        try {
+            const formData = new FormData();
+            formData.append('subject_id', event.target.value);
+            formData.append('classroom_id', props.classroom_id);
+            formData.append('day', Number(event.target.attributes.day.value)+1);
+            formData.append('lesson_number', event.target.attributes.lesson_number.value);
+
+            const response = await axios.post('http://127.0.0.1:8000/journal/classroom/timetableupdate', formData);
+
+            console.log('Image uploaded:', response.data);
+        } catch (error) {
+            console.error('Error uploading image:', error);
+        }
+    };
 
 </script>
 
@@ -80,6 +96,10 @@
                     <p class="d-table-cell align-middle m-0 p-0 small">Wrocz</p>
                 </div>
             </a>
+
+            <h1 class="fw-light">Zmiana planu lekcji</h1>
+            <h5>Zmien rozkład, zmiany zapisują się automatycznie</h5>
+
             <div class="d-flex flex-wrap">
                 <div class="ms-5 col-md-3" v-for="(day, day_nr) in classroomLessons">
                     <div class="mt-3">
@@ -88,13 +108,12 @@
                             <div class="p-3 pe-5">
                                 <div class="small mt-1" v-for="(time, l_nr) in timetable">
                                     {{ time }}
-                                    <p v-for="subject in subjects">
-                                        <!-- {{ l_nr }}
-                                        {{ subject.name }}
-                                        {{ day_nr }} -->
-                                        <!-- {{ console.log(classroomLessons[day_nr][l_nr]) }} -->
-                                        <h1 v-if="containsValuesForKeys(classroomLessons[day_nr], 'lesson_number', l_nr, 'subject_id', subject.id)">true</h1>
-                                    </p>
+                                    <select :day="day_nr" :lesson_number="l_nr" @change="saveChanges" class="form-select form-select-sm">
+                                        <option value=""></option>
+                                        <option v-for="subject in subjects" :value="subject.id" :selected="containsValuesForKeys(classroomLessons[day_nr], 'lesson_number', l_nr, 'subject_id', subject.id)">
+                                            {{ subject.name }}
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

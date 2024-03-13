@@ -142,41 +142,51 @@ class ClassroomController extends Controller
     }
     public function timetable_update(Request $request)
     {
-        // dd($request->all());
-        $validated = $request->validate([
-            'lessons' => ['required'],
+
+        $validator = Validator::make($request->all(), [
+            'subject_id' => ['required'],
             'classroom_id' => ['required'],
+            'day' => ['required'],
+            'lesson_number' => ['required'],
         ]);
-        foreach ($validated['lessons'] as $day => $timetable) {
-            foreach ($timetable as $lesson_number => $subject_id) {
-                if($subject_id)
-                {
-                    $lssn = Lesson::query()->where(['classroom_id' => $validated['classroom_id'], 'lesson_number' => $lesson_number, 'day' => $day])->first();
-                    if($lssn)
-                    {
-                        $lssn->update([
-                            'subject_id' => $subject_id,
-                        ]);
-                    } else
-                    {
-                        Lesson::create([
-                            'subject_id' => $subject_id,
-                            'classroom_id' => $validated['classroom_id'],
-                            'day' => $day,
-                            'lesson_number' => $lesson_number,
-                        ]);
-                    }
-                } else
-                {
-                    $lssn = Lesson::query()->where(['classroom_id' => $validated['classroom_id'], 'lesson_number' => $lesson_number, 'day' => $day])->first();
-                    if($lssn)
-                    {
-                        $lssn->delete();
-                    }
-                }
-            }
+
+        if($validator->fails())
+        {
+            return response()->json(
+                ['message' => $validator->errors()]
+            );
         }
-        return redirect()->route('classroom.timetable');
+
+        $lesson = Lesson::query()->where([
+            'classroom_id' => $request->classroom_id,
+            'day' => $request->day,
+            'lesson_number' => $request->lesson_number
+        ])->get();
+
+        if($lesson->count() !== 0)
+        {
+            $lesson->first()->update([
+                'subject_id' => $request->subject_id,
+                'classroom_id' => $request->classroom_id,
+                'day' => $request->day,
+                'lesson_number' => $request->lesson_number,
+            ]);
+            return response()->json([
+                'message' => 'updated',
+            ], 200);
+        } else
+        {
+            Lesson::create([
+                'subject_id' => $request->subject_id,
+                'classroom_id' => $request->classroom_id,
+                'day' => $request->day,
+                'lesson_number' => $request->lesson_number,
+            ]);
+            return response()->json([
+                'message' => 'created',
+            ], 200);
+        }
+
     }
 
 }
