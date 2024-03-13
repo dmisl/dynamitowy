@@ -120,9 +120,6 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-5 text-center">
-                <button type="submit" class="btn btn-primary btn-lg">Zapisac</button>
-            </div>
         </div>
 
     </div>
