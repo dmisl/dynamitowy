@@ -5,14 +5,14 @@
 @section('content')
 
     <div class="d-flex" style="height: 100%;">
-        
+
         <x-classroom-menu></x-classroom-menu>
-        
+
         <div class="col-md-9 user-select-none">
 
             <div class="p-3">
 
-                <classroom-timetable-edit></classroom-timetable-edit>
+                <classroom-timetable-edit :classroom_id="{{ $classroom->id }}"></classroom-timetable-edit>
 
                 {{-- <a href="{{ route('classroom.index') }}" class="d-flex mb-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="21" height="21" viewBox="0 0 256 256" xml:space="preserve">
