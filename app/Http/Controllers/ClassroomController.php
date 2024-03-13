@@ -165,15 +165,24 @@ class ClassroomController extends Controller
 
         if($lesson->count() !== 0)
         {
-            $lesson->first()->update([
-                'subject_id' => $request->subject_id,
-                'classroom_id' => $request->classroom_id,
-                'day' => $request->day,
-                'lesson_number' => $request->lesson_number,
-            ]);
-            return response()->json([
-                'message' => 'updated',
-            ], 200);
+            if($request->subject_id == 'delete')
+            {
+                $lesson->first()->delete();
+                return response()->json([
+                    'message' => 'deleted',
+                ], 200);
+            } else
+            {
+                $lesson->first()->update([
+                    'subject_id' => $request->subject_id,
+                    'classroom_id' => $request->classroom_id,
+                    'day' => $request->day,
+                    'lesson_number' => $request->lesson_number,
+                ]);
+                return response()->json([
+                    'message' => 'updated',
+                ], 200);
+            }
         } else
         {
             Lesson::create([

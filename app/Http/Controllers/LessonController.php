@@ -47,35 +47,7 @@ class LessonController extends Controller
     public function update(Request $request)
     {
 
-        return response()->json(
-            ['message' => $request->all()]
-        );
-
-        $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'min:3'],
-            'email' => ['required', 'email'],
-            'classroom_id' => ['required'],
-            'photo' => $request->hasFile('photo') ? ['file', 'image'] : ['nullable'],
-        ]);
-
-        if($validator->fails())
-        {
-            return response()->json(
-                ['message' => $validator->errors()]
-            );
-        }
-
-        // Lesson::create([
-        //     'name' => $request->name,
-        //     'email' => $request->email,
-        //     'classroom_id' => $request->classroom_id,
-        //     'photo' => $path,
-        //     'password' => 'student',
-        //     'role_id' => 1
-        // ]);
-
-        return response()->json([
-            'message' => 'success',
-        ], 200);
+        
+        
     }
 }

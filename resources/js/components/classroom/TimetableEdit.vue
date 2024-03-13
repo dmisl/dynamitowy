@@ -109,7 +109,7 @@
                                 <div class="small mt-1" v-for="(time, l_nr) in timetable">
                                     {{ time }}
                                     <select :day="day_nr" :lesson_number="l_nr" @change="saveChanges" class="form-select form-select-sm">
-                                        <option value=""></option>
+                                        <option value="delete"></option>
                                         <option v-for="subject in subjects" :value="subject.id" :selected="containsValuesForKeys(classroomLessons[day_nr], 'lesson_number', l_nr, 'subject_id', subject.id)">
                                             {{ subject.name }}
                                         </option>
