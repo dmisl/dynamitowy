@@ -13,7 +13,9 @@
                     v-for="(student, index) in this.studentsWithIDKey" :key="student.user_id">
                     <td :class="{ 'table-success': student.user_id == this.selectedStudentId }"
                         @click="this.selectStudent(student.user_id)">{{ student.user_name }}</td>
-                    <td :class="{ 'table-info': reasonIndex == this.selectedGradeReason }" class="text-center"
+                    <td :class="{ 'table-info': reasonIndex == this.selectedGradeReason }" 
+                    @click="this.selectGradeReason(reasonIndex)"
+                    class="text-center"
                         v-for="(gradeReason, reasonIndex) in this.GradeReasons" :key="reasonIndex">
                         {{ getGradeValue(student.user_id, gradeReason) }}
                     </td>
@@ -137,6 +139,9 @@ export default {
         this.emitter.on("ChangeGrades", (data) => {
             this.changeGrade(data);
         })
+        this.emitter.on("AddGradeReason", (data) => {
+            this.GradeReasons.push(data)
+        })
     },
     methods: {
         GetStudents() {
@@ -196,6 +201,18 @@ export default {
                 this.fakeGrades.push(G);
             }
             this.selectedStudentId++
+        },
+        sendGrades(){
+            console.log(this.fakeGrades);
+            axios
+                .post(`/api/grades`, this.fakeGrades)
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.error("Error fetching students:", error);
+                    // Handle error gracefully, e.g., display an error message to the user
+                });
         }
 
     },

@@ -41,7 +41,8 @@ export default {
     },
     methods: {
         addGradeReason() {
-            
+            console.log(this.text);
+            this.emitter.emit('AddGradeReason', this.text)
         }
     },
 }
