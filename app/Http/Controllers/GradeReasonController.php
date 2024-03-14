@@ -12,12 +12,8 @@ class GradeReasonController extends Controller
     public function store(Request $request)
     {
 
-        return response()->json([
-            'message' => $request->all()
-        ]);
-
         $validator = Validator::make($request->all(), [
-            'text' => ['required'],
+            'name' => ['required'],
             'subject_id' => ['required'],
             'classroom_id' => ['required'],
             'date' => ['required'],
@@ -38,7 +34,7 @@ class GradeReasonController extends Controller
         ]);
 
         return response()->json([
-            'message' => $gradeReason->text
+            'message' => $gradeReason->classroom->users
         ]);
 
         foreach ($gradeReason->classroom->users as $user) {

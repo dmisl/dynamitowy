@@ -1,5 +1,32 @@
 <script setup>
 
+    import { markRaw, ref, defineComponent, provide } from 'vue';
+
+    import Index from './Index.vue';
+    import Show from './Show.vue';
+    import Create from './Create.vue';
+    import Classroom from './Classroom.vue';
+
+    const props = defineProps(['classroom_id'])
+
+    const rawIndex = markRaw(Index)
+    const rawShow = markRaw(Show)
+    const rawCreate = markRaw(Create)
+    const rawClassroom = markRaw(Classroom)
+
+    const currentComponent = ref(Index)
+    const user_id = ref(0)
+
+    function change(component, userId = 0)
+    {
+        user_id.value = userId
+        currentComponent.value = component
+    }
+
+    provide('imported', {rawIndex, rawShow, rawCreate, rawClassroom})
+    provide('change', change)
+    provide('user_id', user_id)
+
 </script>
 
 <template>
@@ -9,17 +36,17 @@
             <div class="col-md-3 bg-info bg-gradient" style="position: fixed; height: 100vh;">
                 <div class="user-select-none">
 
-                    <a href="{{ route('warning.index') }}" class="text-decoration-none text-dark">
+                    <a role="button" @click="change(rawIndex)" class="text-decoration-none text-dark">
                         <div class="w-100 ps-2 fs-5 border-bottom border-dark">
                             Lista uwag
                         </div>
                     </a>
-                    <a href="{{ route('warning.classroom') }}" class="text-decoration-none text-dark">
+                    <a role="button" @click="change(rawClassroom)" class="text-decoration-none text-dark">
                         <div class="w-100 ps-2 fs-5 border-bottom border-dark">
                             Lista uwag klasy
                         </div>
                     </a>
-                    <a href="{{ route('warning.create', [0]) }}" class="text-decoration-none text-dark">
+                    <a role="button" @click="change(rawCreate)" class="text-decoration-none text-dark">
                         <div class="w-100 ps-2 fs-5 border-bottom border-dark">
                             Dodac uwage
                         </div>
@@ -35,32 +62,7 @@
 
             <div class="p-3">
 
-                <h1 class="fw-medium">Lista uwag</h1>
-
-                <div class="w-100 mx-auto">
-
-                    <!-- @if($warnings->count() !== 0)
-                        @foreach($warnings as $warning)
-                            <div class="w-100 rounded-3 mt-2 mx-auto bg-secondary-subtle border p-2 row justify-content-between">
-                                <div class="col">
-                                    <p class="fs-4 m-0 p-0">Uczen:</p>
-                                    <p class="fs-5 fw-medium m-0 p-0">{{ $warning->user->name }} - {{ $warning->user->classroom->name }}</p>
-                                    <p class="small text-secondary m-0 p-0">{{ $warning->date }}</p>
-                                </div>
-                                <div class="col">
-                                    <p class="fs-4 m-0 p-0">Opis:</p>
-                                    <p class="fs-6 fw-medium m-0 p-0 text-wrap">{{ $warning->desc }}</p>
-                                </div>
-                                <div class="col">
-                                    <a href="{{ route('warning.show', [$warning->id]) }}">Show</a>
-                                </div>
-                            </div>
-                        @endforeach
-                    @else
-                        <h2 class="text-center fw-light">W tym momencie nie dodano zadnej uwagi</h2>
-                    @endif -->
-
-                </div>
+                <component :is="currentComponent" :user_id="user_id"></component>
 
             </div>
 
