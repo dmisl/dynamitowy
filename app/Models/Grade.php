@@ -12,7 +12,7 @@ class Grade extends Model
     use HasFactory;
 
     protected $fillable = [
-        'type', 'user_id', 'description', 'grade_reason_id'
+        'type', 'user_id', 'grade_reason_id'
     ];
 
     public function user() : BelongsTo
