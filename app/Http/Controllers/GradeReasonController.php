@@ -37,6 +37,10 @@ class GradeReasonController extends Controller
             'date' => $request->date
         ]);
 
+        return response()->json([
+            'message' => $gradeReason->text
+        ]);
+
         foreach ($gradeReason->classroom->users as $user) {
             Grade::create([
                 'type' => 18,
@@ -46,7 +50,7 @@ class GradeReasonController extends Controller
         }
 
         return response()->json([
-            'message' => 'grade reason has been created'
+            'message' => 'grade reason has been updated'
         ]);
 
     }
