@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('type');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('grade_reason_id')->constrained();
-            $table->text('description');
         });
     }
 
