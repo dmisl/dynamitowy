@@ -10,30 +10,35 @@ class GradeReasonController extends Controller
 {
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'text' => ['required'],
-            'subject_id' => ['required'],
-            'classroom_id' => ['required'],
-            'date' => ['required'],
+
+        return response()->json([
+            'message' => $request->all()
         ]);
 
-        $gradeReason = GradeReason::create([
-            'text' => $validated['text'],
-            'subject_id' => $validated['subject_id'],
-            'classroom_id' => $validated['classroom_id'],
-            'date' => $validated['date'],
-        ]);
+        // $validated = $request->validate([
+        //     'text' => ['required'],
+        //     'subject_id' => ['required'],
+        //     'classroom_id' => ['required'],
+        //     'date' => ['required'],
+        // ]);
 
-        foreach ($gradeReason->classroom->users as $user) {
-            Grade::create([
-                'type' => 'brak',
-                'user_id' => $user->id,
-                'description' => '',
-                'grade_reason_id' => $gradeReason->id
-            ]);
-        }
+        // $gradeReason = GradeReason::create([
+        //     'text' => $validated['text'],
+        //     'subject_id' => $validated['subject_id'],
+        //     'classroom_id' => $validated['classroom_id'],
+        //     'date' => $validated['date'],
+        // ]);
 
-        return back();
+        // foreach ($gradeReason->classroom->users as $user) {
+        //     Grade::create([
+        //         'type' => 'brak',
+        //         'user_id' => $user->id,
+        //         'description' => '',
+        //         'grade_reason_id' => $gradeReason->id
+        //     ]);
+        // }
+
+        // return back();
 
     }
 }
