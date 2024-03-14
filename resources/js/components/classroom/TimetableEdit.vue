@@ -70,6 +70,9 @@
         }
     };
 
+    const imported = inject('imported')
+    const currentComponent = inject('currentComponent')
+
 </script>
 
 <template>

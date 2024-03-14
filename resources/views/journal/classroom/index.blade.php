@@ -10,7 +10,8 @@
 
         <div class="col-md-9">
 
-            <classroom-list classroom_id="{{ $classroom->id }}"></classroom-list>
+            <classroom-parent :classroom_id="{{ $classroom->id }}"></classroom-parent>
+            {{-- <classroom-list classroom_id="{{ $classroom->id }}"></classroom-list> --}}
 
         </div>
     </div>

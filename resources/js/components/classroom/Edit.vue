@@ -1,6 +1,6 @@
 <script setup>
     import axios from 'axios';
-    import { ref, onMounted } from 'vue';
+    import { ref, onMounted, inject } from 'vue';
 
     const props = defineProps(['user_id'])
 
@@ -51,11 +51,15 @@
                 }
             });
 
-            console.log('Image uploaded:', response.data);
+            change(imported.rawIndex)
+
         } catch (error) {
             console.error('Error uploading image:', error);
         }
     };
+
+    const change = inject('change')
+    const imported = inject('imported')
 
 </script>
 <template>
@@ -67,7 +71,7 @@
 
         <div v-else class="p-3">
 
-            <a href="{{ route('classroom.index') }}" class="d-flex mb-2">
+            <a role="button" @click="change(imported.rawIndex)" class="d-flex mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="21" height="21" viewBox="0 0 256 256" xml:space="preserve">
                     <defs>
                     </defs>
@@ -101,7 +105,7 @@
                 <div class="mt-3 w-50">
                     <label for="classes"><h3>Klasa</h3></label>
                     <select v-model="userClassroomId" id="classes" class="form-select">
-                        <option v-for="classroom in classrooms" value="{{ classroom.id }}">{{ classroom.name }}</option>
+                        <option v-for="classroom in classrooms" :selected="classroom.id == userClassroomId" value="{{ classroom.id }}">{{ classroom.name }}</option>
                     </select>
                 </div>
 

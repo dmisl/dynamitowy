@@ -1,9 +1,8 @@
 <script setup>
     import axios from 'axios';
-    import { ref, onMounted } from 'vue';
+    import { ref, onMounted, inject } from 'vue';
 
     const props = defineProps(['classroom_id'])
-
 
     const users = ref([]);
     const classroom = ref([]);
@@ -21,6 +20,9 @@
             loading.value = false;
         }
     });
+
+    const change = inject('change')
+    const imported = inject('imported')
 
 </script>
 <template>
@@ -55,7 +57,7 @@
                         <td>
                             <div class="d-flex">
                                 <div class="d-table me-1">
-                                    <a href="{{ route('classroom.edit', $student->id) }}">
+                                    <a role="button" @click="change(imported.rawEdit, user.id)">
                                         <svg class="d-table-cell align-middle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="height: 20px;" viewBox="0 0 256 256" xml:space="preserve">
 
                                             <defs>
@@ -72,7 +74,7 @@
                                     </a>
                                 </div>
                                 <div class="d-table me-1">
-                                    <a href="{{ route('classroom.show', $student->id) }}">
+                                    <a role="button" @click="change(imported.rawShow, user.id)">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20" viewBox="0 0 256 256" xml:space="preserve">
 
                                             <defs>
@@ -118,7 +120,7 @@
                 </tbody>
             </table>
 
-            <a href="{{ route('classroom.create') }}" class="btn btn-primary btn-sm">Dodac ucznia</a>
+            <a role="button" @click="change(imported.rawCreate)" class="btn btn-primary btn-sm">Dodac ucznia</a>
         </div>
 
     </div>

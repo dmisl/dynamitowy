@@ -11,6 +11,7 @@ import Edit from './components/classroom/Edit.vue';
 import Create from './components/classroom/Create.vue';
 import Timetable from './components/classroom/Timetable.vue';
 import TimetableEdit from './components/classroom/TimetableEdit.vue';
+import Parent from './components/classroom/Parent.vue';
 
 const emitter = mitt()
 const app = createApp({});
@@ -34,6 +35,7 @@ app.component('ClassroomEdit', Edit);
 app.component('ClassroomCreate', Create);
 app.component('ClassroomTimetable', Timetable);
 app.component('ClassroomTimetableEdit', TimetableEdit);
+app.component('ClassroomParent', Parent);
 
 app.mount("#app");
 
