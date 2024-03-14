@@ -1,6 +1,6 @@
 <script setup>
     import axios from 'axios';
-    import { ref, onMounted } from 'vue';
+    import { ref, onMounted, inject } from 'vue';
 
     const props = defineProps(['classroom_id'])
     const loading = ref(true);
@@ -71,7 +71,7 @@
     };
 
     const imported = inject('imported')
-    const currentComponent = inject('currentComponent')
+    const change = inject('change')
 
 </script>
 
@@ -83,7 +83,7 @@
         </div>
 
         <div v-else class="p-3">
-            <a href="{{ route('classroom.index') }}" class="d-flex mb-2">
+            <a role="button" @click="change(imported.rawTimetable)" class="d-flex mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="21" height="21" viewBox="0 0 256 256" xml:space="preserve">
                     <defs>
                     </defs>

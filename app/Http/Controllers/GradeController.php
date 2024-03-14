@@ -32,4 +32,10 @@ class GradeController extends Controller
         $gradeReasons = GradeReason::query()->where(['subject_id' => $subject_id, 'classroom_id' => $classroom_id])->get();
         return view('journal.grade.edit', compact('lessons', 'classroom', 'timetable', 'subject', 'gradeReasons'));
     }
+    public function update(Request $request)
+    {
+        return response()->json([
+            'message' => $request->all()
+        ]);
+    }
 }
