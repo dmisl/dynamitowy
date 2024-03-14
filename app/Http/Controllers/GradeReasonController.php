@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Grade;
 use App\Models\GradeReason;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class GradeReasonController extends Controller
 {
@@ -15,30 +16,38 @@ class GradeReasonController extends Controller
             'message' => $request->all()
         ]);
 
-        // $validated = $request->validate([
-        //     'text' => ['required'],
-        //     'subject_id' => ['required'],
-        //     'classroom_id' => ['required'],
-        //     'date' => ['required'],
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'text' => ['required'],
+            'subject_id' => ['required'],
+            'classroom_id' => ['required'],
+            'date' => ['required'],
+        ]);
 
-        // $gradeReason = GradeReason::create([
-        //     'text' => $validated['text'],
-        //     'subject_id' => $validated['subject_id'],
-        //     'classroom_id' => $validated['classroom_id'],
-        //     'date' => $validated['date'],
-        // ]);
+        if($validator->fails())
+        {
+            return response()->json(
+                ['message' => $validator->errors()]
+            );
+        }
 
-        // foreach ($gradeReason->classroom->users as $user) {
-        //     Grade::create([
-        //         'type' => 'brak',
-        //         'user_id' => $user->id,
-        //         'description' => '',
-        //         'grade_reason_id' => $gradeReason->id
-        //     ]);
-        // }
+        $gradeReason = GradeReason::create([
+            'text' => $request->name,
+            'subject_id' => $request->subject_id,
+            'classroom_id' => $request->classroom_id,
+            'date' => $request->date
+        ]);
 
-        // return back();
+        foreach ($gradeReason->classroom->users as $user) {
+            Grade::create([
+                'type' => 18,
+                'user_id' => $user->id,
+                'grade_reason_id' => $gradeReason->id
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'grade reason has been created'
+        ]);
 
     }
 }

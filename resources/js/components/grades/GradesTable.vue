@@ -117,7 +117,7 @@ export default {
                     classroom_id: this.classroom_id,
                     date: this.todaysDate(),
                 }
-            axios.post('http://localhost:8000/gradereason', dataToSend).then(response => {
+            axios.post('http://127.0.0.1:8000/gradereason', dataToSend).then(response => {
                 console.log(response);
                 console.log(response.data);
             })
