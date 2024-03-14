@@ -3,21 +3,25 @@
         <table class="table table-primary table-bordered">
             <tbody>
                 <tr>
+                    <!-- id: this.GradeReasons.length + 1,
+                    name: data,
+                    subject_id:this.subject_id,
+                    classroom_id: this.classroom_id,
+                    date: this.todaysDate(), -->
                     <th>Imie Nazwisko</th>
-                    <th @click="selectGradeReason(index)" v-for="(GradeReason, index) in this.GradeReasons" :key="index"
-                        class="text-center">{{
-                        GradeReason }}</th>
+                    <th v-if="this.GradeReasons.length > 0" @click="selectGradeReason(index, GradeReason.id)"
+                        v-for="(GradeReason, index) in this.GradeReasons" :key="index" class="text-center">{{
+                            GradeReason["name"] }}</th>
                     <th class="text-center">Dodac temat oceny</th>
                 </tr>
                 <tr :class="{ 'table-success': student.user_id == this.selectedStudentId }"
                     v-for="(student, index) in this.studentsWithIDKey" :key="student.user_id">
                     <td :class="{ 'table-success': student.user_id == this.selectedStudentId }"
                         @click="this.selectStudent(student.user_id)">{{ student.user_name }}</td>
-                    <td :class="{ 'table-info': reasonIndex == this.selectedGradeReason }" 
-                    @click="this.selectGradeReason(reasonIndex)"
-                    class="text-center"
+                    <td :class="{ 'table-info': reasonIndex == this.selectedGradeReason }"
+                        @click="this.selectGradeReason(reasonIndex,)" class="text-center"
                         v-for="(gradeReason, reasonIndex) in this.GradeReasons" :key="reasonIndex">
-                        {{ getGradeValue(student.user_id, gradeReason) }}
+                        {{ getGradeValue(student.user_id, gradeReason.id) }}
                     </td>
                     <td class="text-center" role="button" data-bs-toggle="modal" data-bs-target="#addModal">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
@@ -61,54 +65,9 @@ export default {
         return {
 
             fakeGrades: [{
-                "studentId": 139,
-                "GradeReason": "BHP",
-                "GradeValue": "-1"
-            },
-            {
-                "studentId": 55,
-                "GradeReason": "BHP",
-                "GradeValue": "5"
-            },
-            {
-                "studentId": 56,
-                "GradeReason": "PatauDodik",
-                "GradeValue": "brak"
-            },
-            {
-                "studentId": 45,
-                "GradeReason": "PatauDodik",
-                "GradeValue": "4"
-            },
-            {
-                "studentId": 57,
-                "GradeReason": "PatauDodik",
-                "GradeValue": "6"
-            },
-            {
-                "studentId": 49,
-                "GradeReason": "PatauDodik",
-                "GradeValue": "brak"
-            },
-            {
-                "studentId": 47,
-                "GradeReason": "BHP",
-                "GradeValue": "brak"
-            },
-            {
-                "studentId": 52,
-                "GradeReason": "Daun",
-                "GradeValue": "5"
-            },
-            {
-                "studentId": 56,
-                "GradeReason": "Daun",
-                "GradeValue": "2"
-            },
-            {
-                "studentId": 41,
-                "GradeReason": "Vadym",
-                "GradeValue": "5"
+                studentId: 139,
+                GradeReasonId: 1,
+                GradeValue: "-1"
             }],
             studentsWithIDKey: [
                 {
@@ -117,11 +76,23 @@ export default {
                 },
             ],
             Grade: [],
-            GradeReasons: [],
+            GradeReasons: [
+                {
+                    id: 0,
+                    name: "test",
+                    subject_id: this.subject_id,
+                    classroom_id: this.classroom_id,
+                    date: this.todaysDate()
+                }
+            ],
+
+
+
             subject_id: null,
             classroom_id: null,
             selectedStudentId: null,
             selectedGradeReason: null,
+            selectedGradeReasonId: null,
         }
     },
     components: {
@@ -134,13 +105,22 @@ export default {
             this.classroom_id = data.data.ClassroomId
             this.subject_id = data.data.SubjectId
             this.GetStudents();
-            this.GetGradesDetails();
         })
         this.emitter.on("ChangeGrades", (data) => {
             this.changeGrade(data);
         })
         this.emitter.on("AddGradeReason", (data) => {
-            this.GradeReasons.push(data)
+            const dataToSend =
+                {
+                    name: data,
+                    subject_id: this.subject_id,
+                    classroom_id: this.classroom_id,
+                    date: this.todaysDate(),
+                }
+            axios.post('http://localhost:8000/gradereason', dataToSend).then(response => {
+                console.log(response);
+                console.log(response.data);
+            })
         })
     },
     methods: {
@@ -165,27 +145,24 @@ export default {
                 });
 
         },
-        GetGradesDetails() {
-            const expData = this.fakeGrades;
-            this.GradeReasons = [...new Set(expData.map(item => item.GradeReason))]
-            console.log(this.GradeReasons);
-        },
-        getGradeValue(studentId, gradeReason) {
-            const matchingGrade = this.fakeGrades.find(grade => grade.studentId === studentId && grade.GradeReason === gradeReason);
+        getGradeValue(studentId, gradeReasonId) {
+            const matchingGrade = this.fakeGrades.find(grade => grade.studentId === studentId && grade.GradeReasonId === gradeReasonId);
             return matchingGrade ? matchingGrade.GradeValue : 'brak'; // Return empty string if no match found
         },
         selectStudent(x) {
             console.log(x);
             this.selectedStudentId = x
         },
-        selectGradeReason(x) {
+        selectGradeReason(x, id) {
             console.log(x);
             this.selectedGradeReason = x
+            this.selectGradeReasonId = id
+
         },
         changeGrade(x) {
             const G = {
                 studentId: this.selectedStudentId,
-                GradeReason: this.GradeReasons[this.selectedGradeReason],
+                GradeReasonId: this.GradeReasons[this.selectedGradeReason].id,
                 GradeValue: x.data,
             }
             const existingGradeIndex = this.fakeGrades.findIndex(
@@ -202,17 +179,26 @@ export default {
             }
             this.selectedStudentId++
         },
-        sendGrades(){
+        sendGrades() {
             console.log(this.fakeGrades);
             axios
                 .post(`/api/grades`, this.fakeGrades)
                 .then(response => {
-                    console.log(response.data);
+
                 })
                 .catch(error => {
                     console.error("Error fetching students:", error);
                     // Handle error gracefully, e.g., display an error message to the user
                 });
+        },
+        todaysDate() {
+            const today = new Date();
+
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+            const dd = String(today.getDate()).padStart(2, '0');
+
+            return `${yyyy}-${mm}-${dd}`;
         }
 
     },
