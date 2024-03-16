@@ -6,6 +6,6 @@
 
 @section('content')
 
-    <warning-parent></warning-parent>
+    <warning-parent :classroom_id="{{ Auth::user()->teacher->classroom ? Auth::user()->teacher->classroom->id : false }}" :teacher_id="{{ Auth::user()->teacher->id }}"></warning-parent>
 
 @endsection

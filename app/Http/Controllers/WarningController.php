@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Warning;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class WarningController extends Controller
 {
@@ -27,20 +28,34 @@ class WarningController extends Controller
     }
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'user' => ['required', 'exists:users,id'],
-            'desc' => ['required', 'string', 'min:5'],
+
+        $validator = Validator::make($request->all(), [
+            'user_id' => ['required', 'exists:users,id'],
+            'desc' => ['required', 'string'],
+            'date' => ['required', 'date'],
+            'classroom_id' => ['required', 'exists:classrooms,id'],
+            'teacher_id' => ['required'],
         ]);
 
-        Warning::create([
-            'user_id' => $validated['user'],
-            'teacher_id' => Auth::user()->teacher->id,
-            'classroom_id' => User::find($validated['user'])->classroom->id,
-            'desc' => $validated['desc'],
-            'date' => date('Y-m-d'),
+        if($validator->fails())
+        {
+            return response()->json(
+                ['message' => $validator->errors()]
+            );
+        }
+
+        $warning = Warning::create([
+            'user_id' => $request->user_id,
+            'desc' => $request->desc,
+            'date' => $request->date,
+            'teacher_id' => $request->teacher_id,
+            'classroom_id' => $request->classroom_id
         ]);
 
-        return redirect()->route('warning.index');
+        return response()->json([
+            'message' => "successfully created by id {$warning->id}"
+        ]);
+
     }
     public function show($id)
     {

@@ -3,20 +3,21 @@
     import axios from 'axios';
     import { ref, onMounted, inject } from 'vue';
 
+    const props = defineProps(['user_id', 'warning_id'])
+
     const user = ref([])
-    const warnings = ref([]);
-    const classroom = ref([]);
+    const warning = ref([]);
+    const teacher = ref([]);
     const loading = ref(true);
 
     onMounted(async () => {
         try {
-            const warningsResponse = await axios.get(`http://127.0.0.1:8000/api/warnings`);
-            warnings.value = warningsResponse.data.data;
-            const userResponse = await axios.get(`http://127.0.0.1:8000/api/user/${user_id}`);
+            const warningsResponse = await axios.get(`http://127.0.0.1:8000/api/warning/${props.warning_id}`);
+            warning.value = warningsResponse.data.data;
+            const userResponse = await axios.get(`http://127.0.0.1:8000/api/user/${props.user_id}`);
             user.value = userResponse.data.data;
-            console.log(user)
-            // const classroomResponse = await axios.get(`http://127.0.0.1:8000/api/classroom/${user.value.classroom_id}`);
-            // classroom.value = classroomResponse.data.data;
+            const teacherResponse = await axios.get(`http://127.0.0.1:8000/api/user/${warning.value.teacher_id+1}`);
+            teacher.value = teacherResponse.data.data
         } catch (error) {
             console.error('Error fetching users data:', error);
         } finally {
@@ -26,7 +27,6 @@
 
     const imported = inject('imported')
     const change = inject('change')
-    const user_id = inject('user_id')
 
 </script>
 
@@ -56,27 +56,27 @@
                 </div>
             </a>
 
-            <!-- <h1 class="fw-medium">Informacja o uwadze</h1>
+            <h1 class="fw-medium">Informacja o uwadze</h1>
 
             <div class="ps-2 mt-2 w-50">
                 <div class="mt-2">
                     <label for="user" class="fs-5">Imie Nazwisko :</label>
-                    <h3>{{ $warning->user->name }}</h3>
+                    <h3>{{ user.name }}</h3>
                 </div>
                 <div class="mt-2">
                     <label for="desc" class="fs-5">Opis uwagi :</label>
-                    <p class="m-0 p-0 fs-5 fw-medium">{{ $warning->desc }}</p>
+                    <p class="m-0 p-0 fs-5 fw-medium">{{ warning.desc }}</p>
                 </div>
                 <div class="mt-2">
                     <label for="desc" class="fs-5">Data :</label>
-                    <p class="m-0 p-0 fs-5 fw-medium">{{ $warning->date }}</p>
+                    <p class="m-0 p-0 fs-5 fw-medium">{{ warning.date }}</p>
                 </div>
                 <div class="mt-2">
                     <label for="desc" class="fs-5">Nadano nauczycielem :</label>
-                    <p class="m-0 p-0 fs-5 fw-medium">{{ $warning->teacher->user->name }}</p>
+                    <p class="m-0 p-0 fs-5 fw-medium">{{ teacher.name }}</p>
                 </div>
-            </div> -->
-            
+            </div>
+
         </div>
 
     </div>

@@ -31,6 +31,9 @@ Route::get('/users', function () {
 Route::get('/user/{id}', function (string $id) {
     return new UserResource(User::findOrFail($id));
 });
+Route::get('/students', function () {
+    return UserResource::collection(User::query()->where(['role_id' => 1])->get());
+});
 Route::get('/teachers', function () {
     return new UserResource(User::query()->where(['role_id' => 2])->get());
 });
@@ -63,6 +66,13 @@ Route::get('/todayLessons/{id}', function (string $id) {
     $lessons = Lesson::query()->where(['day' => date('N')])->whereIn('subject_id', $subjects)->get()->toJson();
     return $lessons;
 });
+Route::get('/warning/{id}', function (string $id) {
+    return new WarningResource(Warning::findOrFail($id));
+});
 Route::get('/warnings', function () {
     return WarningResource::collection(Warning::all());
 });
+Route::get('/classroomWarnings/{id}', function (string $id) {
+    return WarningResource::collection(Warning::query()->where(['classroom_id' => $id])->get());
+});
+

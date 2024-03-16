@@ -7,7 +7,7 @@
     import Create from './Create.vue';
     import Classroom from './Classroom.vue';
 
-    const props = defineProps(['classroom_id'])
+    const props = defineProps(['classroom_id', 'teacher_id', 'has_class'])
 
     const rawIndex = markRaw(Index)
     const rawShow = markRaw(Show)
@@ -16,10 +16,12 @@
 
     const currentComponent = ref(Index)
     const user_id = ref(0)
+    const warning_id = ref(0)
 
-    function change(component, userId = 0)
+    function change(component, userId = 0, warningId = 0)
     {
         user_id.value = userId
+        warning_id.value = warningId
         currentComponent.value = component
     }
 
@@ -41,12 +43,12 @@
                             Lista uwag
                         </div>
                     </a>
-                    <a role="button" @click="change(rawClassroom)" class="text-decoration-none text-dark">
+                    <a role="button" @click="change(rawClassroom)" v-if="props.classroom_id" class="text-decoration-none text-dark">
                         <div class="w-100 ps-2 fs-5 border-bottom border-dark">
                             Lista uwag klasy
                         </div>
                     </a>
-                    <a role="button" @click="change(rawCreate)" class="text-decoration-none text-dark">
+                    <a role="button" @click="change(rawCreate, 57)" class="text-decoration-none text-dark">
                         <div class="w-100 ps-2 fs-5 border-bottom border-dark">
                             Dodac uwage
                         </div>
@@ -62,7 +64,7 @@
 
             <div class="p-3">
 
-                <component :is="currentComponent" :user_id="user_id"></component>
+                <component :is="currentComponent" :classroom_id="props.classroom_id" :user_id="user_id" :warning_id="warning_id" :teacher_id="props.teacher_id"></component>
 
             </div>
 
