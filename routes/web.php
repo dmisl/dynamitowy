@@ -34,6 +34,9 @@ Route::middleware('teacher')
 ->group(function () {
 
     Route::get('journal', [JournalController::class, 'index'])->name('journal.index');
+    Route::get('journal/lesson', [LessonController::class, 'index'])->name('lesson.index');
+    Route::post('journal/lesson/update', [LessonController::class, 'update'])->name('lesson.store');
+
     Route::get('lesson/{id}/{date}/show', [LessonController::class, 'show'])->name('lesson.show');
     Route::get('lesson/{lesson_id}/{classroom_id}/{date}/edit', [LessonController::class, 'edit'])->name('lesson.edit');
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Classroom;
 use App\Models\Lesson;
+use App\Models\Presence;
 use App\Models\PresenceType;
 use App\Models\Subject;
 use Illuminate\Http\Request;
@@ -12,6 +13,10 @@ use Illuminate\Support\Facades\Validator;
 
 class LessonController extends Controller
 {
+    public function index()
+    {
+        return view('journal.lesson.index');
+    }
     public function show($id, $date)
     {
         // timetable + teacher + teacher`s subjects
@@ -47,7 +52,23 @@ class LessonController extends Controller
     public function update(Request $request)
     {
 
-        
-        
+        $validator = Validator::make($request->all(), [
+            'id' => ['required'],
+            'type' => ['required', 'in:1,2,3,4,5,6,7'],
+        ]);
+
+        if($validator->fails())
+        {
+            return response()->json(
+                ['error' => $validator->errors()]
+            );
+        }
+
+        Presence::find($request->id)->update(['type' => $request->type]);
+
+        return response()->json([
+            'message' => 'success'
+        ]);
+
     }
 }
