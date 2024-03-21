@@ -33,8 +33,6 @@ onMounted(async () => {
         // presence types
         const presenceTypesResponse = await axios.get(`http://127.0.0.1:8000/api/presenceTypes`)
         presenceTypes.value = presenceTypesResponse.data.data
-
-        console.log(classroomPresence)
     } catch (error) {
         console.error('Error fetching users data:', error);
     } finally {

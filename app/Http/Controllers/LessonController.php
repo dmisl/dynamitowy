@@ -64,7 +64,7 @@ class LessonController extends Controller
             );
         }
 
-        Presence::find($request->id)->update(['type' => $request->type]);
+        $presence = Presence::find($request->id)->update(['presence_type_id' => $request->type]);
 
         return response()->json([
             'message' => 'success'

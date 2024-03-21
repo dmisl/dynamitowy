@@ -38,6 +38,8 @@ onMounted(async () => {
         // selecting first user and current lesson
         selected.value.userId = users.value[0].id
         selected.value.lessonId = lesson.value.id
+        selected.value.presenceId = find(classroomPresence.value, 'user_id', selected.value.userId, 'lesson_id', selected.value.lessonId).id
+
     } catch (error) {
         console.error('Error fetching users data:', error);
     } finally {
@@ -71,9 +73,11 @@ onMounted(async () => {
 
             const response = await axios.post('http://127.0.0.1:8000/journal/lesson/update', formData);
 
-            classroomPresence.value.find(obj => obj.id === selected.value.presenceId).type = type;
+            // console.log('uploaded:', response.data);
 
-            console.log('uploaded:', response.data);
+            classroomPresence.value.find(obj => obj.id === selected.value.presenceId).presence_type_id = type;
+            select(users.value[users.value.findIndex(obj => obj.id === selected.value.userId)+1].id)
+
         } catch (error) {
             console.error('Error uploading image:', error);
         }
