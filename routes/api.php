@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Resources\ClassroomResource;
+use App\Http\Resources\GradeResource;
 use App\Http\Resources\LessonResource;
 use App\Http\Resources\SubjectResource;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\WarningResource;
 use App\Models\Classroom;
+use App\Models\GradeReason;
 use App\Models\Lesson;
 use App\Models\Presence;
 use App\Models\PresenceType;
@@ -119,4 +121,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('/classroomWarnings/{id}', function (string $id) {
         return WarningResource::collection(Warning::query()->where(['classroom_id' => $id])->get());
     });
-
+// GRADE REASONS / GRADES
+    Route::get('/gradeReasons/{subject_id}', function (string $subject_id) {
+        return GradeResource::collection(GradeReason::query()->where(['subject_id' => $subject_id])->get());
+    });

@@ -5,11 +5,13 @@
 
     import Show from './Show.vue';
     import Edit from './Edit.vue';
+    import Grade from './Grade.vue';
 
     const props = defineProps(['teacher_id'])
 
     const rawShow = markRaw(Show)
     const rawEdit = markRaw(Edit)
+    const rawGrade = markRaw(Grade)
 
     const currentComponent = ref(rawShow)
     const lesson_id = ref(0)
@@ -52,14 +54,15 @@
         }
     });
 
-    function change(component, lessonId, classroomId = 0, subjectId = 0)
+    function change(component, lessonId = 0, classroomId = 0, subjectId = 0)
     {
         currentComponent.value = component
         lesson_id.value = lessonId
         classroom_id.value = classroomId
+        subject_id.value = subjectId
     }
 
-    provide('imported', {rawShow, rawEdit, timetable, lesson_id, classroom_id, subject_id, date})
+    provide('imported', {rawShow, rawEdit, rawGrade, timetable, lesson_id, classroom_id, subject_id, date})
     provide('change', change)
 
 </script>
@@ -80,7 +83,7 @@
 
                         <input @change="changeDate" class="w-100 p-1" type="date" :value="date">
 
-                        <a v-for="lesson in lessons" role="button" @click="change(rawShow, lesson.id)" class="text-decoration-none text-dark">
+                        <a v-for="lesson in lessons" role="button" @click="change(rawShow, lesson.id, lesson.classroom_id)" class="text-decoration-none text-dark">
                             <div class="m-0 p-0 border-bottom border-dark">
                                 <p class="p-0 m-0 ps-1 pt-1 fw-medium">{{ classrooms[lesson.classroom_id-1] ? classrooms[lesson.classroom_id-1].name : '' }} - {{ timetable[lesson.lesson_number] }}</p>
                                 <p class="p-0 m-0 ps-1 small text-wrap">{{ subjects[lesson.subject_id-1] ? subjects[lesson.subject_id-1].name : '' }}</p>
