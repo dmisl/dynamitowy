@@ -45,7 +45,7 @@ Route::middleware('teacher')
     Route::get('grade/{classroom_id}/{subject_id}/show', [GradeController::class, 'show'])->name('grade.show');
     Route::get('grade/{classroom_id}/{subject_id}/edit', [GradeController::class, 'edit'])->name('grade.edit');
 
-    Route::post('gradereason', [GradeReasonController::class, 'store'])->name('gradereason.store');
+    Route::post('gradereason/store', [GradeReasonController::class, 'store'])->name('gradereason.store');
 
     Route::get('warning', [WarningController::class, 'index'])->name('warning.index');
     Route::get('warning/classroom', [WarningController::class, 'classroom'])->name('warning.classroom');

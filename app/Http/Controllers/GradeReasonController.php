@@ -13,7 +13,7 @@ class GradeReasonController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => ['required'],
+            'text' => ['required'],
             'subject_id' => ['required'],
             'classroom_id' => ['required'],
             'date' => ['required'],
@@ -27,14 +27,10 @@ class GradeReasonController extends Controller
         }
 
         $gradeReason = GradeReason::create([
-            'text' => $request->name,
+            'text' => $request->text,
             'subject_id' => $request->subject_id,
             'classroom_id' => $request->classroom_id,
             'date' => $request->date
-        ]);
-
-        return response()->json([
-            'message' => $gradeReason->classroom->users
         ]);
 
         foreach ($gradeReason->classroom->users as $user) {
@@ -46,7 +42,7 @@ class GradeReasonController extends Controller
         }
 
         return response()->json([
-            'message' => 'grade reason has been updated'
+            'message' => 'grade reason has been created'
         ]);
 
     }

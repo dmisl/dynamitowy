@@ -35,6 +35,27 @@ class DatabaseSeeder extends Seeder
         PresenceType::create(['desc' => 'Spoz. z niepow. przy.', 'text' => '<p class="p-0 m-0">ns</p>']);
         PresenceType::create(['desc' => 'Niewiadomo', 'text' => '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="10" height="10" viewBox="0 0 256 256" xml:space="preserve"><defs></defs><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" ><path d="M 63.835 7.659 c -5.257 -5.122 -12.197 -7.834 -19.547 -7.649 C 29.799 0.382 18.012 12.748 18.012 27.574 v 3.955 c 0 0.552 0.448 1 1 1 h 12.334 c 0.552 0 1 -0.448 1 -1 v -4.112 c 0 -6.913 5.419 -12.776 12.081 -13.07 c 3.492 -0.149 6.803 1.088 9.321 3.498 c 2.52 2.411 3.907 5.658 3.907 9.144 v 0.691 c 0 6.893 -5.54 12.517 -12.402 12.652 c -0.081 -0.021 -0.165 -0.032 -0.252 -0.032 c -7.353 0 -13.334 5.982 -13.334 13.334 v 15.237 c 0 0.553 0.448 1 1 1 H 45 c 0.552 0 1 -0.447 1 -1 V 58.096 c 0 -1.86 1.337 -3.468 3.109 -3.739 c 13.043 -1.993 22.879 -13.461 22.879 -26.677 v -0.691 C 71.988 19.647 69.093 12.783 63.835 7.659 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" /><path d="M 45 75.666 H 32.666 c -0.552 0 -1 0.447 -1 1 V 89 c 0 0.553 0.448 1 1 1 H 45 c 0.552 0 1 -0.447 1 -1 V 76.666 C 46 76.113 45.552 75.666 45 75.666 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" /></g></svg>']);
 
+        // creating grade types
+        GradeType::create(['text' => '6']);
+        GradeType::create(['text' => '6-']);
+        GradeType::create(['text' => '5']);
+        GradeType::create(['text' => '5+']);
+        GradeType::create(['text' => '5-']);
+        GradeType::create(['text' => '4']);
+        GradeType::create(['text' => '4+']);
+        GradeType::create(['text' => '4-']);
+        GradeType::create(['text' => '3']);
+        GradeType::create(['text' => '3+']);
+        GradeType::create(['text' => '3-']);
+        GradeType::create(['text' => '2']);
+        GradeType::create(['text' => '2+']);
+        GradeType::create(['text' => '2-']);
+        GradeType::create(['text' => '1']);
+        GradeType::create(['text' => '1+']);
+        GradeType::create(['text' => '1-']);
+        GradeType::create(['text' => '0']);
+        GradeType::create(['text' => 'np']);
+
         // creating admin user
         User::create(['name' => 'Admin Adminiv', 'email' => 'admin@gmail.com', 'password' => 'adminn', 'role_id' => 3]);
         // creating teachers and their users
