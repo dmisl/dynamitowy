@@ -44,6 +44,7 @@ Route::middleware('teacher')
 
     Route::get('grade/{classroom_id}/{subject_id}/show', [GradeController::class, 'show'])->name('grade.show');
     Route::get('grade/{classroom_id}/{subject_id}/edit', [GradeController::class, 'edit'])->name('grade.edit');
+    Route::post('grade/update', [GradeController::class, 'update'])->name('grade.update');
 
     Route::post('gradereason/store', [GradeReasonController::class, 'store'])->name('gradereason.store');
 

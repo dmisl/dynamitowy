@@ -9,6 +9,7 @@ use App\Models\Lesson;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class GradeController extends Controller
 {
@@ -34,8 +35,25 @@ class GradeController extends Controller
     }
     public function update(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'id' => ['required'],
+            'type' => ['required'],
+        ]);
+
+        if($validator->fails())
+        {
+            return response()->json(
+                ['message' => $validator->errors()]
+            );
+        }
+
+        $grade = Grade::find($request->id);
+        $grade->update([
+            'type' => $request->type,
+        ]);
+
         return response()->json([
-            'message' => $request->all()
+            'message' => 'grade has been updated'
         ]);
     }
 }

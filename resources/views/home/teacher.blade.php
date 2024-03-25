@@ -6,7 +6,7 @@
 
     <div style="position:fixed; z-index: -20; width: 100%; height: 100vh; background-image: url('https://images.pexels.com/photos/158826/structure-light-led-movement-158826.jpeg'); background-size: cover; background-repeat: no-repeat;"></div>
 
-    <div class="container bg-light" style="height: 200vh;">
+    <div class="container bg-light">
 
         <div style="width: 80%; padding-top: 20vh; margin: 0 auto;">
 

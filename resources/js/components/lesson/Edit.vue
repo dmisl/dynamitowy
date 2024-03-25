@@ -73,8 +73,6 @@ onMounted(async () => {
 
             const response = await axios.post('http://127.0.0.1:8000/journal/lesson/update', formData);
 
-            // console.log('uploaded:', response.data);
-
             classroomPresence.value.find(obj => obj.id === selected.value.presenceId).presence_type_id = type;
             select(users.value[users.value.findIndex(obj => obj.id === selected.value.userId)+1].id)
 

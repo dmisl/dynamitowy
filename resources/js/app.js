@@ -12,6 +12,8 @@ import WarningParent from './components/warning/Parent.vue';
 
 import LessonParent from './components/lesson/Parent.vue'
 
+import JournalParent from './components/journal/Parent.vue'
+
 const emitter = mitt()
 const app = createApp({});
 
@@ -32,6 +34,8 @@ app.component('ClassroomParent', Parent);
 app.component('WarningParent', WarningParent)
 
 app.component('LessonParent', LessonParent)
+
+app.component('JournalParent', JournalParent)
 
 app.mount("#app");
 

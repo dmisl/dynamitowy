@@ -14,6 +14,7 @@ class JournalController extends Controller
 {
     public function index()
     {
+        return view('journal.index');
         $subjects = Subject::query()->where(['teacher_id' => Auth::user()->teacher->id])->get('id');
         $lesson = Lesson::query()->where(['day' => date('N') <= 5 ? date('N') : 1])->whereIn('subject_id', $subjects)->first();
         if($lesson)
