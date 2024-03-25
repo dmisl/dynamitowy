@@ -1,3 +1,5 @@
+@use('App\Models\Flight')
+
 @extends('layouts.main')
 
 @section('title', 'Strona glowna')
@@ -59,12 +61,14 @@
                             <div class="py-1 text-start">
                                 <p class="ps-0 p-0 m-0 fw-medium">5, 5+</p>
                             </div>
-                            <div class="d-table text-start" style="width: 30px; overflow:hidden;">
-                                <p class="m-0 p-0 fs-4 d-table-cell align-middle">WOZ</p>
-                            </div>
-                            <div class="py-1 text-start">
-                                <p class="ps-0 p-0 m-0 fw-medium">5, 5+</p>
-                            </div>
+                            @foreach($gradeLessons as $gradeLesson)
+                                <div class="d-table text-start" style="width: 30px; overflow:hidden;">
+                                    <p class="m-0 p-0 fs-4 d-table-cell align-middle">Matematyka</p>
+                                </div>
+                                <div class="py-1 text-start">
+                                    <p class="ps-0 p-0 m-0 fw-medium">5, 5+</p>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

@@ -9,5 +9,3 @@ app.component('Login', Login);
 app.component('JournalParent', JournalParent)
 
 app.mount("#app");
-
-
