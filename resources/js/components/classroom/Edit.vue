@@ -47,9 +47,11 @@
 
             const response = await axios.post('http://127.0.0.1:8000/journal/classroom/update', formData, {
                 headers: {
-                'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data'
                 }
             });
+
+            // console.log(response.data)
 
             change(imported.rawIndex)
 
@@ -105,7 +107,7 @@
                 <div class="mt-3 w-50">
                     <label for="classes"><h3>Klasa</h3></label>
                     <select v-model="userClassroomId" id="classes" class="form-select">
-                        <option v-for="classroom in classrooms" :selected="classroom.id == userClassroomId" value="{{ classroom.id }}">{{ classroom.name }}</option>
+                        <option v-for="classroom in classrooms" :selected="classroom.id == userClassroomId.value" :value="classroom.id">{{ classroom.name }}</option>
                     </select>
                 </div>
 

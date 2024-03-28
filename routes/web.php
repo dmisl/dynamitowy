@@ -20,9 +20,6 @@ Route::middleware('auth')
     Route::middleware('student')
     ->group(function () {
         Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
-        Route::get('profile/grades', [ProfileController::class, 'grades'])->name('profile.grades');
-        Route::get('profile/timetable', [ProfileController::class, 'timetable'])->name('profile.timetable');
-        Route::get('profile/warnings', [ProfileController::class, 'warnings'])->name('profile.warnings');
     });
 
     // LOGOUT
@@ -34,24 +31,14 @@ Route::middleware('teacher')
 ->group(function () {
 
     Route::get('journal', [JournalController::class, 'index'])->name('journal.index');
-    Route::get('journal/lesson', [LessonController::class, 'index'])->name('lesson.index');
-    Route::post('journal/lesson/update', [LessonController::class, 'update'])->name('lesson.store');
-
-    Route::get('lesson/{id}/{date}/show', [LessonController::class, 'show'])->name('lesson.show');
-    Route::get('lesson/{lesson_id}/{classroom_id}/{date}/edit', [LessonController::class, 'edit'])->name('lesson.edit');
 
     Route::post('lesson/update', [LessonController::class, 'update'])->name('lesson.update');
 
-    Route::get('grade/{classroom_id}/{subject_id}/show', [GradeController::class, 'show'])->name('grade.show');
-    Route::get('grade/{classroom_id}/{subject_id}/edit', [GradeController::class, 'edit'])->name('grade.edit');
     Route::post('grade/update', [GradeController::class, 'update'])->name('grade.update');
 
     Route::post('gradereason/store', [GradeReasonController::class, 'store'])->name('gradereason.store');
 
     Route::get('warning', [WarningController::class, 'index'])->name('warning.index');
-    Route::get('warning/classroom', [WarningController::class, 'classroom'])->name('warning.classroom');
-    Route::get('warning/{user_id}/show', [WarningController::class, 'show'])->name('warning.show');
-    Route::get('warning/{user_id}/create', [WarningController::class, 'create'])->name('warning.create');
 
     Route::post('warning/store', [WarningController::class, 'store'])->name('warning.store');
 
