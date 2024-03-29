@@ -105,7 +105,7 @@
                         <h4 style="display: inline-block;">Ostatnie oceny</h4>
                         <div class="bg-warning rounded-2">
                             <div class="p-3 pe-5">
-                                <div v-for="gradeLesson in gradeLessons">
+                                <div v-if="gradeLessons.length > 0" v-for="gradeLesson in gradeLessons">
                                     <p class="fw-medium p-0 m-0">{{ subjects.find(obj => obj.id === gradeLesson).name }}</p>
                                     <p class="small fw-medium p-0 m-0">
                                         <span v-for="gradeReason in gradeReasons.filter(obj => obj.subject_id === gradeLesson)">
@@ -114,6 +114,9 @@
                                             </span>
                                         </span>
                                     </p>
+                                </div>
+                                <div v-else>
+                                    Brak ocen
                                 </div>
                             </div>
                         </div>

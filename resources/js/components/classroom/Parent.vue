@@ -33,7 +33,7 @@
 
 <script setup>
 
-    import { markRaw, ref, provide } from 'vue';
+    import { markRaw, ref, provide, inject } from 'vue';
 
     import Index from './Index.vue';
     import Show from './Show.vue';
@@ -60,7 +60,12 @@
         currentComponent.value = component
     }
 
+    const importedParent = inject('importedParent')
+    const changeParent = inject('changeParent')
+
     provide('imported', {rawIndex, rawShow, rawCreate, rawEdit, rawTimetable, rawTimetableEdit, props})
     provide('change', change)
+    provide('importedParent', importedParent)
+    provide('changeParent', changeParent)
 
 </script>

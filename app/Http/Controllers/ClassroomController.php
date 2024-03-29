@@ -41,7 +41,7 @@ class ClassroomController extends Controller
             );
         }
 
-        $path = asset('storage/photos/default.png');
+        $path = asset('storage/photos/default.jpg');
         if($request->hasFile('photo'))
         {
             $storaged = Storage::disk('public')->put("photos", $request->photo);

@@ -64,7 +64,6 @@
 
             const response = await axios.post('http://127.0.0.1:8000/journal/classroom/timetableupdate', formData);
 
-            console.log('Image uploaded:', response.data);
         } catch (error) {
             console.error('Error uploading image:', error);
         }

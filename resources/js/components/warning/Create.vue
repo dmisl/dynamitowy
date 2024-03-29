@@ -41,7 +41,8 @@
 
             const response = await axios.post('http://127.0.0.1:8000/warning/store', formData);
 
-            console.log('Data sent:', response.data);
+            change(imported.rawIndex)
+
         } catch (error) {
             console.error('Error uploading image:', error);
         }

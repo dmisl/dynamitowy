@@ -1,6 +1,6 @@
 <script setup>
 
-    import { ref, markRaw } from 'vue'
+    import { ref, markRaw, provide } from 'vue'
 
     import LessonParent from '../lesson/Parent.vue'
     import ClassroomParent from '../classroom/Parent.vue'
@@ -13,11 +13,16 @@
     const rawClassroom = markRaw(ClassroomParent)
 
     const currentComponent = ref(rawLesson)
+    const user_id = ref(0)
 
-    function changeParent(component)
+    function changeParent(component, userId = 0)
     {
         currentComponent.value = component
+        user_id.value = userId
     }
+
+    provide('changeParent', changeParent)
+    provide('importedParent', {rawLesson, rawWarning, rawClassroom})
 
 </script>
 <template>
@@ -192,7 +197,7 @@
         </header>
         <div class="flex-grow-1 overflow-auto">
 
-            <component :is="currentComponent" :classroom_id="props.classroom_id" :teacher_id="props.teacher_id" :pre="props.prefix"></component>
+            <component :is="currentComponent" :classroom_id="props.classroom_id" :teacher_id="props.teacher_id" :pre="props.prefix" :user_id="user_id"></component>
 
         </div>
     </div>

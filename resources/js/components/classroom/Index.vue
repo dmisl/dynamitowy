@@ -23,6 +23,8 @@
 
     const change = inject('change')
     const imported = inject('imported')
+    const changeParent = inject('changeParent')
+    const importedParent = inject('importedParent')
 
 </script>
 <template>
@@ -103,7 +105,7 @@
                                     </a>
                                 </div>
                                 <div class="d-table me-1">
-                                    <a href="{{ route('warning.create', [$student->id]) }}">
+                                    <a role="button" @click="changeParent(importedParent.rawWarning, user.id)">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20" viewBox="0 0 256 256" xml:space="preserve">
 
                                             <defs>
