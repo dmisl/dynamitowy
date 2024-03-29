@@ -42,7 +42,7 @@
     import Timetable from './Timetable.vue';
     import TimetableEdit from './TimetableEdit.vue';
 
-    const props = defineProps(['classroom_id'])
+    const props = defineProps(['classroom_id', 'pre'])
 
     const rawIndex = markRaw(Index)
     const rawShow = markRaw(Show)
@@ -60,7 +60,7 @@
         currentComponent.value = component
     }
 
-    provide('imported', {rawIndex, rawShow, rawCreate, rawEdit, rawTimetable, rawTimetableEdit})
+    provide('imported', {rawIndex, rawShow, rawCreate, rawEdit, rawTimetable, rawTimetableEdit, props})
     provide('change', change)
 
 </script>

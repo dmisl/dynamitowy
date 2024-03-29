@@ -1,12 +1,12 @@
 <script setup>
 
-    import { ref, onMounted, markRaw } from 'vue'
+    import { ref, markRaw } from 'vue'
 
     import LessonParent from '../lesson/Parent.vue'
     import ClassroomParent from '../classroom/Parent.vue'
     import WarningParent from '../warning/Parent.vue'
 
-    const props = defineProps(['classroom_id', 'teacher_id'])
+    const props = defineProps(['classroom_id', 'teacher_id', 'prefix'])
 
     const rawLesson = markRaw(LessonParent)
     const rawWarning = markRaw(WarningParent)
@@ -192,7 +192,7 @@
         </header>
         <div class="flex-grow-1 overflow-auto">
 
-            <component :is="currentComponent" :classroom_id="props.classroom_id" :teacher_id="props.teacher_id"></component>
+            <component :is="currentComponent" :classroom_id="props.classroom_id" :teacher_id="props.teacher_id" :pre="props.prefix"></component>
 
         </div>
     </div>

@@ -11,6 +11,11 @@
     const classroom = ref([]);
     const classroomLessons = ref([]);
     const subjects = ref([]);
+    // grade variables
+    const gradeReasons = ref([])
+    const grades = ref([])
+    const gradeLessons = ref([])
+    const gradeTypes = ref()
 
     onMounted(async () => {
         try {
@@ -20,8 +25,20 @@
             classroom.value = classroomResponse.data.data;
             const classroomLessonsResponse = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${props.classroom_id}/${today}`);
             classroomLessons.value = classroomLessonsResponse.data.data;
+            // grade/subject requests handling
             const subjectsResponse = await axios.get(`http://127.0.0.1:8000/api/subjects`);
             subjects.value = subjectsResponse.data.data;
+            const gradeReasonsResponse = await axios.get(`http://127.0.0.1:8000/api/gradeReasons`)
+            gradeReasons.value = gradeReasonsResponse.data.data
+            const gradeResponse = await axios.get(`http://127.0.0.1:8000/api/user_grades/${user.value.id}`)
+            grades.value = gradeResponse.data.data
+            const availableGradeReasons = []
+            grades.value.forEach(grade => {
+                availableGradeReasons.push(gradeReasons.value.find(obj => obj.id === grade.grade_reason_id))
+            });
+            gradeLessons.value = [...new Set(availableGradeReasons.map(obj => obj.subject_id))]
+            const gradeTypesResponse = await axios.get(`http://127.0.0.1:8000/api/gradeTypes`)
+            gradeTypes.value = gradeTypesResponse.data.data
         } catch (error) {
             console.error('Error fetching users data:', error);
         } finally {
@@ -59,11 +76,13 @@
                 </div>
             </a>
 
-            <h1 class="fw-light">Informacja o ucznie<br><span class="fw-normal">{{ user.name }}</span></h1>
+            <h1 class="fw-light ms-2 pt-3">Informacja o ucznie<br><span class="fw-normal">{{ user.name }}</span></h1>
 
-            <div class="d-flex">
+            <div class="d-flex ms-3">
 
                 <div>
+
+                    <div class="mt-3" :style="{'width': '200px', 'height': '200px', 'background-image': `url('${imported.props.pre+user.photo}')`, 'background-position': 'center', 'background-size': 'cover'}"></div>
 
                     <div class="mt-3">
                         <h4>Imie nazwisko ucznia</h4>
@@ -86,16 +105,16 @@
                         <h4 style="display: inline-block;">Ostatnie oceny</h4>
                         <div class="bg-warning rounded-2">
                             <div class="p-3 pe-5">
-                                <p class="fw-medium p-0 m-0">Matematyka</p>
-                                <p class="small fw-medium p-0 m-0">5</p>
-                                <p class="fw-medium p-0 m-0 pt-1">Jezyk polski</p>
-                                <p class="small fw-medium p-0 m-0">5</p>
-                                <p class="fw-medium p-0 m-0 pt-1">Jezyk niemiecki</p>
-                                <p class="small fw-medium p-0 m-0">5</p>
-                                <p class="fw-medium p-0 m-0 pt-1">Jezyk angielski</p>
-                                <p class="small fw-medium p-0 m-0">5</p>
-                                <p class="fw-medium p-0 m-0 pt-1">Historia</p>
-                                <p class="small fw-medium p-0 m-0">5</p>
+                                <div v-for="gradeLesson in gradeLessons">
+                                    <p class="fw-medium p-0 m-0">{{ subjects.find(obj => obj.id === gradeLesson).name }}</p>
+                                    <p class="small fw-medium p-0 m-0">
+                                        <span v-for="gradeReason in gradeReasons.filter(obj => obj.subject_id === gradeLesson)">
+                                            <span v-for="grade in grades.filter(obj => obj.grade_reason_id == gradeReason.id)">
+                                                {{ gradeTypes.find(obj => obj.id == grade.type).text+', ' }}
+                                            </span>
+                                        </span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>

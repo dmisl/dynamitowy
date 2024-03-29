@@ -124,12 +124,18 @@ use Illuminate\Support\Facades\Route;
         return WarningResource::collection(Warning::query()->where(['classroom_id' => $id])->get());
     });
 // GRADE REASONS / GRADES / GRADE TYPES
+    Route::get('/gradeReasons', function () {
+        return GradeResource::collection(GradeReason::all());
+    });
     Route::get('/gradeReasons/{subject_id}', function (string $subject_id) {
         return GradeResource::collection(GradeReason::query()->where(['subject_id' => $subject_id])->get());
     });
     Route::get('grades/{classroom_id}/{subject_id}', function (string $classroom_id, string $subject_id) {
         $gradeReasons = GradeReason::query()->where(['classroom_id' => $classroom_id, 'subject_id' => $subject_id])->get('id');
         return GradeResource::collection(Grade::query()->whereIn('grade_reason_id', $gradeReasons)->get());
+    });
+    Route::get('user_grades/{user_id}', function (string $user_id) {
+        return GradeResource::collection(User::find($user_id)->grades);
     });
     Route::get('/gradeTypes', function () {
         return GradeResource::collection(GradeType::all());
