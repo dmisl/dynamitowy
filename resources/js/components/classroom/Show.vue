@@ -82,7 +82,7 @@
 
                 <div>
 
-                    <div class="mt-3" :style="{'width': '200px', 'height': '200px', 'background-image': `url('${imported.props.pre+user.photo}')`, 'background-position': 'center', 'background-size': 'cover'}"></div>
+                    <div class="mt-3" :style="{'width': '200px', 'height': '200px', 'background-image': `url('${user.photo}')`, 'background-position': 'center', 'background-size': 'cover'}"></div>
 
                     <div class="mt-3">
                         <h4>Imie nazwisko ucznia</h4>

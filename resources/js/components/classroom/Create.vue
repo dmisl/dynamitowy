@@ -29,7 +29,8 @@
                 }
             });
 
-            console.log('Image uploaded:', response.data);
+            change(imported.rawIndex)
+
         } catch (error) {
             console.error('Error uploading image:', error);
         }

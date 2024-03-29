@@ -51,8 +51,6 @@
                 }
             });
 
-            // console.log(response.data)
-
             change(imported.rawIndex)
 
         } catch (error) {

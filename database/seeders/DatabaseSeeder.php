@@ -15,6 +15,7 @@ use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
         // creating user roles
             Role::create(['name' => 'student']);
             Role::create(['name' => 'teacher']);
@@ -818,6 +820,16 @@ class DatabaseSeeder extends Seeder
                         }
                     }
                 }
+            }
+
+        // giving all users default avatar
+            $url = "https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg";
+            $image = file_get_contents($url);
+            Storage::disk('public')->put("photos/default.jpg", $image);
+            foreach (User::all() as $user) {
+                $user->update([
+                    'photo' => 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg'
+                ]);
             }
     }
 
