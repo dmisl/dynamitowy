@@ -30,52 +30,58 @@
                     </div>
                 </div>
             </a>
-            <a href="" class="text-decoration-none text-dark">
+            <div class="text-decoration-none text-dark">
                 <div class="bg-warning mx-auto mt-4" style="width: 90%;">
-                    <div class="d-flex justify-content-center">
-                        <div class="p-2 ps-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="50" height="50" viewBox="0 0 256 256" xml:space="preserve">
+                    <a href="{{ route('profile.index', [1]) }}" class="text-decoration-none text-dark">
+                        <div class="d-flex justify-content-center">
+                            <div class="p-2 ps-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="50" height="50" viewBox="0 0 256 256" xml:space="preserve">
 
-                                <defs>
-                                </defs>
-                                <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
-                                    <path d="M 22.105 22.105 L 0.559 43.651 c -0.745 0.745 -0.745 1.953 0 2.699 l 6.094 6.094 c 0.487 -0.749 1.155 -1.413 2.045 -1.908 c 1.95 -1.084 4.418 -0.952 6.215 0.37 c 2.934 2.159 3.164 6.311 0.692 8.783 c -0.293 0.293 -0.61 0.546 -0.944 0.763 l 7.444 7.444 L 45 45 L 22.105 22.105 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(50,171,219); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                    <path d="M 43.651 0.559 l -6.094 6.094 c 0.748 0.486 1.412 1.154 1.906 2.042 c 1.085 1.949 0.954 4.418 -0.367 6.215 c -2.158 2.936 -6.312 3.168 -8.785 0.695 c -0.293 -0.293 -0.546 -0.61 -0.763 -0.944 l -7.444 7.444 L 45 45 l 22.895 -22.895 L 46.349 0.559 C 45.604 -0.186 44.396 -0.186 43.651 0.559 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,209,91); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                    <circle cx="32.12" cy="34.99" r="5.79" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,209,91); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
-                                    <circle cx="57.88" cy="9.22" r="5.79" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,209,91); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
-                                    <path d="M 51.5 82.584 c -2.472 -2.472 -2.242 -6.624 0.692 -8.783 c 1.797 -1.322 4.265 -1.454 6.215 -0.37 c 0.89 0.494 1.558 1.159 2.045 1.908 l 7.444 -7.444 L 45 45 L 22.105 67.895 l 21.546 21.546 c 0.745 0.745 1.953 0.745 2.699 0 l 6.094 -6.094 C 52.11 83.13 51.793 82.877 51.5 82.584 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(242,112,112); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                    <path d="M 85.206 54.152 c -0.578 -0.688 -1.278 -1.191 -2.033 -1.534 l 6.268 -6.268 c 0.745 -0.745 0.745 -1.953 0 -2.699 l -6.094 -6.094 c -0.486 0.748 -1.154 1.412 -2.042 1.906 c -1.949 1.085 -4.418 0.954 -6.215 -0.367 c -2.936 -2.158 -3.168 -6.312 -0.695 -8.785 c 0.293 -0.293 0.61 -0.546 0.944 -0.763 l -7.444 -7.444 l -7.618 7.618 c -0.343 -0.755 -0.847 -1.456 -1.535 -2.034 c -2.282 -1.918 -5.797 -1.75 -7.878 0.385 c -2.209 2.265 -2.192 5.892 0.052 8.136 c 0.507 0.507 1.086 0.893 1.702 1.173 L 45 45 l 3.241 3.241 l 4.202 4.202 l 8.008 8.008 l 5.626 5.626 l 1.817 1.817 l 7.618 -7.618 c 0.28 0.616 0.666 1.195 1.173 1.702 c 2.244 2.244 5.872 2.261 8.137 0.051 C 86.957 59.948 87.124 56.434 85.206 54.152 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(9,214,180); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                    <circle cx="9.22" cy="32.12" r="5.79" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(50,171,219); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
-                                    <circle cx="34.99" cy="57.88" r="5.79" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(50,171,219); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
-                                    <circle cx="32.12" cy="80.78" r="5.79" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(242,112,112); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
-                                    <circle cx="57.88" cy="55.01" r="5.79" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(242,112,112); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
-                                </g>
-                            </svg>
+                                    <defs>
+                                    </defs>
+                                    <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
+                                        <path d="M 22.105 22.105 L 0.559 43.651 c -0.745 0.745 -0.745 1.953 0 2.699 l 6.094 6.094 c 0.487 -0.749 1.155 -1.413 2.045 -1.908 c 1.95 -1.084 4.418 -0.952 6.215 0.37 c 2.934 2.159 3.164 6.311 0.692 8.783 c -0.293 0.293 -0.61 0.546 -0.944 0.763 l 7.444 7.444 L 45 45 L 22.105 22.105 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(50,171,219); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                        <path d="M 43.651 0.559 l -6.094 6.094 c 0.748 0.486 1.412 1.154 1.906 2.042 c 1.085 1.949 0.954 4.418 -0.367 6.215 c -2.158 2.936 -6.312 3.168 -8.785 0.695 c -0.293 -0.293 -0.546 -0.61 -0.763 -0.944 l -7.444 7.444 L 45 45 l 22.895 -22.895 L 46.349 0.559 C 45.604 -0.186 44.396 -0.186 43.651 0.559 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,209,91); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                        <circle cx="32.12" cy="34.99" r="5.79" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,209,91); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+                                        <circle cx="57.88" cy="9.22" r="5.79" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,209,91); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+                                        <path d="M 51.5 82.584 c -2.472 -2.472 -2.242 -6.624 0.692 -8.783 c 1.797 -1.322 4.265 -1.454 6.215 -0.37 c 0.89 0.494 1.558 1.159 2.045 1.908 l 7.444 -7.444 L 45 45 L 22.105 67.895 l 21.546 21.546 c 0.745 0.745 1.953 0.745 2.699 0 l 6.094 -6.094 C 52.11 83.13 51.793 82.877 51.5 82.584 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(242,112,112); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                        <path d="M 85.206 54.152 c -0.578 -0.688 -1.278 -1.191 -2.033 -1.534 l 6.268 -6.268 c 0.745 -0.745 0.745 -1.953 0 -2.699 l -6.094 -6.094 c -0.486 0.748 -1.154 1.412 -2.042 1.906 c -1.949 1.085 -4.418 0.954 -6.215 -0.367 c -2.936 -2.158 -3.168 -6.312 -0.695 -8.785 c 0.293 -0.293 0.61 -0.546 0.944 -0.763 l -7.444 -7.444 l -7.618 7.618 c -0.343 -0.755 -0.847 -1.456 -1.535 -2.034 c -2.282 -1.918 -5.797 -1.75 -7.878 0.385 c -2.209 2.265 -2.192 5.892 0.052 8.136 c 0.507 0.507 1.086 0.893 1.702 1.173 L 45 45 l 3.241 3.241 l 4.202 4.202 l 8.008 8.008 l 5.626 5.626 l 1.817 1.817 l 7.618 -7.618 c 0.28 0.616 0.666 1.195 1.173 1.702 c 2.244 2.244 5.872 2.261 8.137 0.051 C 86.957 59.948 87.124 56.434 85.206 54.152 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(9,214,180); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                        <circle cx="9.22" cy="32.12" r="5.79" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(50,171,219); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+                                        <circle cx="34.99" cy="57.88" r="5.79" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(50,171,219); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+                                        <circle cx="32.12" cy="80.78" r="5.79" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(242,112,112); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+                                        <circle cx="57.88" cy="55.01" r="5.79" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(242,112,112); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="d-table text-decoration-none text-dark">
+                                <h4 class="d-table-cell align-middle m-0 p-0 fw-light">Ostatnie oceny ></h4>
+                            </div>
                         </div>
-                        <a href="{{ route('profile.grades') }}" class="d-table text-decoration-none text-dark">
-                            <h4 class="d-table-cell align-middle m-0 p-0 fw-light">Ostatnie oceny ></h4>
-                        </a>
-                    </div>
-                    <div class="mt-1 pb-2">
-                        <div class="px-3">
-                            @foreach($gradeSubjects as $gradeSubject)
-                                <div class="d-table text-start">
-                                    <p class="m-0 p-0 fs-5 d-table-cell align-middle">{{ Subject::find($gradeSubject)->name }}</p>
-                                </div>
-                                <div class="py-1 text-start">
-                                    <p class="ps-0 p-0 m-0 fw-medium">
-                                        @foreach(GradeReason::query()->where(['subject_id' => $gradeSubject, 'classroom_id' => Auth::user()->classroom->id])->get() as $gradeReason)
-                                            @foreach($gradeReason->grades()->where('user_id', Auth::id())->get() as $grade)
-                                                {{ GradeType::find($grade->type)->text.',' }}
-                                            @endforeach
-                                        @endforeach
-                                    </p>
-                                </div>
-                            @endforeach
+                        <div class="mt-1 pb-2">
+                            <div class="px-3">
+                                @if(count($gradeSubjects) == 0)
+                                    Brak ocen
+                                @else
+                                    @foreach($gradeSubjects as $gradeSubject)
+                                        <div class="d-table text-start">
+                                            <p class="m-0 p-0 fs-5 d-table-cell align-middle">{{ Subject::find($gradeSubject)->name }}</p>
+                                        </div>
+                                        <div class="py-1 text-start">
+                                            <p class="ps-0 p-0 m-0 fw-medium">
+                                                @foreach(GradeReason::query()->where(['subject_id' => $gradeSubject, 'classroom_id' => Auth::user()->classroom->id])->get() as $gradeReason)
+                                                    @foreach($gradeReason->grades()->where('user_id', Auth::id())->get() as $grade)
+                                                        {{ GradeType::find($grade->type)->text.',' }}
+                                                    @endforeach
+                                                @endforeach
+                                            </p>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
-            </a>
+            </div>
         </div>
         <div class="col-md-4">
             <a href="{{ route('profile.index') }}" class="text-decoration-none text-light mt-2">
@@ -123,7 +129,7 @@
                     </div>
                 </div>
             </a>
-            <a href="{{ route('profile.warnings') }}" class="text-decoration-none text-light">
+            <a href="{{ route('profile.index', [3]) }}" class="text-decoration-none text-light">
                 <div class="bg-warning mx-auto mt-4" style="width: 90%;">
                     <div class="d-flex justify-content-center">
                         <div class="p-2 ps-0 pe-0">
@@ -146,33 +152,31 @@
             </a>
         </div>
         <div class="col-md-4">
-            <a href="" class="text-decoration-none text-light mt-2">
+            <a href="{{ route('profile.index', [2]) }}" class="text-decoration-none text-light mt-2">
                 <div class="bg-danger mx-auto" style="width: 90%;">
-                    <a class="text-decoration-none text-light" href="{{ route('profile.timetable') }}">
-                        <div class="d-flex pt-3 ps-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="40" height="40" viewBox="0 0 256 256" xml:space="preserve">
+                    <div class="d-flex pt-3 ps-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="40" height="40" viewBox="0 0 256 256" xml:space="preserve">
 
-                                <defs>
-                                </defs>
-                                <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
-                                    <path d="M 64.654 14.951 H 25.345 c -1.657 0 -3 -1.343 -3 -3 s 1.343 -3 3 -3 h 39.309 c 1.657 0 3 1.343 3 3 S 66.312 14.951 64.654 14.951 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                    <path d="M 87 31.837 H 3 c -1.657 0 -3 -1.343 -3 -3 v -8.87 C 0 13.893 4.942 8.951 11.016 8.951 h 6.398 c 1.657 0 3 1.343 3 3 s -1.343 3 -3 3 h -6.398 C 8.25 14.951 6 17.201 6 19.967 v 5.87 h 78 v -5.87 c 0 -2.766 -2.25 -5.017 -5.017 -5.017 h -6.397 c -1.657 0 -3 -1.343 -3 -3 s 1.343 -3 3 -3 h 6.397 C 85.058 8.951 90 13.893 90 19.967 v 8.87 C 90 30.494 88.657 31.837 87 31.837 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                    <path d="M 78.983 89.123 H 11.016 C 4.942 89.123 0 84.181 0 78.106 V 28.837 c 0 -1.657 1.343 -3 3 -3 h 84 c 1.657 0 3 1.343 3 3 v 49.269 C 90 84.181 85.058 89.123 78.983 89.123 z M 6 31.837 v 46.269 c 0 2.767 2.25 5.017 5.016 5.017 h 67.967 c 2.767 0 5.017 -2.25 5.017 -5.017 V 31.837 H 6 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                    <path d="M 23.761 51.483 h -4.762 c -1.442 0 -2.612 -1.169 -2.612 -2.612 v -4.762 c 0 -1.442 1.169 -2.612 2.612 -2.612 h 4.762 c 1.442 0 2.612 1.169 2.612 2.612 v 4.762 C 26.372 50.313 25.203 51.483 23.761 51.483 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                    <path d="M 47.381 51.483 h -4.762 c -1.442 0 -2.612 -1.169 -2.612 -2.612 v -4.762 c 0 -1.442 1.169 -2.612 2.612 -2.612 h 4.762 c 1.442 0 2.612 1.169 2.612 2.612 v 4.762 C 49.993 50.313 48.824 51.483 47.381 51.483 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                    <path d="M 71.001 51.483 h -4.762 c -1.442 0 -2.612 -1.169 -2.612 -2.612 v -4.762 c 0 -1.442 1.169 -2.612 2.612 -2.612 h 4.762 c 1.442 0 2.612 1.169 2.612 2.612 v 4.762 C 73.613 50.313 72.444 51.483 71.001 51.483 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                    <path d="M 23.761 72.022 h -4.762 c -1.442 0 -2.612 -1.169 -2.612 -2.612 v -4.762 c 0 -1.442 1.169 -2.612 2.612 -2.612 h 4.762 c 1.442 0 2.612 1.169 2.612 2.612 v 4.762 C 26.372 70.853 25.203 72.022 23.761 72.022 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                    <path d="M 47.381 72.022 h -4.762 c -1.442 0 -2.612 -1.169 -2.612 -2.612 v -4.762 c 0 -1.442 1.169 -2.612 2.612 -2.612 h 4.762 c 1.442 0 2.612 1.169 2.612 2.612 v 4.762 C 49.993 70.853 48.824 72.022 47.381 72.022 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                    <path d="M 71.001 72.022 h -4.762 c -1.442 0 -2.612 -1.169 -2.612 -2.612 v -4.762 c 0 -1.442 1.169 -2.612 2.612 -2.612 h 4.762 c 1.442 0 2.612 1.169 2.612 2.612 v 4.762 C 73.613 70.853 72.444 72.022 71.001 72.022 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                    <path d="M 22.734 20.025 h -2.708 c -1.442 0 -2.612 -1.169 -2.612 -2.612 V 6.489 c 0 -1.442 1.169 -2.612 2.612 -2.612 h 2.708 c 1.442 0 2.612 1.169 2.612 2.612 v 10.924 C 25.345 18.855 24.176 20.025 22.734 20.025 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                    <path d="M 69.975 20.025 h -2.708 c -1.442 0 -2.612 -1.169 -2.612 -2.612 V 6.489 c 0 -1.442 1.169 -2.612 2.612 -2.612 h 2.708 c 1.442 0 2.612 1.169 2.612 2.612 v 10.924 C 72.586 18.855 71.417 20.025 69.975 20.025 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                </g>
-                            </svg>
-                            <div class="d-table">
-                                <h3 class="fs-3 d-table-cell align-middle m-0 p-0 ps-2 fw-light">Plan lekcji ></h3>
-                            </div>
+                            <defs>
+                            </defs>
+                            <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
+                                <path d="M 64.654 14.951 H 25.345 c -1.657 0 -3 -1.343 -3 -3 s 1.343 -3 3 -3 h 39.309 c 1.657 0 3 1.343 3 3 S 66.312 14.951 64.654 14.951 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <path d="M 87 31.837 H 3 c -1.657 0 -3 -1.343 -3 -3 v -8.87 C 0 13.893 4.942 8.951 11.016 8.951 h 6.398 c 1.657 0 3 1.343 3 3 s -1.343 3 -3 3 h -6.398 C 8.25 14.951 6 17.201 6 19.967 v 5.87 h 78 v -5.87 c 0 -2.766 -2.25 -5.017 -5.017 -5.017 h -6.397 c -1.657 0 -3 -1.343 -3 -3 s 1.343 -3 3 -3 h 6.397 C 85.058 8.951 90 13.893 90 19.967 v 8.87 C 90 30.494 88.657 31.837 87 31.837 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <path d="M 78.983 89.123 H 11.016 C 4.942 89.123 0 84.181 0 78.106 V 28.837 c 0 -1.657 1.343 -3 3 -3 h 84 c 1.657 0 3 1.343 3 3 v 49.269 C 90 84.181 85.058 89.123 78.983 89.123 z M 6 31.837 v 46.269 c 0 2.767 2.25 5.017 5.016 5.017 h 67.967 c 2.767 0 5.017 -2.25 5.017 -5.017 V 31.837 H 6 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <path d="M 23.761 51.483 h -4.762 c -1.442 0 -2.612 -1.169 -2.612 -2.612 v -4.762 c 0 -1.442 1.169 -2.612 2.612 -2.612 h 4.762 c 1.442 0 2.612 1.169 2.612 2.612 v 4.762 C 26.372 50.313 25.203 51.483 23.761 51.483 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <path d="M 47.381 51.483 h -4.762 c -1.442 0 -2.612 -1.169 -2.612 -2.612 v -4.762 c 0 -1.442 1.169 -2.612 2.612 -2.612 h 4.762 c 1.442 0 2.612 1.169 2.612 2.612 v 4.762 C 49.993 50.313 48.824 51.483 47.381 51.483 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <path d="M 71.001 51.483 h -4.762 c -1.442 0 -2.612 -1.169 -2.612 -2.612 v -4.762 c 0 -1.442 1.169 -2.612 2.612 -2.612 h 4.762 c 1.442 0 2.612 1.169 2.612 2.612 v 4.762 C 73.613 50.313 72.444 51.483 71.001 51.483 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <path d="M 23.761 72.022 h -4.762 c -1.442 0 -2.612 -1.169 -2.612 -2.612 v -4.762 c 0 -1.442 1.169 -2.612 2.612 -2.612 h 4.762 c 1.442 0 2.612 1.169 2.612 2.612 v 4.762 C 26.372 70.853 25.203 72.022 23.761 72.022 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <path d="M 47.381 72.022 h -4.762 c -1.442 0 -2.612 -1.169 -2.612 -2.612 v -4.762 c 0 -1.442 1.169 -2.612 2.612 -2.612 h 4.762 c 1.442 0 2.612 1.169 2.612 2.612 v 4.762 C 49.993 70.853 48.824 72.022 47.381 72.022 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <path d="M 71.001 72.022 h -4.762 c -1.442 0 -2.612 -1.169 -2.612 -2.612 v -4.762 c 0 -1.442 1.169 -2.612 2.612 -2.612 h 4.762 c 1.442 0 2.612 1.169 2.612 2.612 v 4.762 C 73.613 70.853 72.444 72.022 71.001 72.022 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <path d="M 22.734 20.025 h -2.708 c -1.442 0 -2.612 -1.169 -2.612 -2.612 V 6.489 c 0 -1.442 1.169 -2.612 2.612 -2.612 h 2.708 c 1.442 0 2.612 1.169 2.612 2.612 v 10.924 C 25.345 18.855 24.176 20.025 22.734 20.025 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                                <path d="M 69.975 20.025 h -2.708 c -1.442 0 -2.612 -1.169 -2.612 -2.612 V 6.489 c 0 -1.442 1.169 -2.612 2.612 -2.612 h 2.708 c 1.442 0 2.612 1.169 2.612 2.612 v 10.924 C 72.586 18.855 71.417 20.025 69.975 20.025 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+                            </g>
+                        </svg>
+                        <div class="d-table">
+                            <h3 class="fs-3 d-table-cell align-middle m-0 p-0 ps-2 fw-light">Plan lekcji ></h3>
                         </div>
-                    </a>
+                    </div>
                     <div class="mt-3 text-light pb-2">
                         <table style="width: 90%; margin: 0 auto; user-select:none;">
                             @foreach($lessons as $lesson)

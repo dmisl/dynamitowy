@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    public function index()
+    public function index($redirect = 0)
     {
         $user = Auth::user();
-        return view('profile.index', compact('user'));
+        return view('profile.index', compact('user', 'redirect'));
     }
     public function grades()
     {

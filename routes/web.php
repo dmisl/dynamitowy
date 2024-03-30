@@ -19,7 +19,7 @@ Route::middleware('auth')
 
     Route::middleware('student')
     ->group(function () {
-        Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+        Route::get('profile/{redirect?}', [ProfileController::class, 'index'])->name('profile.index');
     });
 
     // LOGOUT
