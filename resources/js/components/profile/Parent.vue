@@ -14,8 +14,10 @@
 
     const currentComponent = ref(rawIndex)
 
-    const props = defineProps(['redirect'])
+    const props = defineProps(['redirect', 'user_id'])
+    const user_id = props.user_id
     const changed = ref(false)
+
     if(props.redirect && !changed.value)
     {
         switch (props.redirect) {
@@ -36,12 +38,14 @@
         }
     }
 
+    console.log(currentComponent.value)
+
     function change(component)
     {
         currentComponent.value = component
     }
 
-    provide('imported', {rawIndex, rawGrade, rawTimetable, rawWarning})
+    provide('imported', {rawIndex, rawGrade, rawTimetable, rawWarning, user_id})
     provide('change', change)
 
 </script>

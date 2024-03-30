@@ -30,11 +30,11 @@
     </header>
     <div id="app" class="m-0 p-0 flex-grow-1 overflow-auto">
 
-        <div class="container bg-light h-100">
+        <div class="container bg-light">
 
             <div style="width: 80%; padding-top: 20vh; margin: 0 auto; height: 100%;">
 
-                <div class="container text-center h-100">
+                <div class="container text-center pb-5">
                     @yield('content')
                 </div>
 

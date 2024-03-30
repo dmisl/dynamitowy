@@ -54,6 +54,9 @@ use Illuminate\Support\Facades\Route;
     Route::get('/lessons', function () {
         return LessonResource::collection(Lesson::all());
     });
+    Route::get('allClassroomLessons/{classroom_id}', function ($classroom_id) {
+        return ClassroomResource::collection(Classroom::find($classroom_id)->lessons);
+    });
     Route::get('classroomLessons/{classroom_id}/{day}', function (string $classroom_id, string $day) {
         return ClassroomResource::collection(Classroom::find($classroom_id)->lessons()->where('day', $day)->get());
     });
@@ -119,6 +122,9 @@ use Illuminate\Support\Facades\Route;
     });
     Route::get('/warnings', function () {
         return WarningResource::collection(Warning::all());
+    });
+    Route::get('/user_warnings/{user_id}', function (string $user_id) {
+        return WarningResource::collection(Warning::query()->where(['user_id' => $user_id])->get());
     });
     Route::get('/classroomWarnings/{id}', function (string $id) {
         return WarningResource::collection(Warning::query()->where(['classroom_id' => $id])->get());

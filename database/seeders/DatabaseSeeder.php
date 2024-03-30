@@ -14,6 +14,7 @@ use App\Models\Role;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\User;
+use App\Models\Warning;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
@@ -823,13 +824,20 @@ class DatabaseSeeder extends Seeder
             }
 
         // giving all users default avatar
-            $url = "https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg";
-            $image = file_get_contents($url);
-            Storage::disk('public')->put("photos/default.jpg", $image);
             foreach (User::all() as $user) {
                 $user->update([
                     'photo' => 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg'
                 ]);
+                if($user->role_id == 1)
+                {
+                    Warning::create([
+                        'user_id' => $user->id,
+                        'desc' => 'Ignorowanie zasad BHP',
+                        'date' => date('Y-m-d'),
+                        'teacher_id' => 6,
+                        'classroom_id' => $user->classroom_id
+                    ]);
+                }
             }
     }
 
