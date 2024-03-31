@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\GradeReasonController;
+use App\Http\Controllers\HeadmasterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LessonController;
@@ -57,6 +58,17 @@ Route::middleware('teacher')
         Route::post('/update', [ClassroomController::class, 'update'])->name('classroom.update');
 
     });
+
+});
+
+Route::middleware('headmaster')
+->group(function () {
+
+    Route::get('headmaster/{redirect?}', [HeadmasterController::class, 'index'])->name('headmaster.index');
+
+    Route::post('grade/update', [GradeController::class, 'update'])->name('grade.update');
+
+    Route::post('lesson/update', [LessonController::class, 'update'])->name('lesson.update');
 
 });
 

@@ -128,9 +128,12 @@
                         <h4 style="display: inline-block;">Rozklad na dzisiaj</h4>
                         <div class="bg-primary-subtle rounded-2">
                             <div class="p-3 pe-5">
-                                <div v-for="lesson in classroomLessons">
+                                <div v-if="classroomLessons.length > 0" v-for="lesson in classroomLessons">
                                     <p class="fw-medium p-0 pt-1 m-0">{{ subjects[lesson.subject_id].name }}</p>
                                     <p class="small fw-medium p-0 m-0">{{ timetable[lesson.lesson_number] }}</p>
+                                </div>
+                                <div v-else>
+                                    <p class="fw-medium p-0 pt-1 m-0">Dzisiaj odpoczylamy</p>
                                 </div>
                             </div>
                         </div>

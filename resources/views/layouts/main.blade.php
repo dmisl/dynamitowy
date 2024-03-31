@@ -30,7 +30,7 @@
     </header>
     <div id="app" class="m-0 p-0 flex-grow-1 overflow-auto">
 
-        <div class="container bg-light">
+        <div class="container bg-light min-vh-100">
 
             <div style="width: 80%; padding-top: 20vh; margin: 0 auto; height: 100%;">
 

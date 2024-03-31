@@ -136,6 +136,9 @@ use Illuminate\Support\Facades\Route;
     Route::get('/gradeReasons/{subject_id}', function (string $subject_id) {
         return GradeResource::collection(GradeReason::query()->where(['subject_id' => $subject_id])->get());
     });
+    Route::get('/classroomGradeReasons/{classroom_id}/{subject_id}', function (string $classroom_id, string $subject_id) {
+        return GradeResource::collection(GradeReason::query()->where(['subject_id' => $subject_id, 'classroom_id' => $classroom_id])->get());
+    });
     Route::get('grades/{classroom_id}/{subject_id}', function (string $classroom_id, string $subject_id) {
         $gradeReasons = GradeReason::query()->where(['classroom_id' => $classroom_id, 'subject_id' => $subject_id])->get('id');
         return GradeResource::collection(Grade::query()->whereIn('grade_reason_id', $gradeReasons)->get());

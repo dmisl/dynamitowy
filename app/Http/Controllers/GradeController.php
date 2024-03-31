@@ -35,6 +35,11 @@ class GradeController extends Controller
     }
     public function update(Request $request)
     {
+
+        return response()->json([
+            'message' => $request->all()
+        ]);
+
         $validator = Validator::make($request->all(), [
             'id' => ['required'],
             'type' => ['required'],
