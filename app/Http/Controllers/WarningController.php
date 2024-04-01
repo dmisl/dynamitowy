@@ -53,13 +53,57 @@ class WarningController extends Controller
         ]);
 
         return response()->json([
-            'message' => "successfully created by id {$warning->id}"
+            'id' => $warning->id
         ]);
 
     }
-    public function show($id)
+    public function update(Request $request)
     {
-        $warning = Warning::find($id);
-        return view('journal.warning.show', compact('warning'));
+
+        $validator = Validator::make($request->all(), [
+            'id' => ['required'],
+            'user_id' => ['required', 'exists:users,id'],
+            'desc' => ['required', 'string'],
+            'classroom_id' => ['required', 'exists:classrooms,id'],
+        ]);
+
+        if($validator->fails())
+        {
+            return response()->json(
+                ['message' => $validator->errors()]
+            );
+        }
+
+        Warning::find($request->id)->update([
+            'user_id' => $request->user_id,
+            'desc' => $request->desc,
+            'classroom_id' => $request->classroom_id
+        ]);
+
+        return response()->json([
+            'id' => 'successfully updated'
+        ]);
+
+    }
+    public function delete(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'id' => ['required'],
+        ]);
+
+        if($validator->fails())
+        {
+            return response()->json(
+                ['message' => $validator->errors()]
+            );
+        }
+
+        Warning::find($request->id)->delete();
+
+        return response()->json([
+            'id' => 'successfully deleted'
+        ]);
+
     }
 }

@@ -8,7 +8,7 @@
     import TeachersParent from './teachers/Parent.vue'
     import WarningsParent from './warnings/Parent.vue'
 
-    const props = defineProps(['redirect'])
+    const props = defineProps(['redirect', 'teacher_id'])
 
     const rawJournal = markRaw(JournalParent)
     const rawClassrooms = markRaw(ClassroomsParent)
@@ -43,11 +43,16 @@
             break;
     }
 
+    function home()
+    {
+        window.location.href = 'http://127.0.0.1:8000/home'
+    }
+
 </script>
 <template>
     <div>
         <header class="w-100 bg-dark text-light m-0 p-0 user-select-none" style="position: fixed; z-index: 30;">
-            <a class="text-decoration-none text-light" href="{{ route('home.index') }}"><p class="m-0 p-0">Dynamitowy</p></a>
+            <a class="text-decoration-none text-light" @click="home" role="button"><p class="m-0 p-0">Dynamitowy</p></a>
             <div class="d-flex">
                 <a @click="changeParent(rawJournal)" role="button" class="text-light text-decoration-none text-center mx-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="50" height="50" viewBox="0 0 256 256" xml:space="preserve">
@@ -290,7 +295,7 @@
         </header>
         <div class="flex-grow-1 overflow-auto">
 
-            <component :is="currentComponent"></component>
+            <component :is="currentComponent" :teacher_id="props.teacher_id"></component>
 
         </div>
     </div>

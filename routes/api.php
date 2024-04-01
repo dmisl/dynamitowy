@@ -14,6 +14,7 @@ use App\Models\Lesson;
 use App\Models\Presence;
 use App\Models\PresenceType;
 use App\Models\Subject;
+use App\Models\Teacher;
 use App\Models\User;
 use App\Models\Warning;
 use Illuminate\Http\Request;
@@ -40,6 +41,9 @@ use Illuminate\Support\Facades\Route;
     });
     Route::get('/students', function () {
         return UserResource::collection(User::query()->where(['role_id' => 1])->get());
+    });
+    Route::get('/teacher/{id}', function (string $id) {
+        return new UserResource(Teacher::findOrFail($id));
     });
     Route::get('/teachers', function () {
         return new UserResource(User::query()->where(['role_id' => 2])->get());
@@ -121,7 +125,7 @@ use Illuminate\Support\Facades\Route;
         return new WarningResource(Warning::findOrFail($id));
     });
     Route::get('/warnings', function () {
-        return WarningResource::collection(Warning::all());
+        return WarningResource::collection(Warning::query()->orderBy('date', 'desc')->get());
     });
     Route::get('/user_warnings/{user_id}', function (string $user_id) {
         return WarningResource::collection(Warning::query()->where(['user_id' => $user_id])->get());

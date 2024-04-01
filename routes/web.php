@@ -72,6 +72,10 @@ Route::middleware('headmaster')
 
     Route::post('lesson/update', [LessonController::class, 'update'])->name('lesson.update');
 
+    Route::post('warning/store', [WarningController::class, 'store'])->name('warning.store');
+    Route::post('warning/update', [WarningController::class, 'update'])->name('warning.update');
+    Route::post('warning/delete', [WarningController::class, 'delete'])->name('warning.delete');
+
 });
 
 Route::middleware('guest')
