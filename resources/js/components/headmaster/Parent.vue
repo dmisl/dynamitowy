@@ -23,6 +23,26 @@
         currentComponent.value = component
     }
 
+    switch (props.redirect) {
+        case 0:
+            currentComponent.value = rawJournal
+            break;
+        case 1:
+            currentComponent.value = rawWarnings
+            break;
+        case 2:
+            currentComponent.value = rawClassrooms
+            break;
+        case 3:
+            currentComponent.value = rawTeachers
+            break;
+        case 4:
+            currentComponent.value = rawStudents
+            break;
+        default:
+            break;
+    }
+
 </script>
 <template>
     <div>

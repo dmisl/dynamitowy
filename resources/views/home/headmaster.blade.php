@@ -27,7 +27,7 @@
             </a>
             <div class="text-decoration-none text-dark">
                 <div class="bg-warning mx-auto mt-4" style="width: 90%;">
-                    <a href="{{ route('profile.index', [1]) }}" class="text-decoration-none text-dark">
+                    <a href="{{ route('headmaster.index', [2]) }}" class="text-decoration-none text-dark">
                         <div class="d-flex justify-content-center">
                             <div class="p-2 ps-0">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="50" height="50" viewBox="0 0 256 256" xml:space="preserve">
@@ -105,7 +105,7 @@
                     </div>
                 </div>
             </a>
-            <a href="{{ route('profile.index', [3]) }}" class="text-decoration-none text-light">
+            <a href="{{ route('headmaster.index', [1]) }}" class="text-decoration-none text-light">
                 <div class="bg-warning mx-auto mt-4" style="width: 90%;">
                     <div class="d-flex justify-content-center">
                         <div class="p-2 ps-0 pe-0">
@@ -128,7 +128,7 @@
             </a>
         </div>
         <div class="col-md-4">
-            <a href="{{ route('profile.index') }}" class="text-decoration-none text-light mt-2">
+            <a href="{{ route('headmaster.index', [3]) }}" class="text-decoration-none text-light mt-2">
                 <div class="bg-dark d-flex mx-auto justify-content-center" style="width: 90%;">
                     <div class="p-2 ps-0">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="50" height="50" viewBox="0 0 256 256" xml:space="preserve">
@@ -165,7 +165,7 @@
                     </div>
                 </div>
             </a>
-            <a href="{{ route('profile.index') }}" class="text-decoration-none text-light mt-2">
+            <a href="{{ route('headmaster.index', [4]) }}" class="text-decoration-none text-light mt-2">
                 <div class="bg-dark d-flex mx-auto justify-content-center mt-4" style="width: 90%;">
                     <div class="p-2 ps-0">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="50" height="50" viewBox="0 0 256 256" xml:space="preserve">

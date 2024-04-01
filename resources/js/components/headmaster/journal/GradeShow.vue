@@ -92,8 +92,8 @@
         try {
             const formData = new FormData();
             formData.append('text', text.value);
-            formData.append('subject_id', imported.subject_id.value);
-            formData.append('classroom_id', imported.classroom_id.value);
+            formData.append('subject_id', props.subject_id);
+            formData.append('classroom_id', props.classroom_id);
             formData.append('date', new Date().toISOString().split('T')[0]);
 
             const response = await axios.post('http://127.0.0.1:8000/gradereason/store', formData);

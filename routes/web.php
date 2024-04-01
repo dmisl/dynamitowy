@@ -68,6 +68,8 @@ Route::middleware('headmaster')
 
     Route::post('grade/update', [GradeController::class, 'update'])->name('grade.update');
 
+    Route::post('gradereason/store', [GradeReasonController::class, 'store'])->name('gradereason.store');
+
     Route::post('lesson/update', [LessonController::class, 'update'])->name('lesson.update');
 
 });

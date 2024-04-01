@@ -15,7 +15,7 @@
     const rawGradeShow = markRaw(GradeShow)
     const rawPresenceShow = markRaw(PresenceShow)
 
-    const currentComponent = ref(rawPresenceShow)
+    const currentComponent = ref(rawIndex)
 
     function change(component)
     {
@@ -77,7 +77,7 @@
 
             <div class="col-md-9">
 
-                <component :is="currentComponent" :classroom_id="1" :subject_id="subject_id" :lesson_id="5" :date="'2024-03-11'"></component>
+                <component :is="currentComponent" :classroom_id="1" :subject_id="subject_id" :lesson_id="lesson_id" :date="date"></component>
 
             </div>
 
