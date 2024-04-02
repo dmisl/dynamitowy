@@ -10,6 +10,8 @@
     const subjects = ref([])
     const classroom = ref([])
 
+    const title = inject('title')
+
     async function getData()
     {
         loading.value = true
@@ -27,6 +29,7 @@
         } catch (error) {
             console.error(error)
         } finally {
+            title(`Zarządzanie nauczycielem ${user.value.name} | Dynamitowy`)
             loading.value = false
         }
     }

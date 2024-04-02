@@ -19,6 +19,8 @@
 
     const teacher_id = ref(0)
 
+    const title = inject('title')
+
     async function getData()
     {
         loading.value = true
@@ -40,6 +42,7 @@
 
         } finally {
             loading.value = false
+            title(`Zarządzanie klasą ${classroom.value.name} | Dynamitowy`)
         }
     }
 

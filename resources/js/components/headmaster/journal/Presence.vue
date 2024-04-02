@@ -42,6 +42,9 @@
 
     const changePresence = inject('changePresence')
 
+    const title = inject('title')
+    title(`Obecność | Dynamitowy`)
+
 </script>
 
 <template>

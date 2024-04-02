@@ -62,7 +62,7 @@ class DatabaseSeeder extends Seeder
             GradeType::create(['text' => 'np']);
 
         // creating admin user
-            User::create(['name' => 'Jaroslaw Awgustynowicz', 'email' => 'admin@gmail.com', 'password' => 'adminn', 'role_id' => 3]);
+            User::create(['name' => 'Jaroslaw Awgustynowicz', 'email' => 'jaroslaw_awgustynowicz@gmail.com', 'password' => 'adminn', 'role_id' => 3]);
         // creating teachers and their users
             User::create(['name' => 'Gierach Janusz', 'email' => 'gierach_janusz@gmail.com', 'password' => 'teacher', 'role_id' => 2]);
             User::create(['name' => 'Motas-Korzonek Magdalena', 'email' => 'motas_magdalena@gmail.com', 'password' => 'teacher', 'role_id' => 2]);

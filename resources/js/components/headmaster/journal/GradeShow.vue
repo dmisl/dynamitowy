@@ -18,6 +18,8 @@
     const gradeReasons = ref([])
     const grades = ref([])
     const gradeTypes = ref([])
+    const classroom = ref([])
+    const subject = ref([])
 
     const text = ref('')
 
@@ -29,6 +31,8 @@
         }
         return null;
     }
+
+    const title = inject('title')
 
     async function getData()
     {
@@ -52,10 +56,16 @@
                 selected.value.gradeReasonId = gradeReasons.value[0].id
                 selected.value.gradeId = find(grades.value, 'user_id', selected.value.userId, 'grade_reason_id', selected.value.gradeReasonId).id
             }
+            // classroom and subject
+            const classroomResponse = await axios.get(`http://127.0.0.1:8000/api/classroom/${props.classroom_id}`)
+            classroom.value = classroomResponse.data.data
+            const subjectResponse = await axios.get(`http://127.0.0.1:8000/api/subject/${props.subject_id}`)
+            subject.value = subjectResponse.data.data
         } catch (error) {
             console.error('Error fetching users data:', error);
         } finally {
             loading.value = false;
+            title(`Oceny ${classroom.value.name} z ${subject.value.name} | Dynamitowy`)
         }
     }
 

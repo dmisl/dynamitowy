@@ -26,6 +26,9 @@
 
     const teacher_id = ref(0)
 
+    const title = inject('title')
+    title(`Zarządzanie nauczycielami | Dynamitowy`)
+
 </script>
 
 <template>

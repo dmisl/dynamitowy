@@ -1,5 +1,10 @@
 <script setup>
 
+import {inject} from 'vue'
+
+const title = inject('title')
+title(`Dziennik | Dynamitowy`)
+
 </script>
 <template>
     <div class="user-select-none">

@@ -109,6 +109,8 @@
 
     const imported = inject('imported')
     const change = inject('change')
+    const title = inject('title')
+    title(`Zarządzanie uwagą | Dynamitowy`)
 
 </script>
 

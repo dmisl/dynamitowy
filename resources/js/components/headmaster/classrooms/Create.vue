@@ -40,6 +40,9 @@
         }
     }
 
+    const title = inject('title')
+    title(`Dodanie klasy | Dynamitowy`)
+
 </script>
 
 <template>

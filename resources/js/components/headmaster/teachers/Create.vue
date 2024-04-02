@@ -27,6 +27,9 @@
         }
     }
 
+    const title = inject('title')
+    title(`Tworzenie nauczyciela | Dynamitowy`)
+
 </script>
 
 <template>
@@ -51,7 +54,7 @@
 
         <div class="p-2">
 
-            <h1 class="fw-light">Stworzenie nauczyciela</h1>
+            <h1 class="fw-light">Tworzenie nauczyciela</h1>
 
             <div class="col-md-4 offset-4 mt-5">
                 <div class="card">

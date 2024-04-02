@@ -14,6 +14,15 @@
     const rawTeachers = markRaw(TeachersParent)
     const rawWarnings = markRaw(WarningsParent)
 
+    function title(text)
+    {
+        document.querySelector('title').innerHTML = text
+    }
+
+    title(`Dziennik`)
+
+    provide('title', title)
+
     const currentComponent = ref(rawJournal)
 
     function changeParent(component)

@@ -21,8 +21,6 @@
         teacher_id.value = teacherId
     }
 
-    change(rawShow, 3)
-
     const loading = ref(true)
 
     const teachers = ref([])

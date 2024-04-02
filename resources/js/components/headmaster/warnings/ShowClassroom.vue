@@ -10,6 +10,8 @@
     const classroom = ref([]);
     const loading = ref(true);
 
+    const title = inject('title')
+
     async function getData()
     {
         loading.value = true
@@ -24,6 +26,7 @@
             console.error('Error fetching users data:', error);
         } finally {
             loading.value = false;
+            title(`Lista wszystkich uwag ${classroom.value.name} | Dynamitowy`)
         }
     }
 

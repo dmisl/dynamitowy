@@ -41,6 +41,9 @@
 
     const changeGrade = inject('changeGrade')
 
+    const title = inject('title')
+    title(`Oceny | Dynamitowy`)
+
 </script>
 
 <template>
