@@ -83,7 +83,9 @@ use Illuminate\Support\Facades\Route;
     Route::get('/classrooms', function () {
         return ClassroomResource::collection(Classroom::all());
     });
-
+    Route::get('has_classroom/{teacher_id}', function (string $teacher_id) {
+        return new ClassroomResource(Classroom::query()->where(['teacher_id' => $teacher_id])->first());
+    });
 // PRESENCE / PRESENCE TYPES
     Route::get('classroomPresence/{classroom_id}/{day}/{date}', function (string $classroom_id, string $day, string $date) {
         $classroom = Classroom::find($classroom_id);
@@ -122,6 +124,9 @@ use Illuminate\Support\Facades\Route;
     });
     Route::get('/subjects', function () {
         return SubjectResource::collection(Subject::all());
+    });
+    Route::get('teacher_subjects/{teacher_id}', function (string $teacher_id) {
+        return SubjectResource::collection(Subject::query()->where(['teacher_id' => $teacher_id])->get());
     });
 // WARNINGS
     Route::get('/warning/{id}', function (string $id) {

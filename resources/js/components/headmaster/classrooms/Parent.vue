@@ -21,8 +21,6 @@
         classroom_id.value = classroomId
     }
 
-    change(rawCreate)
-
     provide('imported', {rawIndex, rawShow, rawCreate, classroom_id})
     provide('change', change)
 

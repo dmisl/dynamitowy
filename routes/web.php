@@ -9,6 +9,8 @@ use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\WarningController;
 use Illuminate\Support\Facades\Route;
@@ -81,6 +83,12 @@ Route::middleware('headmaster')
     Route::post('classroom/new_classroom', [ClassroomController::class, 'new_classroom'])->name('classroom.new_classroom');
     Route::post('classroom/teacher_update', [ClassroomController::class, 'teacher_update'])->name('classroom.teacher_update');
     Route::post('classroom/timetable_update', [ClassroomController::class, 'timetable_update'])->name('classroom.timetable_update');
+
+    Route::post('teacher/store', [TeacherController::class, 'store'])->name('teacher.store');
+    Route::post('teacher/update', [TeacherController::class, 'update'])->name('teacher.update');
+    Route::post('teacher/delete', [TeacherController::class, 'delete'])->name('teacher.delete');
+
+    Route::post('subject/store', [SubjectController::class, 'store'])->name('subject.store');
 
 });
 
