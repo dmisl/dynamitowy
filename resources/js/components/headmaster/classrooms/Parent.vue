@@ -1,43 +1,45 @@
 <script setup>
 
-    import { ref, provide, markRaw } from 'vue'
+    import { ref, provide, markRaw, onMounted } from 'vue'
     import axios from 'axios'
 
     import Index from './Index.vue';
+    import Show from './Show.vue';
+    import Create from './Create.vue';
 
     const rawIndex = markRaw(Index)
+    const rawShow = markRaw(Show)
+    const rawCreate = markRaw(Create)
 
     const currentComponent = ref(rawIndex)
 
-    function change(component)
+    const classroom_id = ref(0)
+
+    function change(component, classroomId = 0)
     {
         currentComponent.value = component
-    }
-
-    const classroom_id = ref(0)
-    const subject_id = ref(0)
-    const lesson_id = ref(0)
-    const date = ref(0)
-
-    function changeGrade(classroomId, subjectId)
-    {
         classroom_id.value = classroomId
-        subject_id.value = subjectId
-        change(rawGradeShow)
     }
 
-    function changePresence(classroomId, lessonId, day)
-    {
-        classroom_id.value = classroomId
-        lesson_id.value = lessonId
-        date.value = day
-        change(rawPresenceShow)
-    }
+    change(rawCreate)
 
-    provide('imported', {rawIndex})
+    provide('imported', {rawIndex, rawShow, rawCreate, classroom_id})
     provide('change', change)
-    provide('changeGrade', changeGrade)
-    provide('changePresence', changePresence)
+
+    const loading = ref(true)
+
+    const classrooms = ref([])
+
+    onMounted(async () => {
+        try {
+            const classroomsResponse = await axios.get(`http://127.0.0.1:8000/api/classrooms`)
+            classrooms.value = classroomsResponse.data.data
+        } catch (error) {
+
+        } finally {
+            loading.value = false
+        }
+    })
 
 </script>
 
@@ -50,13 +52,18 @@
                 <div class="col-md-3 bg-info bg-gradient" style="position: fixed; height: 100vh;">
                     <div class="user-select-none">
 
-                        <div>
+                        <div v-if="loading">Loading...</div>
 
-                            <div @click="change(rawPresence)" role="button" class="m-0 p-0 border-bottom border-dark">
-                                <p class="p-0 m-0 ps-1 pt-1 fw-medium">Zarządzać obecnościami</p>
+                        <div v-else>
+
+                            <div @click="change(rawIndex)" role="button" class="m-0 p-0 border-bottom border-dark">
+                                <p class="p-0 m-0 ps-1 pt-1 fw-medium">Zarządzanie klasami</p>
                             </div>
-                            <div @click="change(rawGrade)" role="button" class="m-0 p-0 border-bottom border-dark">
-                                <p class="p-0 m-0 ps-1 pt-1 fw-medium">Zarządzać ocenami</p>
+                            <div v-for="classroom in classrooms" @click="change(rawShow, classroom.id)" role="button" class="m-0 p-0 border-bottom border-dark">
+                                <p class="p-0 m-0 ps-2 pt-1 fw-medium">- Klasa {{ classroom.name }}</p>
+                            </div>
+                            <div @click="change(rawCreate)" role="button" class="m-0 p-0 border-bottom border-dark">
+                                <p class="p-0 m-0 ps-1 pt-1 fw-medium">Utworzyć klasę</p>
                             </div>
 
                         </div>
@@ -69,7 +76,7 @@
 
             <div class="col-md-9">
 
-                <component :is="currentComponent" :classroom_id="1" :subject_id="subject_id" :lesson_id="5" :date="'2024-03-11'"></component>
+                <component :is="currentComponent"></component>
 
             </div>
 

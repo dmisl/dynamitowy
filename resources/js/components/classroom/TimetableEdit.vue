@@ -5,7 +5,7 @@
     const props = defineProps(['classroom_id'])
     const loading = ref(true);
     const timetable = ['7:10', '8:00', '8:50', '9:40', '10:30', '11:35', '12:25', '13:15', '14:05', '14:55', '15:45', '16:35']
-    const days = ['Poniedzialek', 'Wtorek', 'Sroda', 'Czwartek', 'Piatek']
+    const days = ['Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek']
 
     const subjects = ref([])
     const teachers = ref([])
@@ -100,7 +100,7 @@
             </a>
 
             <h1 class="fw-light">Zmiana planu lekcji</h1>
-            <h5>Zmien rozkład, zmiany zapisują się automatycznie</h5>
+            <h5>Zmiany rozkładu zapisują się automatycznie</h5>
 
             <div class="d-flex flex-wrap">
                 <div class="ms-5 col-md-3" v-for="(day, day_nr) in classroomLessons">

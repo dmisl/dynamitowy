@@ -385,7 +385,7 @@ class DatabaseSeeder extends Seeder
 
         // 1TP
 
-            Classroom::create(['name' => '2TP', 'teacher_id' => 7]);
+            Classroom::create(['name' => '1TP', 'teacher_id' => 7]);
 
             User::create(['name' => 'Kristian Aswiczynski', 'email' => 'kristian_aswiczynski@gmail.com', 'classroom_id' => 9, 'role_id' => 1, 'password' => 'student']);
             User::create(['name' => 'Aleksandr Achmataliew', 'email' => 'aleksandr_achmataliew@gmail.com', 'classroom_id' => 9, 'role_id' => 1, 'password' => 'student']);

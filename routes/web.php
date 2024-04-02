@@ -76,6 +76,12 @@ Route::middleware('headmaster')
     Route::post('warning/update', [WarningController::class, 'update'])->name('warning.update');
     Route::post('warning/delete', [WarningController::class, 'delete'])->name('warning.delete');
 
+    Route::post('classroom/store', [ClassroomController::class, 'store'])->name('classroom.store');
+    Route::post('classroom/remove', [ClassroomController::class, 'remove'])->name('classroom.remove');
+    Route::post('classroom/new_classroom', [ClassroomController::class, 'new_classroom'])->name('classroom.new_classroom');
+    Route::post('classroom/teacher_update', [ClassroomController::class, 'teacher_update'])->name('classroom.teacher_update');
+    Route::post('classroom/timetable_update', [ClassroomController::class, 'timetable_update'])->name('classroom.timetable_update');
+
 });
 
 Route::middleware('guest')

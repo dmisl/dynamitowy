@@ -45,6 +45,9 @@ use Illuminate\Support\Facades\Route;
     Route::get('/teacher/{id}', function (string $id) {
         return new UserResource(Teacher::findOrFail($id));
     });
+    Route::get('/teachersModel', function () {
+        return UserResource::collection(Teacher::all());
+    });
     Route::get('/teachers', function () {
         return new UserResource(User::query()->where(['role_id' => 2])->get());
     });
