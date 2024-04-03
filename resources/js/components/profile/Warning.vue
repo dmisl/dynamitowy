@@ -3,6 +3,8 @@
     import { ref, onMounted, inject } from 'vue'
     import axios from 'axios'
 
+    const props = defineProps(['prefix'])
+
     const loading = ref(true)
 
     const user = ref([])
@@ -11,14 +13,12 @@
 
     onMounted(async () => {
         try {
-            console.clear()
-            const userResponse = await axios.get(`http://127.0.0.1:8000/api/user/${imported.user_id}`)
+            const userResponse = await axios.get(`${props.prefix}api/user/${imported.user_id}`)
             user.value = userResponse.data.data
-            const usersResponse = await axios.get(`http://127.0.0.1:8000/api/users`)
+            const usersResponse = await axios.get(`${props.prefix}api/users`)
             users.value = usersResponse.data.data
-            const warningsResponse = await axios.get(`http://127.0.0.1:8000/api/user_warnings/${user.value.id}`)
+            const warningsResponse = await axios.get(`${props.prefix}api/user_warnings/${user.value.id}`)
             warnings.value = warningsResponse.data.data
-            console.log(warnings.value)
         } catch (error) {
             console.error(error)
         } finally {
@@ -60,7 +60,7 @@
                     <div class="mt-5">
 
                         <div v-for="warning in warnings" class="bg-secondary-subtle p-3 mt-2 rounded-3">
-                            
+
                             <div class="d-flex">
                                 <div class="ms-2">
                                     <h4>Data</h4>

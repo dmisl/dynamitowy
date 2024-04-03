@@ -3,6 +3,8 @@
     import { ref, onMounted, inject, watch } from 'vue'
     import axios from 'axios'
 
+    const props = defineProps(['prefix'])
+
     const loading = ref(true)
     const days = ['Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek']
     const timetable = ['7:10', '8:00', '8:50', '9:40', '10:30', '11:35', '12:25', '13:15', '14:05', '14:55', '15:45', '16:35']
@@ -25,18 +27,18 @@
     {
         loading.value = true
         try {
-            const classroomResponse = await axios.get(`http://127.0.0.1:8000/api/classroom/${imported.classroom_id.value}`)
+            const classroomResponse = await axios.get(`${props.prefix}api/classroom/${imported.classroom_id.value}`)
             classroom.value = classroomResponse.data.data
-            const usersResponse = await axios.get(`http://127.0.0.1:8000/api/classroomUsers/${classroom.value.id}`)
+            const usersResponse = await axios.get(`${props.prefix}api/classroomUsers/${classroom.value.id}`)
             users.value = usersResponse.data.data
-            const allUsersResponse = await axios.get(`http://127.0.0.1:8000/api/users`)
+            const allUsersResponse = await axios.get(`${props.prefix}api/users`)
             allUsers.value = allUsersResponse.data.data
-            const teachersResponse = await axios.get(`http://127.0.0.1:8000/api/teachersModel`)
+            const teachersResponse = await axios.get(`${props.prefix}api/teachersModel`)
             teachers.value = teachersResponse.data.data
-            const classroomLessons = await axios.get(`http://127.0.0.1:8000/api/allClassroomLessons/${classroom.value.id}`)
+            const classroomLessons = await axios.get(`${props.prefix}api/allClassroomLessons/${classroom.value.id}`)
             lessons.value = classroomLessons.data.data
             teacher_id.value = classroom.value.teacher_id
-            const subjectsResponse = await axios.get(`http://127.0.0.1:8000/api/subjects`)
+            const subjectsResponse = await axios.get(`${props.prefix}api/subjects`)
             subjects.value = subjectsResponse.data.data
         } catch (error) {
 
@@ -59,7 +61,7 @@
             formData.append('teacher_id', teacher_id.value);
             formData.append('classroom_id', classroom.value.id);
 
-            const response = await axios.post('http://127.0.0.1:8000/classroom/teacher_update', formData);
+            const response = await axios.post(`${props.prefix}classroom/teacher_update`, formData);
 
         } catch (error) {
             console.error(error);
@@ -91,7 +93,7 @@
             formData.append('day', el.attributes.day.value);
             formData.append('lesson_number', el.attributes.lesson_number.value);
 
-            const response = await axios.post('http://127.0.0.1:8000/classroom/timetable_update', formData);
+            const response = await axios.post(`${props.prefix}classroom/timetable_update`, formData);
 
         } catch (error) {
             console.error(error);
@@ -109,7 +111,7 @@
             formData.append('classroom_id', classroom.value.id);
             formData.append('photo', newUser.value.photo);
 
-            const response = await axios.post('http://127.0.0.1:8000/classroom/store', formData, {
+            const response = await axios.post(`${props.prefix}classroom/store`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -133,7 +135,7 @@
             const formData = new FormData();
             formData.append('id', selected_user.value.id);
 
-            const response = await axios.post('http://127.0.0.1:8000/classroom/remove', formData);
+            const response = await axios.post(`${props.prefix}classroom/remove`, formData);
 
             getData()
 

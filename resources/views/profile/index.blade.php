@@ -4,6 +4,6 @@
 
 @section('content')
 
-    <profile-parent :user_id="{{ Auth::id() }}" :redirect="{{ $redirect }}"></profile-parent>
+    <profile-parent :user_id="{{ Auth::id() }}" :redirect="{{ $redirect }}" :pre="'{{ asset('') }}'"></profile-parent>
 
 @endsection

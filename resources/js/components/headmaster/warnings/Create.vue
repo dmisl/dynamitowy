@@ -3,7 +3,7 @@
     import { ref, onMounted, inject } from 'vue'
     import axios from 'axios';
 
-    const props = defineProps(['teacher_id'])
+    const props = defineProps(['teacher_id', 'prefix'])
 
     const loading = ref(true)
 
@@ -19,11 +19,11 @@
         user_id.value = 0
         desc.value = ''
         try {
-            const classroomsResponse = await axios.get(`http://127.0.0.1:8000/api/classrooms`)
+            const classroomsResponse = await axios.get(`${props.prefix}api/classrooms`)
             classrooms.value = classroomsResponse.data.data
             if(classroom_id.value)
             {
-                const usersResponse = await axios.get(`http://127.0.0.1:8000/api/classroomUsers/${classroom_id.value}`)
+                const usersResponse = await axios.get(`${props.prefix}api/classroomUsers/${classroom_id.value}`)
                 users.value = usersResponse.data.data
             }
         } catch (error)
@@ -49,7 +49,7 @@
             formData.append('date', new Date().toISOString().split('T')[0]);
             formData.append('teacher_id', props.teacher_id);
 
-            const response = await axios.post('http://127.0.0.1:8000/warning/store', formData);
+            const response = await axios.post(`${props.prefix}warning/store`, formData);
 
             console.log(response.data.id)
 

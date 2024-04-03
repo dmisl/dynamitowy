@@ -14,7 +14,7 @@
 
     const currentComponent = ref(rawIndex)
 
-    const props = defineProps(['redirect', 'user_id'])
+    const props = defineProps(['redirect', 'user_id', 'pre'])
     const user_id = props.user_id
     const changed = ref(false)
 
@@ -38,12 +38,19 @@
         }
     }
 
-    console.log(currentComponent.value)
-
     function change(component)
     {
         currentComponent.value = component
     }
+
+    function title(text)
+    {
+        document.querySelector('title').innerHTML = text
+    }
+
+    title(`Dziennik`)
+
+    provide('title', title)
 
     provide('imported', {rawIndex, rawGrade, rawTimetable, rawWarning, user_id})
     provide('change', change)
@@ -51,6 +58,6 @@
 </script>
 <template>
     <div>
-        <component :is="currentComponent"></component>
+        <component :is="currentComponent" :prefix="props.pre"></component>
     </div>
 </template>

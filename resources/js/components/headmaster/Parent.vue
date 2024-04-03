@@ -7,7 +7,7 @@
     import TeachersParent from './teachers/Parent.vue'
     import WarningsParent from './warnings/Parent.vue'
 
-    const props = defineProps(['redirect', 'teacher_id'])
+    const props = defineProps(['redirect', 'teacher_id', 'prefix'])
 
     const rawJournal = markRaw(JournalParent)
     const rawClassrooms = markRaw(ClassroomsParent)
@@ -49,7 +49,7 @@
 
     function home()
     {
-        window.location.href = 'http://127.0.0.1:8000/home'
+        window.location.href = `${props.prefix}home`
     }
 
 </script>
@@ -260,7 +260,7 @@
         </header>
         <div class="flex-grow-1 overflow-auto">
 
-            <component :is="currentComponent" :teacher_id="props.teacher_id"></component>
+            <component :is="currentComponent" :teacher_id="props.teacher_id" :pre="props.prefix"></component>
 
         </div>
     </div>

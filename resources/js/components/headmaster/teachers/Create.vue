@@ -3,6 +3,8 @@
     import { ref, inject } from 'vue'
     import axios from 'axios'
 
+    const props = defineProps(['prefix'])
+
     const imported = inject('imported')
     const change = inject('change')
 
@@ -16,9 +18,7 @@
             formData.append('name', newTeacher.value.name)
             formData.append('email', newTeacher.value.email)
 
-            const response = await axios.post(`http://127.0.0.1:8000/teacher/store`, formData)
-
-            console.log(response.data)
+            const response = await axios.post(`${props.prefix}teacher/store`, formData)
 
             change(imported.rawShow, response.data.teacher_id)
 

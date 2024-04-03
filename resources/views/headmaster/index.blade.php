@@ -19,7 +19,7 @@
 
     <div id="app" class="d-flex flex-column" style="height: 100vh;">
 
-        <headmaster-parent :redirect="{{ $redirect }}" :teacher_id="{{ Auth::user()->teacher->id }}"></headmaster-parent>
+        <headmaster-parent :redirect="{{ $redirect }}" :teacher_id="{{ Auth::user()->teacher->id }}" :prefix="'{{ asset('') }}'"></headmaster-parent>
 
     </div>
 </body>

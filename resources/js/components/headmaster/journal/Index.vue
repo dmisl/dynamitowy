@@ -2,6 +2,8 @@
 
 import {inject} from 'vue'
 
+const props = defineProps(['prefix'])
+
 const title = inject('title')
 title(`Dziennik | Dynamitowy`)
 

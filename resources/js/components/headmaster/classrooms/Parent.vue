@@ -7,6 +7,8 @@
     import Show from './Show.vue';
     import Create from './Create.vue';
 
+    const props = defineProps(['pre'])
+
     const rawIndex = markRaw(Index)
     const rawShow = markRaw(Show)
     const rawCreate = markRaw(Create)
@@ -74,7 +76,7 @@
 
             <div class="col-md-9">
 
-                <component :is="currentComponent"></component>
+                <component :is="currentComponent" :prefix="props.pre"></component>
 
             </div>
 

@@ -3,6 +3,8 @@
     import { ref, onMounted, inject } from 'vue'
     import axios from 'axios'
 
+    const props = defineProps(['prefix'])
+
     const loading = ref(true)
 
     const teacher = ref([])
@@ -16,13 +18,13 @@
     {
         loading.value = true
         try {
-            const teacherResponse = await axios.get(`http://127.0.0.1:8000/api/teacher/${imported.teacher_id.value}`)
+            const teacherResponse = await axios.get(`${props.prefix}api/teacher/${imported.teacher_id.value}`)
             teacher.value = teacherResponse.data.data
-            const userResponse = await axios.get(`http://127.0.0.1:8000/api/user/${teacher.value.user_id}`)
+            const userResponse = await axios.get(`${props.prefix}api/user/${teacher.value.user_id}`)
             user.value = userResponse.data.data
-            const subjectsResponse = await axios.get(`http://127.0.0.1:8000/api/teacher_subjects/${teacher.value.id}`)
+            const subjectsResponse = await axios.get(`${props.prefix}api/teacher_subjects/${teacher.value.id}`)
             subjects.value = subjectsResponse.data.data
-            const classroomResponse = await axios.get(`http://127.0.0.1:8000/api/has_classroom/${teacher.value.id}`)
+            const classroomResponse = await axios.get(`${props.prefix}api/has_classroom/${teacher.value.id}`)
             classroom.value = classroomResponse.data.data
             updatedUser.value.name = user.value.name
             updatedUser.value.email = user.value.email
@@ -51,7 +53,7 @@
             formData.append('name', subject_name.value)
             formData.append('teacher_id', teacher.value.id)
 
-            const response = await axios.post(`http://127.0.0.1:8000/subject/store`, formData)
+            const response = await axios.post(`${props.prefix}subject/store`, formData)
 
             console.log(response.data)
 
@@ -72,7 +74,7 @@
             formData.append('name', updatedUser.value.name)
             formData.append('email', updatedUser.value.email)
 
-            const response = await axios.post(`http://127.0.0.1:8000/teacher/update`, formData)
+            const response = await axios.post(`${props.prefix}teacher/update`, formData)
 
         } catch (error) {
             console.error(error)
@@ -87,7 +89,7 @@
             const formData = new FormData()
             formData.append('id', teacher.value.user_id)
 
-            const response = await axios.post(`http://127.0.0.1:8000/teacher/delete`, formData)
+            const response = await axios.post(`${props.prefix}teacher/delete`, formData)
 
             getParentData()
 

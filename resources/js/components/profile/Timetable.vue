@@ -3,6 +3,8 @@
     import { ref, onMounted, inject } from 'vue'
     import axios from 'axios'
 
+    const props = defineProps(['prefix'])
+
     const loading = ref(true)
 
     const user = ref([])
@@ -13,12 +15,11 @@
 
     onMounted(async () => {
         try {
-            console.clear()
-            const userResponse = await axios.get(`http://127.0.0.1:8000/api/user/${imported.user_id}`)
+            const userResponse = await axios.get(`${props.prefix}api/user/${imported.user_id}`)
             user.value = userResponse.data.data
-            const subjectsResponse = await axios.get(`http://127.0.0.1:8000/api/subjects`)
+            const subjectsResponse = await axios.get(`${props.prefix}api/subjects`)
             subjects.value = subjectsResponse.data.data
-            const classroomLessonsResponse = await axios.get(`http://127.0.0.1:8000/api/allClassroomLessons/${user.value.classroom_id}`)
+            const classroomLessonsResponse = await axios.get(`${props.prefix}api/allClassroomLessons/${user.value.classroom_id}`)
             classroomLessons.value = classroomLessonsResponse.data.data
         } catch (error) {
             console.error(error)

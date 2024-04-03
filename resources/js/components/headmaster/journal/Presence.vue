@@ -3,6 +3,8 @@
     import { ref, onMounted, inject } from 'vue'
     import axios from 'axios'
 
+    const props = defineProps(['prefix'])
+
     const loading = ref(true)
 
     const classrooms = ref([])
@@ -22,14 +24,14 @@
 
         loading.value = true
         try {
-            const classroomsResponse = await axios.get(`http://127.0.0.1:8000/api/classrooms`)
+            const classroomsResponse = await axios.get(`${props.prefix}api/classrooms`)
             classrooms.value = classroomsResponse.data.data
             if(classroom_id.value && date.value)
             {
                 const day = new Date(date.value).getDay()
-                const lessonsResponse = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${classroom_id.value}/${day}`)
+                const lessonsResponse = await axios.get(`${props.prefix}api/classroomLessons/${classroom_id.value}/${day}`)
                 lessons.value = lessonsResponse.data.data
-                const subjectsResponse = await axios.get(`http://127.0.0.1:8000/api/subjects`)
+                const subjectsResponse = await axios.get(`${props.prefix}api/subjects`)
                 subjects.value = subjectsResponse.data.data
             }
             lesson_id.value = 0

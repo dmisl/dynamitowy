@@ -3,7 +3,7 @@
     import { ref, onMounted, inject } from 'vue'
     import axios from 'axios';
 
-    const props = defineProps(['warning_id'])
+    const props = defineProps(['warning_id', 'prefix'])
 
     const loading = ref(true)
 
@@ -24,13 +24,13 @@
         loading.value = true
         try {
             // showing data
-            const warningResponse = await axios.get(`http://127.0.0.1:8000/api/warning/${props.warning_id}`)
+            const warningResponse = await axios.get(`${props.prefix}api/warning/${props.warning_id}`)
             warning.value = warningResponse.data.data
-            const teacherResponse = await axios.get(`http://127.0.0.1:8000/api/teacher/${warning.value.teacher_id}`)
+            const teacherResponse = await axios.get(`${props.prefix}api/teacher/${warning.value.teacher_id}`)
             teacher.value = teacherResponse.data.data
-            const teacherUserResponse = await axios.get(`http://127.0.0.1:8000/api/user/${teacher.value.user_id}`)
+            const teacherUserResponse = await axios.get(`${props.prefix}api/user/${teacher.value.user_id}`)
             teacher.value = teacherUserResponse.data.data
-            const userResponse = await axios.get(`http://127.0.0.1:8000/api/user/${warning.value.user_id}`)
+            const userResponse = await axios.get(`${props.prefix}api/user/${warning.value.user_id}`)
             user.value = userResponse.data.data
 
             // editing
@@ -56,11 +56,11 @@
         try {
             // editing
 
-            const classroomsResponse = await axios.get(`http://127.0.0.1:8000/api/classrooms`)
+            const classroomsResponse = await axios.get(`${props.prefix}api/classrooms`)
             classrooms.value = classroomsResponse.data.data
             if(classroom_id.value)
             {
-                const classroomUsersResponse = await axios.get(`http://127.0.0.1:8000/api/classroomUsers/${classroom_id.value}`)
+                const classroomUsersResponse = await axios.get(`${props.prefix}api/classroomUsers/${classroom_id.value}`)
                 classroomUsers.value = classroomUsersResponse.data.data
             }
         } catch (error)
@@ -81,7 +81,7 @@
             formData.append('classroom_id', classroom_id.value);
             formData.append('desc', desc.value);
 
-            const response = await axios.post('http://127.0.0.1:8000/warning/update', formData);
+            const response = await axios.post(`${props.prefix}warning/update`, formData);
 
         } catch (error) {
             console.error('Error uploading image:', error);
@@ -97,7 +97,7 @@
             const formData = new FormData();
             formData.append('id', warning.value.id);
 
-            const response = await axios.post('http://127.0.0.1:8000/warning/delete', formData);
+            const response = await axios.post(`${props.prefix}warning/delete`, formData);
 
         } catch (error) {
             console.error('Error uploading image:', error);

@@ -3,7 +3,7 @@
 import { ref, inject, onMounted } from 'vue'
 import axios from 'axios'
 
-const props = defineProps(['classroom_id', 'lesson_id', 'date'])
+const props = defineProps(['classroom_id', 'lesson_id', 'date', 'prefix'])
 
 const imported = inject('imported')
 const change = inject('change')
@@ -24,22 +24,22 @@ const title = inject('title')
 onMounted(async () => {
     try {
         // current lesson
-        const lessonResponse = await axios.get(`http://127.0.0.1:8000/api/lesson/${props.lesson_id}`);
+        const lessonResponse = await axios.get(`${props.prefix}api/lesson/${props.lesson_id}`);
         lesson.value = lessonResponse.data.data;
         // lesson`s classroom
-        const classroomResponse = await axios.get(`http://127.0.0.1:8000/api/classroom/${lesson.value.classroom_id}`);
+        const classroomResponse = await axios.get(`${props.prefix}api/classroom/${lesson.value.classroom_id}`);
         classroom.value = classroomResponse.data.data;
         // this lesson`s users
-        const usersResponse = await axios.get(`http://127.0.0.1:8000/api/classroomUsers/${lesson.value.classroom_id}`);
+        const usersResponse = await axios.get(`${props.prefix}api/classroomUsers/${lesson.value.classroom_id}`);
         users.value = usersResponse.data.data;
         // those users` lessons and presence today
-        const classroomLessonsResponse = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${lesson.value.classroom_id}/${lesson.value.day}`);
+        const classroomLessonsResponse = await axios.get(`${props.prefix}api/classroomLessons/${lesson.value.classroom_id}/${lesson.value.day}`);
         classroomLessons.value = classroomLessonsResponse.data.data;
         const day = new Date(props.date).getDay()
-        const classroomPresenceResponse = await axios.get(`http://127.0.0.1:8000/api/classroomPresence/${lesson.value.classroom_id}/${lesson.value.day}/${props.date}`)
+        const classroomPresenceResponse = await axios.get(`${props.prefix}api/classroomPresence/${lesson.value.classroom_id}/${lesson.value.day}/${props.date}`)
         classroomPresence.value = classroomPresenceResponse.data.data
         // presence types
-        const presenceTypesResponse = await axios.get(`http://127.0.0.1:8000/api/presenceTypes`)
+        const presenceTypesResponse = await axios.get(`${props.prefix}api/presenceTypes`)
         presenceTypes.value = presenceTypesResponse.data.data
 
         // selecting first user and current lesson
@@ -79,7 +79,7 @@ onMounted(async () => {
             formData.append('id', selected.value.presenceId);
             formData.append('type', type);
 
-            const response = await axios.post('http://127.0.0.1:8000/lesson/update', formData);
+            const response = await axios.post(`${props.prefix}lesson/update`, formData);
 
             classroomPresence.value.find(obj => obj.id === selected.value.presenceId).presence_type_id = type;
             select(users.value[users.value.findIndex(obj => obj.id === selected.value.userId)+1].id)

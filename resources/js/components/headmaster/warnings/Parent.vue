@@ -8,7 +8,7 @@
     import ShowClassroom from './ShowClassroom.vue';
     import Create from './Create.vue';
 
-    const props = defineProps(['teacher_id'])
+    const props = defineProps(['teacher_id', 'pre'])
 
     const loading = ref(true)
 
@@ -82,7 +82,7 @@
 
             <div class="col-md-9">
 
-                <component :is="currentComponent" :teacher_id="teacher_id" :warning_id="warning_id" :classroom_id="classroom_id"></component>
+                <component :is="currentComponent" :teacher_id="teacher_id" :warning_id="warning_id" :classroom_id="classroom_id" :prefix="props.pre"></component>
 
             </div>
 

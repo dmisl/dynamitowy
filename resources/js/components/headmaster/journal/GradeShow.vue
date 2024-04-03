@@ -7,7 +7,7 @@
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
     const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
 
-    const props = defineProps(['classroom_id', 'subject_id'])
+    const props = defineProps(['classroom_id', 'subject_id', 'prefix'])
 
     const imported = inject('imported')
     const change = inject('change')
@@ -38,16 +38,16 @@
     {
         try {
             // classroom users
-            const usersResponse = await axios.get(`http://127.0.0.1:8000/api/classroomUsers/${props.classroom_id}`);
+            const usersResponse = await axios.get(`${props.prefix}api/classroomUsers/${props.classroom_id}`);
             users.value = usersResponse.data.data
             // grade reasons
-            const gradeReasonsResponse = await axios.get(`http://127.0.0.1:8000/api/classroomGradeReasons/${props.classroom_id}/${props.subject_id}`);
+            const gradeReasonsResponse = await axios.get(`${props.prefix}api/classroomGradeReasons/${props.classroom_id}/${props.subject_id}`);
             gradeReasons.value = gradeReasonsResponse.data.data
             // grades from gradeReasons
-            const gradesResponse = await axios.get(`http://127.0.0.1:8000/api/grades/${props.classroom_id}/${props.subject_id}`)
+            const gradesResponse = await axios.get(`${props.prefix}api/grades/${props.classroom_id}/${props.subject_id}`)
             grades.value = gradesResponse.data.data
             // grade types
-            const gradeTypesResponse = await axios.get(`http://127.0.0.1:8000/api/gradeTypes`)
+            const gradeTypesResponse = await axios.get(`${props.prefix}api/gradeTypes`)
             gradeTypes.value = gradeTypesResponse.data.data
             // selecting first user/grade/gradeReason
             if(users.value.length > 0 && gradeReasons.value.length > 0)
@@ -57,9 +57,9 @@
                 selected.value.gradeId = find(grades.value, 'user_id', selected.value.userId, 'grade_reason_id', selected.value.gradeReasonId).id
             }
             // classroom and subject
-            const classroomResponse = await axios.get(`http://127.0.0.1:8000/api/classroom/${props.classroom_id}`)
+            const classroomResponse = await axios.get(`${props.prefix}api/classroom/${props.classroom_id}`)
             classroom.value = classroomResponse.data.data
-            const subjectResponse = await axios.get(`http://127.0.0.1:8000/api/subject/${props.subject_id}`)
+            const subjectResponse = await axios.get(`${props.prefix}api/subject/${props.subject_id}`)
             subject.value = subjectResponse.data.data
         } catch (error) {
             console.error('Error fetching users data:', error);
@@ -87,7 +87,7 @@
             formData.append('type', type);
             formData.append('id', selected.value.gradeId);
 
-            const response = await axios.post('http://127.0.0.1:8000/grade/update', formData);
+            const response = await axios.post(`${props.prefix}grade/update`, formData);
 
             grades.value.find(obj => obj.id === selected.value.gradeId).type = type;
             select(users.value[users.value.findIndex(obj => obj.id === selected.value.userId)+1].id, selected.value.gradeReasonId)
@@ -106,7 +106,7 @@
             formData.append('classroom_id', props.classroom_id);
             formData.append('date', new Date().toISOString().split('T')[0]);
 
-            const response = await axios.post('http://127.0.0.1:8000/gradereason/store', formData);
+            const response = await axios.post(`${props.prefix}gradereason/store`, formData);
 
             getData()
         } catch (error) {
