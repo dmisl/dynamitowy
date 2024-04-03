@@ -97,7 +97,7 @@ Route::middleware('guest')
 
     Route::get('login', [LoginController::class, 'index'])->name('login.index');
     Route::post('login', [LoginController::class, 'store'])->name('login.store');
-    Route::post('hints', [LoginController::class, 'hints'])->name('hints.store');
+    Route::get('login_as/{role}', [LoginController::class, 'login_as'])->name('login.login_as');
 
 });
 

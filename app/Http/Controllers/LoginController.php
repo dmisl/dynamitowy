@@ -10,20 +10,18 @@ class LoginController extends Controller
 {
     public function index()
     {
-        Auth::login(User::find(1));
-        return redirect()->route('home.index');
+        return view('login.index');
     }
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'email' => ['required', 'string', 'min:5'],
             'password' => ['required', 'string'],
-            'role' => ['required', 'in:1,2,3'],
         ]);
 
-        if(Auth::attempt(['email' => $validated['email'], 'password' => $validated['password']]))
+        if(Auth::attempt($validated))
         {
-            User::find(Auth::user()->id)->update(['role_id' => $validated['role']]);
             return redirect()->route('home.index');
         } else
         {
@@ -31,13 +29,27 @@ class LoginController extends Controller
         }
 
     }
+    public function login_as($role)
+    {
+        switch ($role) {
+            case 1:
+                Auth::login(User::find(57));
+                break;
+            case 2:
+                Auth::login(User::find(7));
+                break;
+            case 3:
+                Auth::login(User::find(1));
+                break;
+            default:
+                # code...
+                break;
+        }
+        return redirect()->route('home.index');
+    }
     public function logout()
     {
         Auth::logout();
         return redirect()->route('login.index');
-    }
-    public function hints()
-    {
-        return 'spierdalaj';
     }
 }

@@ -5,7 +5,7 @@
 
 @extends('layouts.main')
 
-@section('title', 'Strona glowna')
+@section('title', 'Główna strona | Dynamitowy')
 
 @section('content')
 
