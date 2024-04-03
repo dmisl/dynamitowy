@@ -25,6 +25,8 @@
     const imported = inject('imported')
     const changeParent = inject('changeParent')
     const importedParent = inject('importedParent')
+    const title = inject('title')
+    title(`Lista uczniow | Dynamitowy`)
 
 </script>
 <template>

@@ -15,6 +15,8 @@ const classroomLessons = ref([])
 const classroomPresence = ref([])
 const presenceTypes = ref([])
 
+const title = inject('title')
+
 onMounted(async () => {
     try {
         // current lesson
@@ -43,6 +45,7 @@ onMounted(async () => {
     } catch (error) {
         console.error('Error fetching users data:', error);
     } finally {
+        title(`Edytowanie obecności klasy ${classroom.value.name} ${imported.date.value} | Dynamitowy`)
         loading.value = false;
     }
 });

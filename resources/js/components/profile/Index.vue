@@ -23,6 +23,8 @@
 
     const imported = inject('imported')
     const change = inject('change')
+    const title = inject('title')
+    title(`Profil ucznia | Dynamitowy`)
 
 </script>
 <template>

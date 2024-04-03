@@ -14,6 +14,8 @@
     const classroomPresence = ref([])
     const presenceTypes = ref([])
 
+    const title = inject('title')
+
     async function getData()
     {
         loading.value = true
@@ -46,6 +48,7 @@
             console.error('Error fetching users data:', error);
         } finally {
             loading.value = false;
+            title(`Obecność klasy ${classroom.value.name} ${imported.date.value} | Dynamitowy`)
         }
     }
 

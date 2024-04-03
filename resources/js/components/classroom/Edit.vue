@@ -14,6 +14,8 @@
     const userClassroomId = ref('')
     const userImage = ref(null)
 
+    const title = inject('title')
+    
     onMounted(async () => {
         try {
             const userResponse = await axios.get(`http://127.0.0.1:8000/api/user/${props.user_id}`);
@@ -27,6 +29,7 @@
             console.error('Error fetching users data:', error);
         } finally {
             loading.value = false;
+            title(`Edytowanie informacji o ucznie ${user.value.name} | Dynamitowy`)
         }
     });
 
@@ -88,7 +91,7 @@
                 </div>
             </a>
 
-            <h1 class="fw-light">Informacja o ucznie<br><span class="fw-normal">{{ user.name }}</span></h1>
+            <h1 class="fw-light">Edytowanie informacji o ucznie<br><span class="fw-normal">{{ user.name }}</span></h1>
 
             <div class="ps-3">
 

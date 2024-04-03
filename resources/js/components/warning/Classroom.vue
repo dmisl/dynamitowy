@@ -10,6 +10,8 @@
     const classrooms = ref([]);
     const loading = ref(true);
 
+    const title = inject('title')
+
     onMounted(async () => {
         try {
             const warningsResponse = await axios.get(`http://127.0.0.1:8000/api/classroomWarnings/${props.classroom_id}`);
@@ -22,6 +24,7 @@
             console.error('Error fetching users data:', error);
         } finally {
             loading.value = false;
+            title(`Lista uwag klasy ${classrooms.value.find(obj => obj.id == [props.classroom_id]).name} | Dynamitowy`)
         }
     });
 

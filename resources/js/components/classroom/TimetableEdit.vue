@@ -11,9 +11,14 @@
     const teachers = ref([])
     const lessons = ref([])
     const classroomLessons = ref([])
+    const classroom = ref([])
+
+    const title = inject('title')
 
     onMounted(async () => {
         try {
+            const classroomResponse = await axios.get(`http://127.0.0.1:8000/api/classroom/${props.classroom_id}`)
+            classroom.value = classroomResponse.data.data
             const classroomLessonsResponse1 = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${props.classroom_id}/1`);
             classroomLessons.value.push(classroomLessonsResponse1.data.data)
             const classroomLessonsResponse2 = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${props.classroom_id}/2`);
@@ -33,6 +38,7 @@
         } catch (error) {
             console.error('Error fetching users data:', error);
         } finally {
+            title(`Edytowanie rozkładu lekcji klasy ${classroom.value.name} | Dynamitowy`)
             loading.value = false;
         }
     });

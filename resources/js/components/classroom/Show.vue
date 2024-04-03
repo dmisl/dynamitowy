@@ -17,6 +17,8 @@
     const gradeLessons = ref([])
     const gradeTypes = ref()
 
+    const title = inject('title')
+    
     onMounted(async () => {
         try {
             const userResponse = await axios.get(`http://127.0.0.1:8000/api/user/${props.user_id}`);
@@ -43,6 +45,7 @@
             console.error('Error fetching users data:', error);
         } finally {
             loading.value = false;
+            title(`Infromacja o ucznie ${user.value.name} | Dynamitowy`)
         }
     });
 

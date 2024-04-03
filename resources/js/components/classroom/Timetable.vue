@@ -7,6 +7,7 @@
     const today = new Date().getDay() <= 5 ? new Date().getDay() : 1
     const timetable = ['7:10', '8:00', '8:50', '9:40', '10:30', '11:35', '12:25', '13:15', '14:05', '14:55', '15:45', '16:35']
 
+    const classroom = ref([])
     const classroomLessons1 = ref([])
     const classroomLessons2 = ref([])
     const classroomLessons3 = ref([])
@@ -15,8 +16,12 @@
     const subjects = ref([])
     const teachers = ref([])
 
+    const title = inject('title')
+
     onMounted(async () => {
         try {
+            const classroomResponse = await axios.get(`http://127.0.0.1:8000/api/classroom/${props.classroom_id}`)
+            classroom.value = classroomResponse.data.data
             const classroomLessons1Response = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${props.classroom_id}/1`);
             classroomLessons1.value = classroomLessons1Response.data.data
             const classroomLessons2Response = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${props.classroom_id}/2`);
@@ -35,6 +40,7 @@
             console.error('Error fetching users data:', error);
         } finally {
             loading.value = false;
+            title(`Rozkład lekcji klasy ${classroom.value.name} | Dynamitowy`)
         }
     });
 

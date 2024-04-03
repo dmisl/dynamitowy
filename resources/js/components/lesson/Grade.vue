@@ -15,6 +15,7 @@
     const gradeReasons = ref([])
     const grades = ref([])
     const gradeTypes = ref([])
+    const classroom = ref([])
 
     const text = ref('')
 
@@ -27,9 +28,14 @@
         return null;
     }
 
+    const title = inject('title')
+
     async function getData()
     {
         try {
+            // classroom
+            const classroomResponse = await axios.get(`http://127.0.0.1:8000/api/classroom/${imported.classroom_id.value}`)
+            classroom.value = classroomResponse.data.data
             // classroom users
             const usersResponse = await axios.get(`http://127.0.0.1:8000/api/classroomUsers/${imported.classroom_id.value}`);
             users.value = usersResponse.data.data
@@ -50,6 +56,7 @@
             console.error('Error fetching users data:', error);
         } finally {
             loading.value = false;
+            title(`Edytowanie ocen klasy ${classroom.value.name} | Dynamitowy`)
         }
     }
 
