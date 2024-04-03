@@ -7,7 +7,7 @@
     import Edit from './Edit.vue';
     import Grade from './Grade.vue';
 
-    const props = defineProps(['teacher_id'])
+    const props = defineProps(['teacher_id', 'prefix'])
 
     const rawShow = markRaw(Show)
     const rawEdit = markRaw(Edit)
@@ -29,7 +29,7 @@
     function changeDate(event)
     {
         let day = new Date(event.target.value).getDay() <= 5 ? new Date(event.target.value).getDay() : 1
-        axios.get(`http://127.0.0.1:8000/api/todayLessons/${props.teacher_id}/${day}`)
+        axios.get(`${props.prefix}api/todayLessons/${props.teacher_id}/${day}`)
         .then(response => {
             lessons.value = response.data.data;
         })
@@ -41,11 +41,11 @@
 
     onMounted(async () => {
         try {
-            const lessonsResponse = await axios.get(`http://127.0.0.1:8000/api/todayLessons/${props.teacher_id}/0`);
+            const lessonsResponse = await axios.get(`${props.prefix}api/todayLessons/${props.teacher_id}/0`);
             lessons.value = lessonsResponse.data.data;
-            const classroomsResponse = await axios.get(`http://127.0.0.1:8000/api/classrooms`);
+            const classroomsResponse = await axios.get(`${props.prefix}api/classrooms`);
             classrooms.value = classroomsResponse.data.data;
-            const subjectsResponse = await axios.get(`http://127.0.0.1:8000/api/subjects`);
+            const subjectsResponse = await axios.get(`${props.prefix}api/subjects`);
             subjects.value = subjectsResponse.data.data;
         } catch (error) {
             console.error('Error fetching users data:', error);
@@ -104,7 +104,7 @@
                 <h2 class="fw-light">Wybierz lekcje</h2>
             </div>
             <div v-else>
-                <component :is="currentComponent"></component>
+                <component :is="currentComponent" :pre="props.prefix"></component>
             </div>
 
         </div>

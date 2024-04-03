@@ -2,7 +2,7 @@
     import axios from 'axios';
     import { ref, onMounted, inject } from 'vue';
 
-    const props = defineProps(['classroom_id'])
+    const props = defineProps(['classroom_id', 'pre'])
     const loading = ref(true);
     const timetable = ['7:10', '8:00', '8:50', '9:40', '10:30', '11:35', '12:25', '13:15', '14:05', '14:55', '15:45', '16:35']
     const days = ['Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek']
@@ -17,23 +17,23 @@
 
     onMounted(async () => {
         try {
-            const classroomResponse = await axios.get(`http://127.0.0.1:8000/api/classroom/${props.classroom_id}`)
+            const classroomResponse = await axios.get(`${props.pre}api/classroom/${props.classroom_id}`)
             classroom.value = classroomResponse.data.data
-            const classroomLessonsResponse1 = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${props.classroom_id}/1`);
+            const classroomLessonsResponse1 = await axios.get(`${props.pre}api/classroomLessons/${props.classroom_id}/1`);
             classroomLessons.value.push(classroomLessonsResponse1.data.data)
-            const classroomLessonsResponse2 = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${props.classroom_id}/2`);
+            const classroomLessonsResponse2 = await axios.get(`${props.pre}api/classroomLessons/${props.classroom_id}/2`);
             classroomLessons.value.push(classroomLessonsResponse2.data.data)
-            const classroomLessonsResponse3 = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${props.classroom_id}/3`);
+            const classroomLessonsResponse3 = await axios.get(`${props.pre}api/classroomLessons/${props.classroom_id}/3`);
             classroomLessons.value.push(classroomLessonsResponse3.data.data)
-            const classroomLessonsResponse4 = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${props.classroom_id}/4`);
+            const classroomLessonsResponse4 = await axios.get(`${props.pre}api/classroomLessons/${props.classroom_id}/4`);
             classroomLessons.value.push(classroomLessonsResponse4.data.data)
-            const classroomLessonsResponse5 = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${props.classroom_id}/5`);
+            const classroomLessonsResponse5 = await axios.get(`${props.pre}api/classroomLessons/${props.classroom_id}/5`);
             classroomLessons.value.push(classroomLessonsResponse5.data.data)
-            const lessonsResponse = await axios.get(`http://127.0.0.1:8000/api/lessons`);
+            const lessonsResponse = await axios.get(`${props.pre}api/lessons`);
             lessons.value = lessonsResponse.data.data
-            const teachersResponse = await axios.get(`http://127.0.0.1:8000/api/teachers`);
+            const teachersResponse = await axios.get(`${props.pre}api/teachers`);
             teachers.value = teachersResponse.data.data;
-            const subjectsResponse = await axios.get(`http://127.0.0.1:8000/api/subjects`);
+            const subjectsResponse = await axios.get(`${props.pre}api/subjects`);
             subjects.value = subjectsResponse.data.data;
         } catch (error) {
             console.error('Error fetching users data:', error);
@@ -68,7 +68,7 @@
             formData.append('day', Number(event.target.attributes.day.value)+1);
             formData.append('lesson_number', event.target.attributes.lesson_number.value);
 
-            const response = await axios.post('http://127.0.0.1:8000/journal/classroom/timetableupdate', formData);
+            const response = await axios.post(`${props.pre}journal/classroom/timetableupdate`, formData);
 
         } catch (error) {
             console.error('Error uploading image:', error);

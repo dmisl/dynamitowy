@@ -2,7 +2,7 @@
     import axios from 'axios';
     import { ref, onMounted, inject } from 'vue';
 
-    const props = defineProps(['classroom_id', 'user_id'])
+    const props = defineProps(['classroom_id', 'user_id', 'pre'])
     const loading = ref(true);
     const today = new Date().getDay() <= 5 ? new Date().getDay() : 1
     const timetable = ['7:10', '8:00', '8:50', '9:40', '10:30', '11:35', '12:25', '13:15', '14:05', '14:55', '15:45', '16:35',]
@@ -18,28 +18,28 @@
     const gradeTypes = ref()
 
     const title = inject('title')
-    
+
     onMounted(async () => {
         try {
-            const userResponse = await axios.get(`http://127.0.0.1:8000/api/user/${props.user_id}`);
+            const userResponse = await axios.get(`${props.pre}api/user/${props.user_id}`);
             user.value = userResponse.data.data;
-            const classroomResponse = await axios.get(`http://127.0.0.1:8000/api/classroom/${props.classroom_id}`);
+            const classroomResponse = await axios.get(`${props.pre}api/classroom/${props.classroom_id}`);
             classroom.value = classroomResponse.data.data;
-            const classroomLessonsResponse = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${props.classroom_id}/${today}`);
+            const classroomLessonsResponse = await axios.get(`${props.pre}api/classroomLessons/${props.classroom_id}/${today}`);
             classroomLessons.value = classroomLessonsResponse.data.data;
             // grade/subject requests handling
-            const subjectsResponse = await axios.get(`http://127.0.0.1:8000/api/subjects`);
+            const subjectsResponse = await axios.get(`${props.pre}api/subjects`);
             subjects.value = subjectsResponse.data.data;
-            const gradeReasonsResponse = await axios.get(`http://127.0.0.1:8000/api/gradeReasons`)
+            const gradeReasonsResponse = await axios.get(`${props.pre}api/gradeReasons`)
             gradeReasons.value = gradeReasonsResponse.data.data
-            const gradeResponse = await axios.get(`http://127.0.0.1:8000/api/user_grades/${user.value.id}`)
+            const gradeResponse = await axios.get(`${props.pre}api/user_grades/${user.value.id}`)
             grades.value = gradeResponse.data.data
             const availableGradeReasons = []
             grades.value.forEach(grade => {
                 availableGradeReasons.push(gradeReasons.value.find(obj => obj.id === grade.grade_reason_id))
             });
             gradeLessons.value = [...new Set(availableGradeReasons.map(obj => obj.subject_id))]
-            const gradeTypesResponse = await axios.get(`http://127.0.0.1:8000/api/gradeTypes`)
+            const gradeTypesResponse = await axios.get(`${props.pre}api/gradeTypes`)
             gradeTypes.value = gradeTypesResponse.data.data
         } catch (error) {
             console.error('Error fetching users data:', error);

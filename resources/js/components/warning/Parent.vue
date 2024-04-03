@@ -7,7 +7,7 @@
     import Create from './Create.vue';
     import Classroom from './Classroom.vue';
 
-    const props = defineProps(['classroom_id', 'teacher_id', 'has_class', 'user_id'])
+    const props = defineProps(['classroom_id', 'teacher_id', 'has_class', 'user_id', 'prefix'])
 
     const rawIndex = markRaw(Index)
     const rawShow = markRaw(Show)
@@ -68,7 +68,7 @@
 
             <div class="p-3">
 
-                <component :is="currentComponent" :classroom_id="props.classroom_id" :user_id="user_id" :warning_id="warning_id" :teacher_id="props.teacher_id"></component>
+                <component :is="currentComponent" :classroom_id="props.classroom_id" :user_id="user_id" :warning_id="warning_id" :teacher_id="props.teacher_id" :pre="props.prefix"></component>
 
             </div>
 

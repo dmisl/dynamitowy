@@ -2,7 +2,7 @@
     import axios from 'axios';
     import { ref, onMounted, inject } from 'vue';
 
-    const props = defineProps(['user_id'])
+    const props = defineProps(['user_id', 'pre'])
 
     const user = ref([])
     const classrooms = ref([])
@@ -15,15 +15,15 @@
     const userImage = ref(null)
 
     const title = inject('title')
-    
+
     onMounted(async () => {
         try {
-            const userResponse = await axios.get(`http://127.0.0.1:8000/api/user/${props.user_id}`);
+            const userResponse = await axios.get(`${props.pre}api/user/${props.user_id}`);
             user.value = userResponse.data.data;
             userName.value = user.value.name
             userEmail.value = user.value.email
             userClassroomId.value = user.value.classroom_id
-            const classroomsResponse = await axios.get(`http://127.0.0.1:8000/api/classrooms`);
+            const classroomsResponse = await axios.get(`${props.pre}api/classrooms`);
             classrooms.value = classroomsResponse.data.data;
         } catch (error) {
             console.error('Error fetching users data:', error);
@@ -48,7 +48,7 @@
             formData.append('classroom_id', userClassroomId.value);
             formData.append('photo', userImage.value);
 
-            const response = await axios.post('http://127.0.0.1:8000/journal/classroom/update', formData, {
+            const response = await axios.post(`${props.pre}journal/classroom/update`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

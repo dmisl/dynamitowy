@@ -3,6 +3,8 @@
     import { ref, inject, onMounted, watch } from 'vue'
     import axios from 'axios'
 
+    const props = defineProps(['pre'])
+
     const imported = inject('imported')
     const change = inject('change')
     const loading = ref(true)
@@ -21,21 +23,21 @@
         loading.value = true
         try {
             // current lesson
-            const lessonResponse = await axios.get(`http://127.0.0.1:8000/api/lesson/${imported.lesson_id.value}`);
+            const lessonResponse = await axios.get(`${props.pre}api/lesson/${imported.lesson_id.value}`);
             lesson.value = lessonResponse.data.data;
             // lesson`s classroom
-            const classroomResponse = await axios.get(`http://127.0.0.1:8000/api/classroom/${lesson.value.classroom_id}`);
+            const classroomResponse = await axios.get(`${props.pre}api/classroom/${lesson.value.classroom_id}`);
             classroom.value = classroomResponse.data.data;
             // this lesson`s users
-            const usersResponse = await axios.get(`http://127.0.0.1:8000/api/classroomUsers/${lesson.value.classroom_id}`);
+            const usersResponse = await axios.get(`${props.pre}api/classroomUsers/${lesson.value.classroom_id}`);
             users.value = usersResponse.data.data;
             // those users` lessons and presence today
-            const classroomLessonsResponse = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${lesson.value.classroom_id}/${lesson.value.day}`);
+            const classroomLessonsResponse = await axios.get(`${props.pre}api/classroomLessons/${lesson.value.classroom_id}/${lesson.value.day}`);
             classroomLessons.value = classroomLessonsResponse.data.data;
-            const classroomPresenceResponse = await axios.get(`http://127.0.0.1:8000/api/classroomPresence/${lesson.value.classroom_id}/${lesson.value.day}/${imported.date.value}`)
+            const classroomPresenceResponse = await axios.get(`${props.pre}api/classroomPresence/${lesson.value.classroom_id}/${lesson.value.day}/${imported.date.value}`)
             classroomPresence.value = classroomPresenceResponse.data.data
             // presence types
-            const presenceTypesResponse = await axios.get(`http://127.0.0.1:8000/api/presenceTypes`)
+            const presenceTypesResponse = await axios.get(`${props.pre}api/presenceTypes`)
             presenceTypes.value = presenceTypesResponse.data.data
         } catch (error) {
             if (error.response && error.response.status === 429) {

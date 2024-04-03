@@ -2,7 +2,7 @@
     import axios from 'axios';
     import { ref, onMounted, inject } from 'vue';
 
-    const props = defineProps(['classroom_id'])
+    const props = defineProps(['classroom_id', 'pre'])
     const loading = ref(true);
     const today = new Date().getDay() <= 5 ? new Date().getDay() : 1
     const timetable = ['7:10', '8:00', '8:50', '9:40', '10:30', '11:35', '12:25', '13:15', '14:05', '14:55', '15:45', '16:35']
@@ -20,21 +20,21 @@
 
     onMounted(async () => {
         try {
-            const classroomResponse = await axios.get(`http://127.0.0.1:8000/api/classroom/${props.classroom_id}`)
+            const classroomResponse = await axios.get(`${props.pre}api/classroom/${props.classroom_id}`)
             classroom.value = classroomResponse.data.data
-            const classroomLessons1Response = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${props.classroom_id}/1`);
+            const classroomLessons1Response = await axios.get(`${props.pre}api/classroomLessons/${props.classroom_id}/1`);
             classroomLessons1.value = classroomLessons1Response.data.data
-            const classroomLessons2Response = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${props.classroom_id}/2`);
+            const classroomLessons2Response = await axios.get(`${props.pre}api/classroomLessons/${props.classroom_id}/2`);
             classroomLessons2.value = classroomLessons2Response.data.data
-            const classroomLessons3Response = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${props.classroom_id}/3`);
+            const classroomLessons3Response = await axios.get(`${props.pre}api/classroomLessons/${props.classroom_id}/3`);
             classroomLessons3.value = classroomLessons3Response.data.data
-            const classroomLessons4Response = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${props.classroom_id}/4`);
+            const classroomLessons4Response = await axios.get(`${props.pre}api/classroomLessons/${props.classroom_id}/4`);
             classroomLessons4.value = classroomLessons4Response.data.data
-            const classroomLessons5Response = await axios.get(`http://127.0.0.1:8000/api/classroomLessons/${props.classroom_id}/5`);
+            const classroomLessons5Response = await axios.get(`${props.pre}api/classroomLessons/${props.classroom_id}/5`);
             classroomLessons5.value = classroomLessons5Response.data.data
-            const subjectsResponse = await axios.get(`http://127.0.0.1:8000/api/subjects`);
+            const subjectsResponse = await axios.get(`${props.pre}api/subjects`);
             subjects.value = subjectsResponse.data.data;
-            const teachersResponse = await axios.get(`http://127.0.0.1:8000/api/teachers`);
+            const teachersResponse = await axios.get(`${props.pre}api/teachers`);
             teachers.value = teachersResponse.data.data;
         } catch (error) {
             console.error('Error fetching users data:', error);

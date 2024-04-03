@@ -3,7 +3,7 @@
     import axios from 'axios';
     import { ref, onMounted, inject } from 'vue';
 
-    const props = defineProps(['user_id', 'teacher_id'])
+    const props = defineProps(['user_id', 'teacher_id', 'pre'])
 
     const students = ref([])
     const warnings = ref([]);
@@ -12,11 +12,11 @@
 
     onMounted(async () => {
         try {
-            const warningsResponse = await axios.get(`http://127.0.0.1:8000/api/warnings`);
+            const warningsResponse = await axios.get(`${props.pre}api/warnings`);
             warnings.value = warningsResponse.data.data;
-            const studentsResponse = await axios.get(`http://127.0.0.1:8000/api/students`);
+            const studentsResponse = await axios.get(`${props.pre}api/students`);
             students.value = studentsResponse.data.data;
-            const classroomsResponse = await axios.get(`http://127.0.0.1:8000/api/classrooms`);
+            const classroomsResponse = await axios.get(`${props.pre}api/classrooms`);
             classrooms.value = classroomsResponse.data.data;
         } catch (error) {
             console.error('Error fetching users data:', error);
@@ -39,7 +39,7 @@
             formData.append('teacher_id', props.teacher_id);
             formData.append('classroom_id', students.value.find(obj => obj.id === 57).classroom_id);
 
-            const response = await axios.post('http://127.0.0.1:8000/warning/store', formData);
+            const response = await axios.post('${props.pre}warning/store', formData);
 
             change(imported.rawIndex)
 

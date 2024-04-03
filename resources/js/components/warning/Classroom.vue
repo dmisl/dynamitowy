@@ -3,7 +3,7 @@
     import axios from 'axios';
     import { ref, onMounted, inject } from 'vue';
 
-    const props = defineProps(['classroom_id'])
+    const props = defineProps(['classroom_id', 'pre'])
 
     const users = ref([])
     const warnings = ref([]);
@@ -14,11 +14,11 @@
 
     onMounted(async () => {
         try {
-            const warningsResponse = await axios.get(`http://127.0.0.1:8000/api/classroomWarnings/${props.classroom_id}`);
+            const warningsResponse = await axios.get(`${props.pre}api/classroomWarnings/${props.classroom_id}`);
             warnings.value = warningsResponse.data.data;
-            const usersResponse = await axios.get(`http://127.0.0.1:8000/api/users`);
+            const usersResponse = await axios.get(`${props.pre}api/users`);
             users.value = usersResponse.data.data;
-            const classroomsResponse = await axios.get(`http://127.0.0.1:8000/api/classrooms`);
+            const classroomsResponse = await axios.get(`${props.pre}api/classrooms`);
             classrooms.value = classroomsResponse.data.data;
         } catch (error) {
             console.error('Error fetching users data:', error);

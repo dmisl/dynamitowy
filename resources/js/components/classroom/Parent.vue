@@ -26,7 +26,7 @@
         <div class="col-md-3"></div>
 
         <div class="col-md-9">
-            <component :is="currentComponent" :classroom_id="props.classroom_id" :user_id="user_id"></component>
+            <component :is="currentComponent" :classroom_id="props.classroom_id" :user_id="user_id" :pre="props.prefix"></component>
         </div>
     </div>
 </template>
@@ -42,7 +42,7 @@
     import Timetable from './Timetable.vue';
     import TimetableEdit from './TimetableEdit.vue';
 
-    const props = defineProps(['classroom_id', 'pre'])
+    const props = defineProps(['classroom_id', 'prefix'])
 
     const rawIndex = markRaw(Index)
     const rawShow = markRaw(Show)

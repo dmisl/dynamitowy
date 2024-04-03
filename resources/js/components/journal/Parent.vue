@@ -206,7 +206,7 @@
         </header>
         <div class="flex-grow-1 overflow-auto">
 
-            <component :is="currentComponent" :classroom_id="props.classroom_id" :teacher_id="props.teacher_id" :pre="props.prefix" :user_id="user_id"></component>
+            <component :is="currentComponent" :classroom_id="props.classroom_id" :teacher_id="props.teacher_id" :pre="props.prefix" :prefix="props.prefix" :user_id="user_id"></component>
 
         </div>
     </div>

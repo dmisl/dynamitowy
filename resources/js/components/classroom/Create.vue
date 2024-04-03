@@ -2,7 +2,7 @@
     import axios from 'axios';
     import { ref, onMounted, inject } from 'vue';
 
-    const props = defineProps(['classroom_id'])
+    const props = defineProps(['classroom_id', 'pre'])
 
     // models
     const userName = ref('')
@@ -23,7 +23,7 @@
             formData.append('classroom_id', props.classroom_id);
             formData.append('photo', userImage.value);
 
-            const response = await axios.post('http://127.0.0.1:8000/journal/classroom/store', formData, {
+            const response = await axios.post(`${props.pre}journal/classroom/store`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
