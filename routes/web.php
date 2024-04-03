@@ -35,7 +35,7 @@ Route::middleware('teacher')
 
     Route::get('journal', [JournalController::class, 'index'])->name('journal.index');
 
-    Route::post('lesson/update', [LessonController::class, 'update'])->name('lesson.update');
+    Route::post('journal/lesson/update', [LessonController::class, 'update'])->name('lesson.update');
 
     Route::post('grade/update', [GradeController::class, 'update'])->name('grade.update');
 

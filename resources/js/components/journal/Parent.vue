@@ -21,6 +21,15 @@
         user_id.value = userId
     }
 
+    function title(text)
+    {
+        document.querySelector('title').innerHTML = text
+    }
+
+    title(`Dziennik`)
+
+    provide('title', title)
+
     provide('changeParent', changeParent)
     provide('importedParent', {rawLesson, rawWarning, rawClassroom})
 

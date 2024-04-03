@@ -49,9 +49,12 @@
             const gradeTypesResponse = await axios.get(`http://127.0.0.1:8000/api/gradeTypes`)
             gradeTypes.value = gradeTypesResponse.data.data
             // selecting first user/grade/gradeReason
-            selected.value.userId = users.value[0].id
-            selected.value.gradeReasonId = gradeReasons.value[0].id
-            selected.value.gradeId = find(grades.value, 'user_id', selected.value.userId, 'grade_reason_id', selected.value.gradeReasonId).id
+            if(gradeReasons.value.length > 0)
+            {
+                selected.value.userId = users.value[0].id
+                selected.value.gradeReasonId = gradeReasons.value[0].id
+                selected.value.gradeId = find(grades.value, 'user_id', selected.value.userId, 'grade_reason_id', selected.value.gradeReasonId).id
+            }
         } catch (error) {
             console.error('Error fetching users data:', error);
         } finally {
