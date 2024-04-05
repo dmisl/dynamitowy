@@ -1,25 +1,12 @@
 <?php
 
-require __DIR__.'/vendor/autoload.php';
-$app = require_once __DIR__.'/bootstrap/app.php';
-$app->useEnvironmentPath(__DIR__);
-$app->loadEnvironmentFrom('.env');
-$app->bootstrapWith([
-    'Illuminate\Foundation\Bootstrap\LoadConfiguration',
-    'Illuminate\Foundation\Bootstrap\HandleExceptions',
-    'Illuminate\Foundation\Bootstrap\RegisterFacades',
-    'Illuminate\Foundation\Bootstrap\RegisterProviders',
-    'Illuminate\Foundation\Bootstrap\BootProviders',
-]);
-use Illuminate\Support\Facades\DB;
-
 function say($message) {
     echo "\033[2J\033[H";
-    echo $message;
+    echo $message." it might take a while";
     echo "\n";
 }
 
-$process = 8;
+$process = 10;
 
 say("- Progress [0/{$process}]");
 file_put_contents("download_composer.php", "<?php copy('https://getcomposer.org/installer', 'composer-setup.php'); ?>");
@@ -104,14 +91,48 @@ system("php artisan config:cache");
 
 say("- Progress [7/{$process}]");
 
-$result = DB::select("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = ?", ['dynamitowy']);
+$conn = new PDO("mysql:host=localhost;", 'root', '');
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-if (!empty($result)) {
+$query = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = ?";
+$stmt = $conn->prepare($query);
+$stmt->execute(["dynamitowy"]);
+
+$result = $stmt->fetch();
+
+if ($result) {
     system("php artisan migrate:refresh --seed");
 } else {
     system("php artisan migrate --seed");
 }
 
-say("- Ready to go!");
+say("- Progress [8/{$process}]");
+
+system("npm install");
+
+say("- Progress [9/{$process}]");
+
+system("php artisan storage:link");
+
+say("- Progress [11/{$process}]");
+
+popen("start cmd /c \"npm run dev\"", "w");
+popen("start cmd /c \"php artisan serve\"", "w");
+
+echo("\033[2J\033[H");
+
+echo("Ready to go! \n");
+
+// URL
+$url = 'http://127.0.0.1:8000';
+
+// Text to display
+$text = 'Click here to open application';
+
+// Generate the clickable link
+$clickableLink = "\033]8;;$url\033\\$text\033]8;;\033\\";
+
+// Output the clickable link
+echo $clickableLink;
 
 ?>
