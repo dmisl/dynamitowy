@@ -19,7 +19,7 @@
 
     <div id="app" class="d-flex flex-column" style="height: 100vh;">
 
-        <journal-parent :classroom_id="{{ Auth::user()->teacher->classroom ? Auth::user()->teacher->classroom->id : 0 }}" :teacher_id="{{ Auth::user()->teacher->id }}" :prefix="'{{ asset('') }}'"></journal-parent>
+        <journal-parent :classroom_id="{{ Auth::user()->teacher->classroom ? Auth::user()->teacher->classroom->id : 0 }}" :teacher_id="{{ Auth::user()->teacher->id }}" :prefix="'{{ asset('') }}'" :redirect="{{ $redirect }}"></journal-parent>
 
     </div>
 </body>

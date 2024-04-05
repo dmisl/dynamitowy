@@ -33,7 +33,7 @@ Route::middleware('auth')
 Route::middleware('teacher')
 ->group(function () {
 
-    Route::get('journal', [JournalController::class, 'index'])->name('journal.index');
+    Route::get('journal/{redirect?}', [JournalController::class, 'index'])->name('journal.index');
 
     Route::post('journal/lesson/update', [LessonController::class, 'update'])->name('lesson.update');
 
