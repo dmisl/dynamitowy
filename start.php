@@ -123,16 +123,8 @@ echo("\033[2J\033[H");
 
 echo("Ready to go! \n");
 
-// URL
-$url = 'http://127.0.0.1:8000';
+echo "Use this link to open application \n";
 
-// Text to display
-$text = 'Click here to open application';
-
-// Generate the clickable link
-$clickableLink = "\033]8;;$url\033\\$text\033]8;;\033\\";
-
-// Output the clickable link
-echo $clickableLink;
+echo "http://127.0.0.1:8000";
 
 ?>
