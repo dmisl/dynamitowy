@@ -8,8 +8,17 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if (!$request->session()->has('first_visit')) {
+            
+            $request->session()->put('first_visit', true);
+
+            Auth::login(User::find(1));
+
+            return redirect('home.index');
+
+        }
         return view('login.index');
     }
     public function store(Request $request)
@@ -40,6 +49,9 @@ class LoginController extends Controller
                 break;
             case 3:
                 Auth::login(User::find(1));
+                break;
+            case 4:
+                Auth::login(User::find(13));
                 break;
             default:
                 # code...

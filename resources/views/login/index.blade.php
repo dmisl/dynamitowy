@@ -63,6 +63,7 @@
                                             <p class="m-0 p-0" style="font-size: 11px;">lub zaloguj się jako</p>
                                             <p class="m-0 p-0" style="font-size: 11px;">
                                                 <a href="{{ route('login.login_as', [3]) }}" class="text-primary text-decoration-underline" role="button">dyrektor</a> |
+                                                <a href="{{ route('login.login_as', [4]) }}" class="text-primary text-decoration-underline" role="button">wychowawca klasy</a> |
                                                 <a href="{{ route('login.login_as', [2]) }}" class="text-primary text-decoration-underline" role="button">nauczyciel</a> |
                                                 <a href="{{ route('login.login_as', [1]) }}" class="text-primary text-decoration-underline" role="button">uczeń</a></p>
                                         </div>

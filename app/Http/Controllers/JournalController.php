@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Auth;
 
 class JournalController extends Controller
 {
-    public function index()
+    public function index($redirect = 0)
     {
-        return view('journal.index');
+        return view('journal.index', compact("redirect"));
     }
 }

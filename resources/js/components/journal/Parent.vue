@@ -6,7 +6,7 @@
     import ClassroomParent from '../classroom/Parent.vue'
     import WarningParent from '../warning/Parent.vue'
 
-    const props = defineProps(['classroom_id', 'teacher_id', 'prefix'])
+    const props = defineProps(['classroom_id', 'teacher_id', 'prefix', 'redirect'])
 
     const rawLesson = markRaw(LessonParent)
     const rawWarning = markRaw(WarningParent)
@@ -21,9 +21,28 @@
         user_id.value = userId
     }
 
+    switch (props.redirect) {
+        case 0:
+            currentComponent.value = rawLesson
+            break;
+        case 1:
+            currentComponent.value = rawWarning
+            break;
+        case 2:
+            currentComponent.value = rawClassroom
+            break;
+        default:
+            break;
+    }
+
     function title(text)
     {
         document.querySelector('title').innerHTML = text
+    }
+
+    function home()
+    {
+        window.location.href = `${props.prefix}home`
     }
 
     title(`Dziennik`)
@@ -37,7 +56,7 @@
 <template>
     <div>
         <header class="w-100 bg-dark text-light m-0 p-0 user-select-none" style="position: fixed; z-index: 30;">
-            <a class="text-decoration-none text-light" href="{{ route('home.index') }}"><p class="m-0 p-0">Dynamitowy</p></a>
+            <a class="text-decoration-none text-light" role="button" @click="home"><p class="m-0 p-0">Dynamitowy</p></a>
             <div class="d-flex">
                 <a @click="changeParent(rawLesson)" role="button" class="text-light text-decoration-none text-center mx-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="50" height="50" viewBox="0 0 256 256" xml:space="preserve">
