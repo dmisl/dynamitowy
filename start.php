@@ -6,7 +6,7 @@ function say($message) {
     echo "\n";
 }
 
-$process = 10;
+$process = 11;
 
 say("- Progress [0/{$process}]");
 file_put_contents("download_composer.php", "<?php copy('https://getcomposer.org/installer', 'composer-setup.php'); ?>");
@@ -114,10 +114,15 @@ say("- Progress [9/{$process}]");
 
 system("php artisan storage:link");
 
+say("- Progress [10/{$process}]");
+
+system("php artisan install:broadcasting");
+
 say("- Progress [11/{$process}]");
 
 popen("start cmd /c \"npm run dev\"", "w");
 popen("start cmd /c \"php artisan serve\"", "w");
+popen("start cmd /c \"php artisan reverb:start --debug\"", "w");
 
 echo("\033[2J\033[H");
 
