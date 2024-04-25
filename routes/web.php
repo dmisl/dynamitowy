@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\GradeReasonController;
@@ -27,6 +28,10 @@ Route::middleware('auth')
 
     // LOGOUT
     Route::get('logout', [LoginController::class, 'logout'])->name('login.logout');
+
+    // MESSAGES
+    Route::get('chat', [ChatController::class, 'index'])->name('chat.index');
+    Route::post('chat/store', [ChatController::class, 'store'])->name('chat.store');
 
 });
 

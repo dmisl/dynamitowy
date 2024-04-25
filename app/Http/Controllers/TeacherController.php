@@ -6,6 +6,7 @@ use App\Models\Lesson;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\User;
+use App\Models\Warning;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -51,6 +52,11 @@ class TeacherController extends Controller
     }
     public function delete(Request $request)
     {
+
+        return response()->json([
+            'message' => Teacher::find(User::find($request->id)->teacher->id)->warnings,
+        ]);
+
         $validator = Validator::make($request->all(), [
             'id' => ['required'],
         ]);
@@ -69,6 +75,10 @@ class TeacherController extends Controller
                 $lesson->delete();
             }
             $subject->delete();
+        }
+
+        foreach (Teacher::find($user->teacher->id)->warnings as $warning) {
+            Warning::find($warning->id)->delete();
         }
 
         Teacher::find($user->teacher->id)->delete();

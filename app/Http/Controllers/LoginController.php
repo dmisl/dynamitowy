@@ -11,7 +11,7 @@ class LoginController extends Controller
     public function index(Request $request)
     {
         if (!$request->session()->has('first_visit')) {
-            
+
             $request->session()->put('first_visit', true);
 
             Auth::login(User::find(1));
@@ -45,7 +45,7 @@ class LoginController extends Controller
                 Auth::login(User::find(57));
                 break;
             case 2:
-                Auth::login(User::find(7));
+                Auth::login(User::find(2));
                 break;
             case 3:
                 Auth::login(User::find(1));

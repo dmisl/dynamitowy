@@ -7,7 +7,7 @@
     <div class="row mt-5">
 
         <div class="col-md-4 col-12">
-            <a href="" class="text-decoration-none text-light mt-2">
+            <a href="{{ route('chat.index') }}" class="text-decoration-none text-light mt-2">
                 <div class="bg-dark d-flex mx-auto justify-content-center" style="width: 90%;">
                     <div class="p-2 ps-0">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="50" height="50" viewBox="0 0 256 256" xml:space="preserve">

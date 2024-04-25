@@ -3,6 +3,7 @@
 use App\Http\Resources\ClassroomResource;
 use App\Http\Resources\GradeResource;
 use App\Http\Resources\LessonResource;
+use App\Http\Resources\MessageResource;
 use App\Http\Resources\SubjectResource;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\WarningResource;
@@ -11,6 +12,7 @@ use App\Models\Grade;
 use App\Models\GradeReason;
 use App\Models\GradeType;
 use App\Models\Lesson;
+use App\Models\Message;
 use App\Models\Presence;
 use App\Models\PresenceType;
 use App\Models\Subject;
@@ -160,4 +162,13 @@ use Illuminate\Support\Facades\Route;
     });
     Route::get('/gradeTypes', function () {
         return GradeResource::collection(GradeType::all());
+    });
+// MESSAGES
+    Route::get('/messages/{sender}/{receiver}', function (string $sender, string $receiver)
+    {
+        $messages = Message::query()
+                   ->whereIn('sender_id', [$sender, $receiver])
+                   ->whereIn('receiver_id', [$sender, $receiver])
+                   ->get();
+        return MessageResource::collection($messages);
     });
