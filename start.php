@@ -6,7 +6,7 @@ function say($message) {
     echo "\n";
 }
 
-$process = 11;
+$process = 10;
 
 say("- Progress [0/{$process}]");
 file_put_contents("download_composer.php", "<?php copy('https://getcomposer.org/installer', 'composer-setup.php'); ?>");
@@ -28,7 +28,7 @@ say("- Progress [4/{$process}]");
 $env_content = 'APP_NAME=Dynamitowy
 APP_ENV=local
 APP_KEY=
-APP_DEBUG=false
+APP_DEBUG=true
 APP_URL=http://localhost
 
 LOG_CHANNEL=stack
@@ -42,7 +42,7 @@ DB_DATABASE=dynamitowy
 DB_USERNAME=root
 DB_PASSWORD=
 
-BROADCAST_DRIVER=log
+BROADCAST_DRIVER=reverb
 CACHE_DRIVER=file
 FILESYSTEM_DISK=local
 QUEUE_CONNECTION=sync
@@ -77,6 +77,18 @@ PUSHER_APP_CLUSTER=mt1
 
 MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
 MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+
+REVERB_APP_ID=590252
+REVERB_APP_KEY=vubkg9ccrgssnkjt7w6d
+REVERB_APP_SECRET=yimosrpuruwi2qkfzgy4
+REVERB_HOST="localhost"
+REVERB_PORT=8080
+REVERB_SCHEME=http
+
+VITE_REVERB_APP_KEY="${REVERB_APP_KEY}"
+VITE_REVERB_HOST="${REVERB_HOST}"
+VITE_REVERB_PORT="${REVERB_PORT}"
+VITE_REVERB_SCHEME="${REVERB_SCHEME}"
 ';
 
 file_put_contents(".env", $env_content);
@@ -115,10 +127,6 @@ say("- Progress [9/{$process}]");
 system("php artisan storage:link");
 
 say("- Progress [10/{$process}]");
-
-system("php artisan install:broadcasting");
-
-say("- Progress [11/{$process}]");
 
 popen("start cmd /c \"npm run dev\"", "w");
 popen("start cmd /c \"php artisan serve\"", "w");
