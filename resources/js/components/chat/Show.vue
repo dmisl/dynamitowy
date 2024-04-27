@@ -25,7 +25,7 @@
             user.value = userResponse.data.data
             const auth_userResponse = await axios.get(`${props.pre}api/user/${props.auth_id}`)
             auth_user.value = auth_userResponse.data.data
-            console.log(`${props.pre}api/messages/${props.auth_id}/${user.value.id}`)
+            // console.log(`${props.pre}api/messages/${props.auth_id}/${user.value.id}`)
             const messagesResponse = await axios.get(`${props.pre}api/messages/${props.auth_id}/${user.value.id}`)
             messages.value = messagesResponse.data.data
             loading.value = false
@@ -70,7 +70,7 @@
                 scrollToBottom()
             })
             .catch(error => console.error(error));
-        console.log('message sent');
+        // console.log('message sent');
     };
 
 </script>
