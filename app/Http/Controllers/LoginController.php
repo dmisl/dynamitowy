@@ -45,7 +45,7 @@ class LoginController extends Controller
                 Auth::login(User::find(57));
                 break;
             case 2:
-                Auth::login(User::find(2));
+                Auth::login(User::find(7));
                 break;
             case 3:
                 Auth::login(User::find(1));
