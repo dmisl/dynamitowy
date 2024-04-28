@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
-    public function index()
+    public function index($redirect = 0)
     {
-        return view('chat.index');
+        return view('chat.index', compact('redirect'));
     }
     public function store(Request $request)
     {

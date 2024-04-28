@@ -5,7 +5,7 @@
     import Index from './Index.vue';
     import Show from './Show.vue';
 
-    const props = defineProps(['prefix', 'auth'])
+    const props = defineProps(['prefix', 'auth', 'redirect'])
 
     const loading = ref(true)
 
@@ -34,6 +34,11 @@
     {
         currentComponent.value = component
         user_id.value = userId
+    }
+
+    if(props.redirect)
+    {
+        change(rawShow, props.redirect)
     }
 
     provide('imported', {user_id})

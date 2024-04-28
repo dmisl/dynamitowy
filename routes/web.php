@@ -30,7 +30,7 @@ Route::middleware('auth')
     Route::get('logout', [LoginController::class, 'logout'])->name('login.logout');
 
     // MESSAGES
-    Route::get('chat', [ChatController::class, 'index'])->name('chat.index');
+    Route::get('chat/{redirect?}', [ChatController::class, 'index'])->name('chat.index');
     Route::post('chat/store', [ChatController::class, 'store'])->name('chat.store');
 
 });

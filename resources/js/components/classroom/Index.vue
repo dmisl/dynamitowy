@@ -92,7 +92,7 @@
                                     </a>
                                 </div>
                                 <div class="d-table me-1">
-                                    <a href="">
+                                    <a :href="`/chat/${user.id}`">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20" viewBox="0 0 256 256" xml:space="preserve">
 
                                             <defs>

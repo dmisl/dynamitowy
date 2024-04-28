@@ -25,6 +25,7 @@ This project addresses a common need in education, providing students, directors
 - [Axios](https://github.com/axios/axios)
 - [Vite](https://vitejs.dev/)
 - [Laravel Reverb](https://reverb.laravel.com/)
+- [Figma](https://www.figma.com/)
 
 ## ⚙️ Server Requiremenets <a id = "requirements"></a>
 
