@@ -15,18 +15,32 @@
     const currentComponent = ref(rawLesson)
     const user_id = ref(0)
 
-    function changeParent(component, userId = 0)
+    function checkIfAdd(attribute = '')
     {
         let url = window.location.href
-        if(component == rawLesson)
+        if(url.charAt(url.length-1) == '/')
         {
-            window.history.pushState({}, '', url.charAt(url.length-1) == '/' ? url : url.slice(0, -1));
-        } else if(component == rawWarning)
+            window.history.pushState({}, '', url+attribute);
+        } else if(url.charAt(url.length-1) == 'r')
         {
-            window.history.pushState({}, '', url.charAt(url.length-1) == '/' ? url+'1' : url.slice(0, -1)+'1');
+            window.history.pushState({}, '', url+'/'+attribute);
         } else
         {
-            window.history.pushState({}, '', url.charAt(url.length-1) == '/' ? url+'2' : url.slice(0, -1)+'2');
+            window.history.pushState({}, '', url.slice(0, -1)+attribute);
+        }
+    }
+
+    function changeParent(component, userId = 0)
+    {
+        if(component == rawLesson)
+        {
+            checkIfAdd()
+        } else if(component == rawWarning)
+        {
+            checkIfAdd(1)
+        } else
+        {
+            checkIfAdd(2)
         }
         currentComponent.value = component
         user_id.value = userId

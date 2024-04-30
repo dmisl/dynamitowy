@@ -1,6 +1,6 @@
 <script setup>
 
-    import { ref, markRaw, provide } from 'vue'
+    import { ref, markRaw, provide, onMounted, onBeforeUnmount } from 'vue'
 
     import JournalParent from './journal/Parent.vue'
     import ClassroomsParent from './classrooms/Parent.vue'
@@ -25,10 +25,50 @@
 
     const currentComponent = ref(rawJournal)
 
+    function checkIfAdd(attribute = '')
+    {
+        let url = window.location.href
+        if(url.charAt(url.length-1) == '/')
+        {
+            window.history.pushState({}, '', url+attribute);
+        } else if(url.charAt(url.length-1) == 'r')
+        {
+            window.history.pushState({}, '', url+'/'+attribute);
+        } else
+        {
+            window.history.pushState({}, '', url.slice(0, -1)+attribute);
+        }
+    }
+
     function changeParent(component)
     {
+        if(component == rawJournal)
+        {
+            checkIfAdd()
+        } else if(component == rawWarnings)
+        {
+            checkIfAdd(1)
+        } else if(component == rawClassrooms)
+        {
+            checkIfAdd(2)
+        } else
+        {
+            checkIfAdd(3)
+        }
         currentComponent.value = component
     }
+
+    const handlePopState = (event) => {
+        window.location.href = window.location.href
+    }
+
+    onMounted(() => {
+        window.addEventListener('popstate', handlePopState);
+    });
+
+    onBeforeUnmount(() => {
+        window.removeEventListener('popstate', handlePopState);
+    });
 
     switch (props.redirect) {
         case 0:
