@@ -16,6 +16,7 @@
             user.value = userResponse.data.data
             const classroomResponse = await axios.get(`${props.prefix}api/classroom/${user.value.classroom_id}`)
             classroom.value = classroomResponse.data.data
+            console.log(user.value)
         } catch (error) {
 
         } finally {
@@ -35,32 +36,48 @@
             <h3 class="fw-light">Loading...</h3>
         </div>
         <div v-else>
-            <div class="d-flex text-start mt-2">
-                <div style="padding-right: 60px;">
-                    <div class="mx-auto" :style="{ 'background-image': `url('${user.photo}')`, 'width': '200px', 'height': '200px', 'background-position': 'center', 'background-size': 'cover', 'background-repeat': 'no-repeat' }"></div>
+
+            <div class="d-flex mx-auto" style="margin-top: 20vh; width: 75%;">
+
+                <div style="width: 220px; border-radius: 100%; height: 220px; background-size: cover; background-repeat: no-repeat; background-position: center;" :style="{ 'background-image': `url(${user.photo})` }"></div>
+                <div class="d-table" style="margin-left: 30px;">
+                    <div class="d-table-cell align-middle text-start">
+                        <h1 class="p-0 m-0" style="font-weight: 400; font-size: 55px;">{{ user.name }}</h1>
+                        <h2 class="p-0 m-0 mt-2 ms-1" style="font-weight: 400; font-size: 30px;">{{ user.email }}</h2>
+                        <h1 class="p-0 m-0 mt-1" style="font-weight: 400; font-size: 60px;">{{ classroom.name }}</h1>
+                    </div>
                 </div>
-                <div>
-                    <h1>{{ user.name }}</h1>
-                    <h3>{{ classroom.name }}</h3>
-                </div>
+
             </div>
-            <div class="row mt-5">
+
+            <div class="mx-auto row" style="margin-top: 140px; width: 80%;">
+
                 <div class="col-md-4">
-                    <div @click="change(imported.rawGrade)" role="button" class="bg-primary p-3" style="margin-right: auto; width: 90%;">
-                        <h5 class="fw-light m-0 p-0">Oceny</h5>
+                    <div @click="change(imported.rawGrade)" role="button" class="mx-auto black_element" style="border-radius: 17px; width: 98%; color: white;">
+
+                        <h1 class="fw-light m-0" style="padding: 8px 35px; font-size: 38px;">Oceny</h1>
+
                     </div>
                 </div>
+
                 <div class="col-md-4">
-                    <div @click="change(imported.rawTimetable)" role="button" class="bg-danger p-3" style="margin: 0 auto; width: 90%;">
-                        <h5 class="fw-light m-0 p-0">Plan lekcji</h5>
+                    <div @click="change(imported.rawWarning)" role="button" class="mx-auto yellow_element" style="border-radius: 17px; width: 98%; color: black;">
+
+                        <h1 class="m-0" style="padding: 8px 35px; font-size: 38px; font-weight: 400;">Uwagi</h1>
+
                     </div>
                 </div>
+
                 <div class="col-md-4">
-                    <div @click="change(imported.rawWarning)" role="button" class="bg-warning p-3" style="margin-left: auto; width: 90%;">
-                        <h5 class="fw-light m-0 p-0">Uwagi</h5>
+                    <div @click="change(imported.rawTimetable)" role="button" class="mx-auto green_element" style="border-radius: 17px; width: 98%; color: black;">
+
+                        <h1 class="m-0" style="padding: 10px 35px; font-size: 38px; font-weight: 400;">Plan lekcji</h1>
+
                     </div>
                 </div>
+
             </div>
+
         </div>
     </div>
 </template>

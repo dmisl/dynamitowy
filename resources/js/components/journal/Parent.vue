@@ -21,7 +21,7 @@
         if(url.charAt(url.length-1) == '/')
         {
             window.history.pushState({}, '', url+attribute);
-        } else if(url.charAt(url.length-1) == 'r')
+        } else if(url.charAt(url.length-1) == 'l')
         {
             window.history.pushState({}, '', url+'/'+attribute);
         } else

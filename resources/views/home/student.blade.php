@@ -1,8 +1,3 @@
-    {{-- Wiadomosci
-    Uczen
-    Plan lekcji
-    Uwagi
-    Ostatnie oceny --}}
 @extends('layouts.main')
 
 @section('title', 'Główna strona | Dynamitowy')
@@ -16,7 +11,7 @@
             <div class="h-100" style="margin-left: 5vw; d-flex flex-column">
 
                 <a href="{{ route('chat.index') }}">
-                    <div class="text-light d-inline-block text-center pwidth" style="background-color: black; border-radius: 17px;">
+                    <div class="text-light d-inline-block text-center pwidth black_element" style="border-radius: 17px;">
 
                         <h1 class="fw-light m-0" style="padding: 11px 35px; font-size: 42px;">Wiadomości</h1>
 
@@ -24,7 +19,7 @@
                 </a>
 
                 <a href="{{ route('profile.index') }}">
-                    <div class="text-light d-inline-block text-center width" style="background-color: #4563FF; border-radius: 17px; margin-top: 26px;">
+                    <div class="text-light d-inline-block text-center width blue_element" style="border-radius: 17px; margin-top: 26px;">
 
                         <h1 class="fw-light m-0" style="padding: 11px 35px; font-size: 42px;">Uczeń</h1>
 
@@ -32,7 +27,7 @@
                 </a>
 
                 <a href="{{ route('profile.index', [3]) }}">
-                    <div class="text-light d-inline-block text-center width" style="background-color: black; border-radius: 17px; margin-top: 26px; color: black;">
+                    <div class="d-inline-block text-center width yellow_element" style="border-radius: 17px; margin-top: 26px; color: black;">
 
                         <h1 class="fw-light m-0" style="padding: 11px 35px; font-size: 42px;">Uwagi</h1>
 
@@ -40,7 +35,7 @@
                 </a>
 
                 <a href="{{ route('profile.index', [1]) }}">
-                    <div class="d-inline-block text-center width" style="background-color: #7bfd91; border-radius: 17px; margin-top: 26px; color: black;">
+                    <div class="d-inline-block text-center width black_element" style="border-radius: 17px; margin-top: 26px; color: white;">
 
                         <h1 class="fw-light m-0" style="padding: 11px 35px; font-size: 42px;">Oceny</h1>
 
@@ -48,7 +43,7 @@
                 </a>
 
                 <a href="{{ route('profile.index', [2]) }}">
-                    <div class="d-inline-block text-center width" style="background-color: rgb(249 81 81); border-radius: 17px; margin-top: 26px; color: white;">
+                    <div class="d-inline-block text-center width green_element" style="border-radius: 17px; margin-top: 26px; color: black;">
 
                         <h1 class="fw-light m-0" style="padding: 11px 35px; font-size: 42px;">Plan lekcji</h1>
 
@@ -82,11 +77,16 @@
 
 <script>
 
-    let widths = document.querySelectorAll('.width')
+    function fixWidth()
+    {
+        let widths = document.querySelectorAll('.width')
 
-    widths.forEach(width => {
-        width.style.width = document.querySelector('.pwidth').offsetWidth+'px'
-    });
+        widths.forEach(width => {
+            width.style.width = document.querySelector('.pwidth').offsetWidth+'px'
+        });
+        setTimeout(fixWidth, 1000);
+    }
+    fixWidth()
 
     function updateTime() {
         let currentTime = new Date();

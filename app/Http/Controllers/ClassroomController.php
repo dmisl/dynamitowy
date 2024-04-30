@@ -32,7 +32,7 @@ class ClassroomController extends Controller
             );
         }
 
-        $path = asset('https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg');
+        $path = 'https://drscdn.500px.org/photo/1091883781/q%3D90_m%3D2048/v2?sig=1e16169a1988d61507fb398baaa526c6c72ceacbcb46275c60758ff1794fba9d';
         if($request->hasFile('photo'))
         {
             $storaged = Storage::disk('public')->put("photos", $request->photo);
@@ -90,7 +90,7 @@ class ClassroomController extends Controller
 
         $user = User::find($request->id);
 
-        $path = asset('https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg');
+        $path = 'https://drscdn.500px.org/photo/1091883781/q%3D90_m%3D2048/v2?sig=1e16169a1988d61507fb398baaa526c6c72ceacbcb46275c60758ff1794fba9d';
         if($request->hasFile('photo'))
         {
             $storaged = Storage::disk('public')->put("photos", $request->photo);

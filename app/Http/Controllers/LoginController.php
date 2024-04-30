@@ -44,7 +44,13 @@ class LoginController extends Controller
     {
         switch ($role) {
             case 1:
-                Auth::login(User::find(57));
+                if(User::find(57))
+                {
+                    Auth::login(User::find(57));
+                } else
+                {
+                    Auth::login(User::query()->where(['role_id' => 1])->first());
+                }
                 break;
             case 2:
                 if(User::find(7))
