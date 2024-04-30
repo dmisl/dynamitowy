@@ -15,11 +15,13 @@
     const currentComponent = ref(rawIndex)
 
     const users = ref([])
+    const filtered = ref([])
 
     onMounted(async () => {
         try {
             const usersResponse = await axios.get(`${props.prefix}api/users`)
             users.value = usersResponse.data.data
+            filtered.value = users.value
         } catch (error) {
 
         } finally
@@ -27,6 +29,13 @@
             loading.value = false
         }
     })
+
+    const text = ref('')
+
+    function filter()
+    {
+        filtered.value = users.value.filter(obj => obj.name.toLowerCase().includes(text.value.toLowerCase()))
+    }
 
     const user_id = ref(0)
 
@@ -45,24 +54,26 @@
 
 </script>
 <template>
-    <div>
-        <div class="w-100 mt-3 overflow-hidden p-0" style="height: 400px;">
+    <div style="width: 90%; margin: 0 auto;">
+        <div class="w-100 mt-3 overflow-hidden p-0" style="height: 50vh;">
 
             <div class="row text-start h-100 p-0 w-100">
 
-                <div class="col-md-4 bg-secondary-subtle p-0 h-100 overflow-auto">
+                <div class="col-md-4 p-0 h-100 overflow-auto" style="background-color: rgb(158 233 255 / 50%);">
+
+                    <input @keyup="filter" v-model="text" type="search" class="search">
 
                     <div v-if="loading" class="p-2 ps-3">
                         Loading...
                     </div>
                     <div v-else>
-                        <div v-for="user in users" @click="change(rawShow, user.id)" role="button"  class="fs-5 p-2 ps-4 border-bottom border-dark">
+                        <div v-for="user in filtered" @click="change(rawShow, user.id)" role="button"  class="fs-5 p-2 ps-4 border-bottom border-dark">
                             <p class="m-0 p-0">{{ user.name }}</p>
                         </div>
                     </div>
 
                 </div>
-                <div class="col-md-8 p-0 h-100 overflow-hidden" style="background-color: rgb(206, 206, 206);">
+                <div class="col-md-8 p-0 h-100 overflow-hidden" style="background-color: rgba(255, 255, 255, 0.5);">
 
                     <component :is="currentComponent" :pre="props.prefix" :auth_id="props.auth"></component>
 

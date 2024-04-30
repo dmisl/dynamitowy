@@ -85,8 +85,8 @@
 
                         <a v-for="lesson in lessons" role="button" @click="change(rawShow, lesson.id, lesson.classroom_id)" class="text-decoration-none text-dark">
                             <div class="m-0 p-0 border-bottom border-dark">
-                                <p class="p-0 m-0 ps-1 pt-1 fw-medium">{{ classrooms[lesson.classroom_id-1] ? classrooms[lesson.classroom_id-1].name : '' }} - {{ timetable[lesson.lesson_number] }}</p>
-                                <p class="p-0 m-0 ps-1 small text-wrap">{{ subjects[lesson.subject_id-1] ? subjects[lesson.subject_id-1].name : '' }}</p>
+                                <p class="p-0 m-0 ps-1 pt-1 fw-medium">{{ classrooms.find(obj => obj.id === lesson.classroom_id).name }} - {{ timetable[lesson.lesson_number] }}</p>
+                                <p class="p-0 m-0 ps-1 small text-wrap">{{ subjects.find(obj => obj.id === lesson.subject_id).name }}</p>
                             </div>
                         </a>
 

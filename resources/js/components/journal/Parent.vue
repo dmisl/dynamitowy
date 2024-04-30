@@ -1,6 +1,6 @@
 <script setup>
 
-    import { ref, markRaw, provide } from 'vue'
+    import { ref, markRaw, provide, onMounted, onBeforeUnmount } from 'vue'
 
     import LessonParent from '../lesson/Parent.vue'
     import ClassroomParent from '../classroom/Parent.vue'
@@ -17,9 +17,32 @@
 
     function changeParent(component, userId = 0)
     {
+        let url = window.location.href
+        if(component == rawLesson)
+        {
+            window.history.pushState({}, '', url.charAt(url.length-1) == '/' ? url : url.slice(0, -1));
+        } else if(component == rawWarning)
+        {
+            window.history.pushState({}, '', url.charAt(url.length-1) == '/' ? url+'1' : url.slice(0, -1)+'1');
+        } else
+        {
+            window.history.pushState({}, '', url.charAt(url.length-1) == '/' ? url+'2' : url.slice(0, -1)+'2');
+        }
         currentComponent.value = component
         user_id.value = userId
     }
+
+    const handlePopState = (event) => {
+        window.location.href = window.location.href
+    }
+
+    onMounted(() => {
+        window.addEventListener('popstate', handlePopState);
+    });
+
+    onBeforeUnmount(() => {
+        window.removeEventListener('popstate', handlePopState);
+    });
 
     switch (props.redirect) {
         case 0:

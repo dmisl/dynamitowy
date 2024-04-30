@@ -14,16 +14,61 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    {{-- <style>
-        .custom-cursor {
-            position: absolute;
-            width: 20px; /* Adjust size as needed */
-            height: 20px;
-            background-image: url('{{ asset("storage/cursor.png") }}');
-            background-size: cover;
-            pointer-events: none; /* Prevent cursor from interfering with click events */
+    <style>
+        .search {
+            width: 100%;
+            box-sizing: border-box;
+            border: 0;
+            outline: 0;
+            font-size: 18px;
+            background-color: white;
+            background-image: url('{{ asset("storage/search.png") }}');
+            background-position: 20px 10px;
+            background-size: 30px;
+            background-repeat: no-repeat;
+            padding: 10px 20px 10px 55px;
         }
-    </style> --}}
+        .black_element
+        {
+            background-color: black;
+            transition: 0.3s;
+        }
+        .black_element:hover
+        {
+            background-color: #333333;
+            transition: 0.5s;
+        }
+        .blue_element
+        {
+            background-color: #4563FF;
+            transition: 0.3s;
+        }
+        .blue_element:hover
+        {
+            background-color: rgb(39, 69, 235);
+            transition: 0.5s;
+        }
+        .yellow_element
+        {
+            background-color: rgb(255, 207, 83);
+            transition: 0.3s;
+        }
+        .yellow_element:hover
+        {
+            background-color: rgb(235, 187, 63);
+            transition: 0.5s;
+        }
+        .green_element
+        {
+            background-color: rgb(135, 255, 178);
+            transition: 0.3s;
+        }
+        .green_element:hover
+        {
+            background-color: rgb(115, 235, 158);
+            transition: 0.5s;
+        }
+    </style>
 </head>
 <body class="d-flex flex-column custom-cursor" style="font-family: 'Poppins', sans-serif; height: 100vh; overflow: hidden;">
     <div style="position: fixed; z-index: -20; width: 100%; height: 100vh; background-image: url('{{ asset('storage/background.png') }}'); background-size: cover; background-repeat: no-repeat;"></div>

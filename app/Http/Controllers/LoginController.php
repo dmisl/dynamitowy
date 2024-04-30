@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classroom;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,13 +47,25 @@ class LoginController extends Controller
                 Auth::login(User::find(57));
                 break;
             case 2:
-                Auth::login(User::find(7));
+                if(User::find(7))
+                {
+                    Auth::login(User::find(7));
+                } else
+                {
+                    Auth::login(Teacher::first()->user_id);
+                }
                 break;
             case 3:
                 Auth::login(User::find(1));
                 break;
             case 4:
-                Auth::login(User::find(13));
+                if(User::find(13))
+                {
+                    Auth::login(User::find(13));
+                } else
+                {
+                    Auth::login(User::find(Classroom::first()->teacher->user_id));
+                }
                 break;
             default:
                 # code...

@@ -12,7 +12,7 @@
 
 
                 <a href="{{ route('chat.index') }}">
-                    <div class="text-light d-inline-block text-center pwidth" style="background-color: black; border-radius: 17px;">
+                    <div class="text-light d-inline-block text-center pwidth black_element" style="border-radius: 17px;">
 
                         <h1 class="fw-light m-0" style="padding: 11px 35px; font-size: 42px;">Wiadomości</h1>
 
@@ -20,7 +20,7 @@
                 </a>
 
                 <a href="{{ route('journal.index') }}">
-                    <div class="text-light d-inline-block text-center width" style="background-color: #4563FF; border-radius: 17px; margin-top: 26px;">
+                    <div class="text-light d-inline-block text-center width blue_element" style="border-radius: 17px; margin-top: 26px;">
 
                         <h1 class="fw-light m-0" style="padding: 11px 35px; font-size: 42px;">Dziennik</h1>
 
@@ -28,20 +28,22 @@
                 </a>
 
                 <a href="{{ route('journal.index', [1]) }}">
-                    <div class="d-inline-block text-center width" style="background-color: #FFCF53; border-radius: 17px; margin-top: 26px; color: black;">
+                    <div class="d-inline-block text-center width yellow_element" style="border-radius: 17px; margin-top: 26px; color: black;">
 
                         <h1 class="m-0" style="padding: 11px 35px; font-size: 42px; font-weight: 400;">Uwagi</h1>
 
                     </div>
                 </a>
 
-                <a href="{{ route('journal.index', [2]) }}">
-                    <div class="text-light d-inline-block text-center width" style="background-color: black; border-radius: 17px; margin-top: 26px; color: black;">
+                @if(Auth::user()->teacher->classroom)
+                    <a href="{{ route('journal.index', [2]) }}">
+                        <div class="text-light d-inline-block text-center width black_element" style="border-radius: 17px; margin-top: 26px; color: black;">
 
-                        <h1 class="fw-light m-0" style="padding: 11px 35px; font-size: 42px;">Moja klasa</h1>
+                            <h1 class="fw-light m-0" style="padding: 11px 35px; font-size: 42px;">Moja klasa</h1>
 
-                    </div>
-                </a>
+                        </div>
+                    </a>
+                @endif
 
             </div>
 
@@ -70,11 +72,16 @@
 
 <script>
 
-    let widths = document.querySelectorAll('.width')
+    function fixWidth()
+    {
+        let widths = document.querySelectorAll('.width')
 
-    widths.forEach(width => {
-        width.style.width = document.querySelector('.pwidth').offsetWidth+'px'
-    });
+        widths.forEach(width => {
+            width.style.width = document.querySelector('.pwidth').offsetWidth+'px'
+        });
+        setTimeout(fixWidth, 1000);
+    }
+    fixWidth()
 
     function updateTime() {
         let currentTime = new Date();

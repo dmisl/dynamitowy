@@ -1,11 +1,15 @@
-@extends('layouts.chat')
+@extends('layouts.main')
 
 @section('title', 'Wiadomości')
 
 @section('content')
 
-    <a href="{{ route('home.index') }}">Wrócz</a>
+    <div style="margin-top: 20vh;">
 
-    <chat-parent :prefix="'{{ asset('') }}'" :auth="{{ Auth::id() }}" :redirect="{{ $redirect }}"></chat-parent>
+        <a href="{{ route('home.index') }}">Wrócz</a>
+
+        <chat-parent :prefix="'{{ asset('') }}'" :auth="{{ Auth::id() }}" :redirect="{{ $redirect }}"></chat-parent>
+
+    </div>
 
 @endsection

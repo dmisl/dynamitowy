@@ -48,7 +48,7 @@
                 <div v-if="warnings.length >= 1" v-for="warning in warnings" class="w-100 rounded-3 mt-2 mx-auto bg-secondary-subtle border p-2 row justify-content-between">
                     <div class="col">
                         <p class="fs-4 m-0 p-0">Uczen:</p>
-                        <p class="fs-5 fw-medium m-0 p-0">{{ users[warning.user_id-1].name }} - {{ classrooms[users[warning.user_id-1].classroom_id-1].name }}</p>
+                        <p class="fs-5 fw-medium m-0 p-0">{{ users.find(obj => obj.id === warning.user_id).name }} - {{ classrooms.find(classroom => classroom.id === users.find(obj => obj.id === warning.user_id).classroom_id).name }}</p>
                         <p class="small text-secondary m-0 p-0">{{ warning.date }}</p>
                     </div>
                     <div class="col">
