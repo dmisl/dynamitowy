@@ -32,7 +32,7 @@ class ClassroomController extends Controller
             );
         }
 
-        $path = asset('storage/photos/default.jpg');
+        $path = asset('https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg');
         if($request->hasFile('photo'))
         {
             $storaged = Storage::disk('public')->put("photos", $request->photo);
@@ -90,7 +90,7 @@ class ClassroomController extends Controller
 
         $user = User::find($request->id);
 
-        $path = asset('storage/photos/default.jpg');
+        $path = asset('https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg');
         if($request->hasFile('photo'))
         {
             $storaged = Storage::disk('public')->put("photos", $request->photo);

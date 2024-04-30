@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classroom;
 use App\Models\Lesson;
 use App\Models\Subject;
 use App\Models\Teacher;
@@ -53,10 +54,6 @@ class TeacherController extends Controller
     public function delete(Request $request)
     {
 
-        return response()->json([
-            'message' => Teacher::find(User::find($request->id)->teacher->id)->warnings,
-        ]);
-
         $validator = Validator::make($request->all(), [
             'id' => ['required'],
         ]);
@@ -77,8 +74,23 @@ class TeacherController extends Controller
             $subject->delete();
         }
 
-        foreach (Teacher::find($user->teacher->id)->warnings as $warning) {
-            Warning::find($warning->id)->delete();
+        if(Warning::query()->where(['teacher_id' => $user->teacher->id])->get()->count() > 0)
+        {
+            foreach (Warning::query()->where(['teacher_id' => $user->teacher->id])->get() as $warning) {
+                $warning->delete();
+            }
+        }
+
+        $classroom = Classroom::query()->where(['teacher_id' => $user->teacher->id])->first();
+        if($classroom)
+        {
+            foreach (Warning::query()->where(['classroom_id' => $classroom->id])->get() as $warning) {
+                $warning->delete();
+            }
+            foreach ($classroom->users as $student) {
+                $student->delete();
+            }
+            $classroom->delete();
         }
 
         Teacher::find($user->teacher->id)->delete();

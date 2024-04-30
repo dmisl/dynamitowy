@@ -46,8 +46,6 @@ Route::middleware('teacher')
 
     Route::post('gradereason/store', [GradeReasonController::class, 'store'])->name('gradereason.store');
 
-    Route::get('warning', [WarningController::class, 'index'])->name('warning.index');
-
     Route::post('warning/store', [WarningController::class, 'store'])->name('warning.store');
 
     Route::middleware('classroom_teacher')

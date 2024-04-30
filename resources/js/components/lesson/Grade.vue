@@ -83,7 +83,7 @@
             formData.append('type', type);
             formData.append('id', selected.value.gradeId);
 
-            const response = await axios.post('${props.pre}grade/update', formData);
+            const response = await axios.post(`${props.pre}grade/update`, formData);
 
             grades.value.find(obj => obj.id === selected.value.gradeId).type = type;
             select(users.value[users.value.findIndex(obj => obj.id === selected.value.userId)+1].id, selected.value.gradeReasonId)
@@ -102,7 +102,7 @@
             formData.append('classroom_id', imported.classroom_id.value);
             formData.append('date', new Date().toISOString().split('T')[0]);
 
-            const response = await axios.post('${props.pre}gradereason/store', formData);
+            const response = await axios.post(`${props.pre}gradereason/store`, formData);
 
             getData()
         } catch (error) {

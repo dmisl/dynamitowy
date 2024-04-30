@@ -1,6 +1,6 @@
 <script setup>
 
-    import { ref, onMounted, inject } from 'vue'
+    import { ref, onMounted, inject, watch } from 'vue'
     import axios from 'axios'
 
     const props = defineProps(['prefix'])
@@ -13,6 +13,10 @@
     const classroom = ref([])
 
     const title = inject('title')
+
+    const imported = inject('imported')
+    const change = inject('change')
+    const getParentData = inject('getParentData')
 
     async function getData()
     {
@@ -40,9 +44,7 @@
         getData()
     })
 
-    const imported = inject('imported')
-    const change = inject('change')
-    const getParentData = inject('getParentData')
+    watch(imported.teacher_id, () => { getData() })
 
     const subject_name = ref('')
 

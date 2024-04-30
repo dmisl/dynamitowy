@@ -76,7 +76,7 @@ onMounted(async () => {
             formData.append('id', selected.value.presenceId);
             formData.append('type', type);
 
-            const response = await axios.post('${props.pre}journal/lesson/update', formData);
+            const response = await axios.post(`${props.pre}journal/lesson/update`, formData);
 
             classroomPresence.value.find(obj => obj.id === selected.value.presenceId).presence_type_id = type;
             select(users.value[users.value.findIndex(obj => obj.id === selected.value.userId)+1].id)

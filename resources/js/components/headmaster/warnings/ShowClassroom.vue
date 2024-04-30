@@ -63,7 +63,7 @@
                         <div class="d-flex align-items-center h-100">
                             <div>
                                 <p class="fs-4 m-0 p-0">Uczen:</p>
-                                <p class="fs-5 fw-medium m-0 p-0">{{ users[warning.user_id-1].name }} - {{ classroom.name }}</p>
+                                <p class="fs-5 fw-medium m-0 p-0">{{ users.find(obj => obj.id === warning.user_id).name }} - {{ classroom.name }}</p>
                                 <p class="small text-secondary m-0 p-0">{{ warning.date }}</p>
                             </div>
                         </div>

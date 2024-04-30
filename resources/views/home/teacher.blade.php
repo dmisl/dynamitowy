@@ -10,6 +10,7 @@
 
             <div class="h-100" style="margin-left: 5vw; d-flex flex-column">
 
+
                 <a href="{{ route('chat.index') }}">
                     <div class="text-light d-inline-block text-center pwidth" style="background-color: black; border-radius: 17px;">
 

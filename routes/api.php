@@ -67,7 +67,7 @@ use Illuminate\Support\Facades\Route;
         return ClassroomResource::collection(Classroom::find($classroom_id)->lessons);
     });
     Route::get('classroomLessons/{classroom_id}/{day}', function (string $classroom_id, string $day) {
-        return ClassroomResource::collection(Classroom::find($classroom_id)->lessons()->where('day', $day)->get());
+        return ClassroomResource::collection(Classroom::find($classroom_id)->lessons()->where('day', $day)->orderBy('lesson_number', 'asc')->get());
     });
     Route::get('/todayLessons/{id}/{date}', function (string $id, string $date = '0') {
         if($date == 0)

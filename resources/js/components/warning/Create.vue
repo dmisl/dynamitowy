@@ -39,7 +39,7 @@
             formData.append('teacher_id', props.teacher_id);
             formData.append('classroom_id', students.value.find(obj => obj.id === 57).classroom_id);
 
-            const response = await axios.post('${props.pre}warning/store', formData);
+            const response = await axios.post(`${props.pre}warning/store`, formData);
 
             change(imported.rawIndex)
 

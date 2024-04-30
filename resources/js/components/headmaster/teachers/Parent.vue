@@ -58,7 +58,7 @@
         <div class="d-flex">
 
             <div style="height: 100%;">
-                <div class="col-md-3 bg-info bg-gradient" style="position: fixed; height: 100vh; overflow: auto;">
+                <div class="col-md-3 bg-gradient" style="position: fixed; height: 100vh; overflow: auto; background-color: rgb(119 178 255);">
                     <div class="user-select-none">
 
                         <div v-if="loading">Loading...</div>
