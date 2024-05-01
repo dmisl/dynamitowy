@@ -804,7 +804,7 @@ class DatabaseSeeder extends Seeder
         // creating random grades for students
             $classrooms = Classroom::all();
             foreach ($classrooms as $classroom) {
-                foreach ($classroom->lessons()->limit(3)->get() as $lesson) {
+                foreach ($classroom->lessons()->select('subject_id')->distinct()->get() as $lesson) {
                     for ($i = 0; $i < 3; $i++) {
                         $gradeReason = GradeReason::create([
                             'text' => 'BHP',

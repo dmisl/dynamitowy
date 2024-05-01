@@ -15,6 +15,7 @@
     const subjects = ref([])
     const gradeTypes = ref([])
     const classroomLessons = ref([])
+    const uniqueLessons = ref([])
 
     onMounted(async () => {
         try {
@@ -34,6 +35,7 @@
             gradeTypes.value = gradeTypesResponse.data.data
             const classroomLessonsResponse = await axios.get(`${props.prefix}api/allClassroomLessons/${user.value.classroom_id}`)
             classroomLessons.value = classroomLessonsResponse.data.data
+            uniqueLessons.value = [...new Set(classroomLessons.value.map(lesson => lesson.subject_id))]
         } catch (error) {
             console.error(error)
         } finally {
@@ -70,8 +72,8 @@
 
                 <p @click="change(imported.rawIndex)" class="p-0 m-0 text-primary text-decoration-underline text-center" role="button">Wrócz</p>
 
-                <div class="mt-5 mx-auto" style="width: 80%;" v-for="lesson in classroomLessons">
-                    <h3 class="fw-light">{{ subjects.find(obj => obj.id === lesson.subject_id).name }}</h3>
+                <div class="mt-5 mx-auto" style="width: 80%;" v-for="subject_id in uniqueLessons">
+                    <h3 class="fw-light">{{ subjects.find(obj => obj.id === subject_id).name }}</h3>
                     <table>
                         <thead>
                             <tr>
@@ -82,7 +84,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="gradeReason in gradeReasons.filter(obj => obj.subject_id === lesson.subject_id && obj.classroom_id === user.classroom_id)" v-if="gradeReasons.filter(obj => obj.subject_id === lesson.subject_id && obj.classroom_id === user.classroom_id).length > 0">
+                            <tr v-for="gradeReason in gradeReasons.filter(obj => obj.subject_id === subject_id && obj.classroom_id === user.classroom_id)" v-if="gradeReasons.filter(obj => obj.subject_id === subject_id && obj.classroom_id === user.classroom_id).length > 0">
                                 <td>{{ gradeTypes[grades.find(obj => obj.grade_reason_id === gradeReason.id).type-1].text }}</td>
                                 <td>{{ gradeReason.text }}</td>
                                 <td>{{ gradeReason.date }}</td>
