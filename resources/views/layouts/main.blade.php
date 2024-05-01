@@ -26,7 +26,7 @@
             background-position: 20px 10px;
             background-size: 30px;
             background-repeat: no-repeat;
-            padding: 10px 20px 10px 55px;
+            padding: 10px 20px 10px 57px;
         }
         .black_element
         {

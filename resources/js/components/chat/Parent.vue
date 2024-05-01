@@ -61,7 +61,7 @@
 
                 <div class="col-md-4 p-0 h-100 overflow-auto" style="background-color: rgb(158 233 255 / 50%);">
 
-                    <input @keyup="filter" v-model="text" type="search" class="search">
+                    <input @keyup="filter" v-model="text" type="search" class="search" placeholder="Znajdż kogoś">
 
                     <div v-if="loading" class="p-2 ps-3">
                         Loading...
