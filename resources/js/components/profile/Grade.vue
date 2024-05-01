@@ -8,6 +8,8 @@
     const loading = ref(true)
 
     const user = ref([])
+    const teachers = ref([])
+    const teacherModels = ref([])
     const gradeReasons = ref([])
     const grades = ref([])
     const subjects = ref([])
@@ -18,6 +20,10 @@
         try {
             const userResponse = await axios.get(`${props.prefix}api/user/${imported.user_id}`)
             user.value = userResponse.data.data
+            const teachersResponse = await axios.get(`${props.prefix}api/teachers`)
+            teachers.value = teachersResponse.data.data
+            const teacherModelsResponse = await axios.get(`${props.prefix}api/teachersModel`)
+            teacherModels.value = teacherModelsResponse.data.data
             const gradeReasonsResponse = await axios.get(`${props.prefix}api/gradeReasons`)
             gradeReasons.value = gradeReasonsResponse.data.data
             const gradesResponse = await axios.get(`${props.prefix}api/user_grades/${user.value.id}`)
@@ -51,27 +57,28 @@
 
 </script>
 <template>
-    <div>
+    <div class="pb-5">
 
-        <div v-if="loading">
-            Loading...
+        <div v-if="loading" style="margin-top: 10vh;">
+            <h3 class="fw-light">
+                Loading...
+            </h3>
         </div>
-        <div v-else>
-
-            <h1 class="ms-3 fw-medium text-start">Oceny</h1>
+        <div v-else style="margin-top: 10vh;">
 
             <div class="text-start mt-5 user-select-none">
 
-                <p @click="change(imported.rawIndex)" class="p-0 m-0 text-primary text-decoration-underline text-center" role="button">Wrocz</p>
+                <p @click="change(imported.rawIndex)" class="p-0 m-0 text-primary text-decoration-underline text-center" role="button">Wrócz</p>
 
-                <div class="px-4 mt-5" v-for="lesson in classroomLessons">
-                    <h4 class="fw-light">{{ subjects.find(obj => obj.id === lesson.subject_id).name }}</h4>
-                    <table class="table table-primary">
+                <div class="mt-5 mx-auto" style="width: 80%;" v-for="lesson in classroomLessons">
+                    <h3 class="fw-light">{{ subjects.find(obj => obj.id === lesson.subject_id).name }}</h3>
+                    <table>
                         <thead>
                             <tr>
                                 <th>Ocena</th>
                                 <th>Temat oceny</th>
                                 <th>Data</th>
+                                <th>Nauczyciel</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,9 +86,10 @@
                                 <td>{{ gradeTypes[grades.find(obj => obj.grade_reason_id === gradeReason.id).type-1].text }}</td>
                                 <td>{{ gradeReason.text }}</td>
                                 <td>{{ gradeReason.date }}</td>
+                                <td>{{ teachers.find(obj => obj.id === teacherModels.find(teacher => teacher.id === subjects.find(subject => subject.id === gradeReason.subject_id).teacher_id).user_id).name }}</td>
                             </tr>
                             <tr v-else>
-                                <td colspan="3">
+                                <td colspan="4">
                                     Brak ocen
                                 </td>
                             </tr>

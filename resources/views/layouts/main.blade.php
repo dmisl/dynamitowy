@@ -68,6 +68,18 @@
             background-color: rgb(115, 235, 158);
             transition: 0.5s;
         }
+        table
+        {
+            width: 100%;
+            font-size: 18px;
+            border-collapse: collapse;
+        }
+        th, td
+        {
+            padding: 5px 10px;
+            background-color: #59dbff5e;
+            border: 1px solid rgba(0, 0, 0, 0.411);
+        }
     </style>
 </head>
 <body class="d-flex flex-column custom-cursor" style="font-family: 'Poppins', sans-serif; height: 100vh; overflow: hidden;">
