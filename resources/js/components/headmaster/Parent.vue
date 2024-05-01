@@ -2,6 +2,7 @@
 
     import { ref, markRaw, provide, onMounted, onBeforeUnmount } from 'vue'
 
+    import 'bootstrap/dist/js/bootstrap.bundle'
     import JournalParent from './journal/Parent.vue'
     import ClassroomsParent from './classrooms/Parent.vue'
     import TeachersParent from './teachers/Parent.vue'
@@ -64,6 +65,10 @@
 
     onMounted(() => {
         window.addEventListener('popstate', handlePopState);
+        let popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl)
+        })
     });
 
     onBeforeUnmount(() => {
@@ -96,7 +101,12 @@
 <template>
     <div>
         <header class="w-100 bg-dark text-light m-0 p-0 user-select-none" style="position: fixed; z-index: 30;">
-            <a class="text-decoration-none text-light" @click="home" role="button"><p class="m-0 p-0">Dynamitowy</p></a>
+            <div class="d-flex">
+                <a class="text-decoration-none text-light" @click="home" role="button"><p class="m-0 p-0">Dynamitowy</p></a>
+                <div class="text-end flex-grow-1">
+                    <p class="p-0 m-0 text-decoration-underline d-inline" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Go to home page and logout to login as another role">Dont forget to check out other roles</p>
+                </div>
+            </div>
             <div class="d-flex">
                 <a @click="changeParent(rawJournal)" role="button" class="text-light text-decoration-none text-center mx-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="50" height="50" viewBox="0 0 256 256" xml:space="preserve">
