@@ -44,35 +44,35 @@
 <template>
     <div>
 
-        <div v-if="loading">
-            Loading...
+        <div v-if="loading" style="margin-top: 10vh;">
+            <h3 class="fw-light">
+                Loading...
+            </h3>
         </div>
         <div v-else>
 
-            <h1 class="ms-3 fw-medium text-start">Uwagi</h1>
+            <div class="text-start user-select-none" style="margin-top: 10vh;">
 
-            <div class="text-start mt-5 user-select-none">
-
-                <p @click="change(imported.rawIndex)" class="p-0 m-0 text-primary text-decoration-underline text-center" role="button">Wrocz</p>
+                <p @click="change(imported.rawIndex)" class="p-0 m-0 text-primary text-decoration-underline text-center" role="button">Wrócz</p>
 
                 <div v-if="warnings.length > 0">
 
                     <div class="mt-5">
 
-                        <div v-for="warning in warnings" class="bg-secondary-subtle p-3 mt-2 rounded-3">
+                        <div v-for="warning in warnings" class="p-3 mt-2 mx-auto" style="width: 80%; border-radius: 20px; background-color: #ed7f8ac7;">
 
-                            <div class="d-flex">
-                                <div class="ms-2">
+                            <div class="d-flex px-5 pt-1">
+                                <div>
                                     <h4>Data</h4>
                                     <h5 class="fw-light">{{ warning.date }}</h5>
                                 </div>
-                                <div style="margin-left: 200px; width: 300px;">
+                                <div style="margin-left: 200px;">
                                     <h4>Opis</h4>
                                     <h5 class="fw-light">
                                         {{ warning.desc }}
                                     </h5>
                                 </div>
-                                <div style="margin-left: auto; margin-right: 100px;">
+                                <div style="margin-left: auto;">
                                     <h4>Nauczyciel</h4>
                                     <h5 class="fw-light">
                                         {{ users.find(obj => obj.id == warning.teacher_id).name }}
