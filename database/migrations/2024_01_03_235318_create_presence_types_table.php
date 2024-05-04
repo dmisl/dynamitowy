@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('homework', function (Blueprint $table) {
+        Schema::create('presence_types', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->text('text');
+            $table->text('desc');
         });
     }
 
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('homework');
+        Schema::dropIfExists('presence_types');
     }
 };
