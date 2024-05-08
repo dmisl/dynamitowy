@@ -9,7 +9,7 @@ function say($message) {
 $process = 10;
 
 say("- Progress [0/{$process}]");
-file_put_contents("download_composer.php", "<?php copy('https://getcomposer.org/installer', 'composer-setup.php'); ?>");
+file_put_contents("download_composer.php", "<?php copy('https://getcomposer.org/installer', 'composer-setup.php');?>");
 
 say("- Progress [1/{$process}]");
 system("php download_composer.php");
@@ -103,19 +103,31 @@ system("php artisan config:cache");
 
 say("- Progress [7/{$process}]");
 
-$conn = new PDO("mysql:host=localhost;", 'root', '');
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$host = '127.0.0.1';
+$user = 'root';
+$password = '';
 
-$query = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = ?";
-$stmt = $conn->prepare($query);
-$stmt->execute(["dynamitowy"]);
+try {
+    $conn = new mysqli($host, $user, $password);
 
-$result = $stmt->fetch();
+    if (!$conn->connect_error) {
+        $conn = new PDO("mysql:host=localhost;", 'root', '');
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-if ($result) {
-    system("php artisan migrate:refresh --seed");
-} else {
-    system("php artisan migrate --seed");
+        $query = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->execute(["dynamitowy"]);
+
+        $result = $stmt->fetch();
+
+        if ($result) {
+            system("php artisan migrate:refresh --seed");
+        } else {
+            system("php artisan migrate --seed");
+        }
+    }
+} catch (mysqli_sql_exception $e) {
+} catch (Exception $e) {
 }
 
 say("- Progress [8/{$process}]");
