@@ -49,6 +49,8 @@ This script automates all necessary setup steps, including installing PHP/JS dep
 
 Once the script completes, your program will be up and running, ready for you to use.
 
+---
+
 To run the program using Docker:
 
 Before running Docker commands, update the .env file with your database configuration.
