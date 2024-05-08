@@ -27,14 +27,19 @@ This project addresses a common need in education, providing students, directors
 - [Laravel Reverb](https://reverb.laravel.com/)
 - [Figma](https://www.figma.com/)
 
-## ⚙️ Server Requiremenets <a id = "requirements"></a>
+## ⚙️ Requiremenets <a id = "requirements"></a>
 
+Server requirements to run locally:
 - PHP >= 8.2
 - [Node.js](https://nodejs.org/en/download) (LTS)
+- MySQL 8.0
+
+To run on Docker:
+- [Docker](https://www.docker.com/products/docker-desktop/)
 
 ## 🚀 Running the Program <a id = "running"></a>
 
-To run the program, simply clone the repository and execute the start script:
+To run the program locally, simply clone the repository and execute the start script:
 ```
 git clone https://github.com/dmisl/Dynamitowy.git
 cd <project_directory>
@@ -43,6 +48,24 @@ php start.php
 This script automates all necessary setup steps, including installing PHP/JS dependencies, setting up environment variables, running migrations, starting the development server, and launching the WebSocket server (Laravel Reverb).
 
 Once the script completes, your program will be up and running, ready for you to use.
+
+To run the program using Docker:
+
+Before running Docker commands, update the .env file with your database configuration.
+
+```
+DB_HOST=database
+DB_USERNAME=someone
+DB_PASSWORD=secret
+```
+then run
+```
+php start.php
+docker-compose build
+docker-compose up
+```
+
+This will set up the program environment using Docker, allowing you to run it seamlessly. (If you encounter any issues with the environment run `docker-compose down` then `docker-compose up`)
 
 ## 💡 Features <a id = "features"></a>
 
