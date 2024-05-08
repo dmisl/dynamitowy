@@ -17,6 +17,15 @@ return new class extends Migration
             $table->foreignId('teacher_id')->constrained();
             $table->string('name');
         });
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('classroom_id')->nullable()->constrained();
+        });
+        Schema::table('lessons', function (Blueprint $table) {
+            $table->foreignId('classroom_id')->nullable()->constrained();
+        });
+        Schema::table('teachers', function (Blueprint $table) {
+            $table->foreignId('classroom_id')->nullable()->constrained();
+        });
     }
 
     /**

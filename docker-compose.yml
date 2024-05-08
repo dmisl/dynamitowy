@@ -1,0 +1,54 @@
+version: "3.9"
+services:
+    # PHP Service
+    php:
+        build:
+            context: .
+            target: php
+            args:
+                - APP_ENV=${APP_ENV}
+        environment:
+            - APP_ENV=${APP_ENV}
+            - CONTAINER_ROLE=app
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+            - ./.env:/var/www/.env
+        ports:
+            - 8000:8000
+        depends_on:
+            - database
+    # Database Server
+    database:
+        image: mysql:8.0
+        ports:
+            -   3306:3306
+        environment:
+            - MYSQL_DATABASE=${DB_DATABASE}
+            - MYSQL_USER=${DB_USERNAME}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
+            - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+        volumes:
+            - db-data:/var/lib/mysql
+    node:
+        platform: linux/arm64/v8 #this line is optional if you are using Mac Silicon chip (M1/M2/M3)
+        build:
+            context: .
+            dockerfile: Dockerfile.node
+        image: nodejs
+        container_name: nodejs
+        ports:
+            - "3000:3000"
+        restart: unless-stopped
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+            - /var/www/node_modules
+        networks:
+            - app-network
+
+networks:
+    app-network:
+        driver: bridge
+volumes:
+    db-data: ~

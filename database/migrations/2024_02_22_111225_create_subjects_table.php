@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('teacher_id')->constrained();
         });
+        Schema::table('lessons', function (Blueprint $table) {
+            $table->foreignId('subject_id')->nullable()->constrained();
+        });
     }
 
     /**
