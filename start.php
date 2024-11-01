@@ -3,7 +3,7 @@
 function say($message) {
     echo "\033[2J\033[H";
     echo $message." it might take a while";
-    echo "\n";
+    echo "\n\n";
 }
 
 $process = 10;
