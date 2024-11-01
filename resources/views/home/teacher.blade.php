@@ -1,45 +1,66 @@
 @extends('layouts.main')
 
-@section('title', 'Strona glowna')
+@section('title', 'Główna strona | Dynamitowy')
 
 @section('content')
 
-    <div style="position:fixed; z-index: -20; width: 100%; height: 100vh; background-image: url('https://images.pexels.com/photos/158826/structure-light-led-movement-158826.jpeg'); background-size: cover; background-repeat: no-repeat;"></div>
+    <div class="d-flex min-vh-100 user-select-none">
 
-    <header class="bg-dark w-100 p-2 user-select-none" style="position: fixed; z-index: 99;">
-        <div class="container text-light d-flex">
-            <h3 class="fw-light m-0">{{ env('APP_NAME') }}</h3>
-            <div class="ms-auto" style="display: table;">
-                <div class="small" style="display: table-cell; vertical-align: middle;">{{ Auth::user()->name }} - {{ Auth::user()->email }} <a class="text-light" href="{{ route('login.logout') }}">(wyloguj)</a></div>
+        <div class="w-50 text-start h-100" style="margin-top: 25vh;">
+
+            <div class="h-100" style="margin-left: 5vw; d-flex flex-column">
+
+
+                <a href="{{ route('chat.index') }}">
+                    <div class="text-light d-inline-block text-center pwidth black_element" style="border-radius: 17px;">
+
+                        <h1 class="fw-light m-0" style="padding: 11px 35px; font-size: 42px;">Wiadomości</h1>
+
+                    </div>
+                </a>
+
+                <a href="{{ route('journal.index') }}">
+                    <div class="text-light d-inline-block text-center width blue_element" style="border-radius: 17px; margin-top: 26px;">
+
+                        <h1 class="fw-light m-0" style="padding: 11px 35px; font-size: 42px;">Dziennik</h1>
+
+                    </div>
+                </a>
+
+                <a href="{{ route('journal.index', [1]) }}">
+                    <div class="d-inline-block text-center width yellow_element" style="border-radius: 17px; margin-top: 26px; color: black;">
+
+                        <h1 class="m-0" style="padding: 11px 35px; font-size: 42px; font-weight: 400;">Uwagi</h1>
+
+                    </div>
+                </a>
+
+                @if(Auth::user()->teacher->classroom)
+                    <a href="{{ route('journal.index', [2]) }}">
+                        <div class="text-light d-inline-block text-center width black_element" style="border-radius: 17px; margin-top: 26px; color: black;">
+
+                            <h1 class="fw-light m-0" style="padding: 11px 35px; font-size: 42px;">Moja klasa</h1>
+
+                        </div>
+                    </a>
+                @endif
+
             </div>
+
         </div>
-    </header>
+        <div class="w-50" style="position: relative;">
 
-    <div class="container bg-light" style="height: 200vh;">
+            <div class="text-end" style="width: 100%; height: 230px; position: absolute; bottom: 0; padding-right: 5vw;">
 
-        <div style="width: 80%; padding-top: 20vh; margin: 0 auto;">
+                <div class="d-inline-block" style="background-color: white; border-radius: 17px; color: black;">
 
-            <div class="container text-center">
+                    <h1 class="m-0 time" style="padding: 11px 50px; font-size: 53px; font-weight: 400;">00:00</h1>
 
-                <div class="d-flex user-select-none" style="flex-wrap: wrap;">
+                </div>
 
-                    <a href="" class="text-decoration-none col-md-4 col-12 text-light mt-2">
-                        <div class="mx-auto bg-dark d-table text-center" style="width: 90%; height: 100%;">
-                            <h2 class="fw-light m-0 d-table-cell py-2" style="vertical-align: middle;">Wiadomosci ></h2>
-                        </div>
-                    </a>
+                <div class="d-inline-block mt-4" style="background-color: white; border-radius: 17px; color: black;">
 
-                    <a href="{{ route('journal.index') }}" class="text-decoration-none col-md-4 col-12 text-light mt-2">
-                        <div class="mx-auto bg-dark d-table text-center" style="width: 90%; height: 100%;">
-                            <h1 class="fw-light m-0 d-table-cell py-2" style="vertical-align: middle;">Dziennik ></h1>
-                        </div>
-                    </a>
-
-                    <a href="" class="text-decoration-none col-md-4 col-12 text-light mt-2">
-                        <div class="mx-auto bg-danger d-table text-center" style="width: 90%; height: 100%;">
-                            <h3 class="fw-light m-0 d-table-cell py-2" style="vertical-align: middle;">Ogłoszenia</h3>
-                        </div>
-                    </a>
+                    <h1 class="m-0 date" style="padding: 11px 35px; font-size: 40px; font-weight: 400;">00 kwietnia 0000</h1>
 
                 </div>
 
@@ -48,5 +69,72 @@
         </div>
 
     </div>
+
+<script>
+
+    function fixWidth()
+    {
+        let widths = document.querySelectorAll('.width')
+
+        widths.forEach(width => {
+            width.style.width = document.querySelector('.pwidth').offsetWidth+'px'
+        });
+        setTimeout(fixWidth, 1000);
+    }
+    fixWidth()
+
+    function updateTime() {
+        let currentTime = new Date();
+
+        let hours = currentTime.getHours();
+        let minutes = currentTime.getMinutes();
+        let seconds = currentTime.getSeconds();
+
+        hours = (hours < 10 ? "0" : "") + hours;
+        minutes = (minutes < 10 ? "0" : "") + minutes;
+        seconds = (seconds < 10 ? "0" : "") + seconds;
+
+        let formattedTime = hours + ":" + minutes;
+
+        document.querySelector('.time').innerHTML = formattedTime
+    }
+
+    setInterval(updateTime, 5000);
+
+    updateTime();
+
+    function getMonthName(monthIndex) {
+        const months = [
+            "stycznia", "lutego", "marca", "kwietnia", "maja", "czerwca",
+            "lipca", "sierpnia", "września", "października", "listopada", "grudnia"
+        ];
+        return months[monthIndex];
+    }
+
+    function updateDateTime() {
+        let currentDateTime = new Date();
+
+        let day = currentDateTime.getDate();
+        let month = getMonthName(currentDateTime.getMonth());
+        let year = currentDateTime.getFullYear();
+
+        let hours = currentDateTime.getHours();
+        let minutes = currentDateTime.getMinutes();
+        let seconds = currentDateTime.getSeconds();
+
+        hours = (hours < 10 ? "0" : "") + hours;
+        minutes = (minutes < 10 ? "0" : "") + minutes;
+        seconds = (seconds < 10 ? "0" : "") + seconds;
+
+        let formattedDate = day + " " + month + " " + year;
+
+        document.querySelector('.date').innerHTML = formattedDate
+    }
+
+    setInterval(updateDateTime, 10000);
+
+    updateDateTime();
+
+</script>
 
 @endsection

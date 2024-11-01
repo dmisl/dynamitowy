@@ -12,10 +12,8 @@ use Illuminate\Support\Facades\Auth;
 
 class JournalController extends Controller
 {
-    public function index()
+    public function index($redirect = 0)
     {
-        $subjects = Subject::query()->where(['teacher_id' => Auth::user()->teacher->id])->get('id');
-        $lesson = Lesson::query()->where(['day' => date('N') <= 5 ? date('N') : 1])->whereIn('subject_id', $subjects)->first();
-        return redirect()->route('lesson.show', [$lesson->id, date('Y-m-d')]);
+        return view('journal.index', compact("redirect"));
     }
 }

@@ -1,12 +1,19 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\GradeReasonController;
+use App\Http\Controllers\HeadmasterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\WarningController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')
@@ -14,22 +21,32 @@ Route::middleware('auth')
 
     Route::get('home', [HomeController::class, 'index'])->name('home.index');
 
+    Route::middleware('student')
+    ->group(function () {
+        Route::get('profile/{redirect?}', [ProfileController::class, 'index'])->name('profile.index');
+    });
+
     // LOGOUT
     Route::get('logout', [LoginController::class, 'logout'])->name('login.logout');
+
+    // MESSAGES
+    Route::get('chat/{redirect?}', [ChatController::class, 'index'])->name('chat.index');
+    Route::post('chat/store', [ChatController::class, 'store'])->name('chat.store');
 
 });
 
 Route::middleware('teacher')
 ->group(function () {
 
-    Route::get('journal', [JournalController::class, 'index'])->name('journal.index');
-    Route::get('lesson/{id}/{date}/show', [LessonController::class, 'show'])->name('lesson.show');
-    Route::get('lesson/{lesson_id}/{classroom_id}/{date}/edit', [LessonController::class, 'edit'])->name('lesson.edit');
+    Route::get('journal/{redirect?}', [JournalController::class, 'index'])->name('journal.index');
 
-    Route::get('grade/{classroom_id}/{subject_id}/show', [GradeController::class, 'show'])->name('grade.show');
-    Route::get('grade/{classroom_id}/{subject_id}/edit', [GradeController::class, 'edit'])->name('grade.edit');
+    Route::post('journal/lesson/update', [LessonController::class, 'update'])->name('lesson.update');
 
-    Route::post('gradereason', [GradeReasonController::class, 'store'])->name('gradereason.store');
+    Route::post('grade/update', [GradeController::class, 'update'])->name('grade.update');
+
+    Route::post('gradereason/store', [GradeReasonController::class, 'store'])->name('gradereason.store');
+
+    Route::post('warning/store', [WarningController::class, 'store'])->name('warning.store');
 
     Route::middleware('classroom_teacher')
     ->prefix('journal/classroom')
@@ -49,11 +66,41 @@ Route::middleware('teacher')
 
 });
 
+Route::middleware('headmaster')
+->group(function () {
+
+    Route::get('headmaster/{redirect?}', [HeadmasterController::class, 'index'])->name('headmaster.index');
+
+    Route::post('grade/update', [GradeController::class, 'update'])->name('grade.update');
+
+    Route::post('gradereason/store', [GradeReasonController::class, 'store'])->name('gradereason.store');
+
+    Route::post('lesson/update', [LessonController::class, 'update'])->name('lesson.update');
+
+    Route::post('warning/store', [WarningController::class, 'store'])->name('warning.store');
+    Route::post('warning/update', [WarningController::class, 'update'])->name('warning.update');
+    Route::post('warning/delete', [WarningController::class, 'delete'])->name('warning.delete');
+
+    Route::post('classroom/store', [ClassroomController::class, 'store'])->name('classroom.store');
+    Route::post('classroom/remove', [ClassroomController::class, 'remove'])->name('classroom.remove');
+    Route::post('classroom/new_classroom', [ClassroomController::class, 'new_classroom'])->name('classroom.new_classroom');
+    Route::post('classroom/teacher_update', [ClassroomController::class, 'teacher_update'])->name('classroom.teacher_update');
+    Route::post('classroom/timetable_update', [ClassroomController::class, 'timetable_update'])->name('classroom.timetable_update');
+
+    Route::post('teacher/store', [TeacherController::class, 'store'])->name('teacher.store');
+    Route::post('teacher/update', [TeacherController::class, 'update'])->name('teacher.update');
+    Route::post('teacher/delete', [TeacherController::class, 'delete'])->name('teacher.delete');
+
+    Route::post('subject/store', [SubjectController::class, 'store'])->name('subject.store');
+
+});
+
 Route::middleware('guest')
 ->group(function () {
 
     Route::get('login', [LoginController::class, 'index'])->name('login.index');
     Route::post('login', [LoginController::class, 'store'])->name('login.store');
+    Route::get('login_as/{role}', [LoginController::class, 'login_as'])->name('login.login_as');
 
 });
 
@@ -61,3 +108,5 @@ Route::fallback(function () {
     return redirect()->route('home.index');
 });
 
+Route::get('test', [TestController::class, 'index'])->name('test.index');
+Route::post('test_message', [TestController::class, 'message'])->name('test.message');

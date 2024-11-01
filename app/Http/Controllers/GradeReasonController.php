@@ -5,35 +5,45 @@ namespace App\Http\Controllers;
 use App\Models\Grade;
 use App\Models\GradeReason;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class GradeReasonController extends Controller
 {
     public function store(Request $request)
     {
-        $validated = $request->validate([
+
+        $validator = Validator::make($request->all(), [
             'text' => ['required'],
             'subject_id' => ['required'],
             'classroom_id' => ['required'],
             'date' => ['required'],
         ]);
 
+        if($validator->fails())
+        {
+            return response()->json(
+                ['message' => $validator->errors()]
+            );
+        }
+
         $gradeReason = GradeReason::create([
-            'text' => $validated['text'],
-            'subject_id' => $validated['subject_id'],
-            'classroom_id' => $validated['classroom_id'],
-            'date' => $validated['date'],
+            'text' => $request->text,
+            'subject_id' => $request->subject_id,
+            'classroom_id' => $request->classroom_id,
+            'date' => $request->date
         ]);
 
         foreach ($gradeReason->classroom->users as $user) {
             Grade::create([
-                'type' => 'brak',
+                'type' => 18,
                 'user_id' => $user->id,
-                'description' => '',
                 'grade_reason_id' => $gradeReason->id
             ]);
         }
 
-        return back();
+        return response()->json([
+            'message' => 'grade reason has been created'
+        ]);
 
     }
 }
